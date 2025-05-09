@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: internationalization
+dependency_overrides:
+  internationalization:
+    path: ../internationalization

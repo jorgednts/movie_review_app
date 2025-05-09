@@ -5,6 +5,7 @@ packages:
   - core
   - design_system
   - internationalization
+  - design_system/ds_widgetbook
 
 command:
   bootstrap:
@@ -12,6 +13,12 @@ command:
       pre: melos run clean
 
 scripts:
+  widgetbook:
+    run: |
+      cd design_system/ds_widgetbook
+      flutter run
+    description: Run Widgetbook Design System
+
   lint:all:
     run: melos run analyze && melos run format
     description: Run all static analysis checks.

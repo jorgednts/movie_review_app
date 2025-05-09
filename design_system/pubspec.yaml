@@ -1,7 +1,7 @@
 name: design_system
-description: "A new Flutter package project."
+description: "App's Design System"
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: ^3.7.2
@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  internationalization:
+    path: ../internationalization
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +24,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  uses-material-design: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:
