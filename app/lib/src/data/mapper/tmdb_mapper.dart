@@ -1,0 +1,32 @@
+import 'package:app/src/data/remote/model/movie_response.dart';
+import 'package:app/src/domain/model/movie_model.dart';
+
+extension MovieResponseMapper on MovieResponse {
+  MovieModel toMovieModel() {
+    return MovieModel(
+      adult: adult ?? false,
+      backdropPath: backdropPath,
+      genreIds:
+          (genreIds ?? [])
+              .map((e) => int.tryParse(e.toString()) ?? -1)
+              .toList(),
+      id: id ?? 0,
+      originalLanguage: originalLanguage ?? '',
+      originalTitle: originalTitle ?? '',
+      overview: overview ?? '',
+      popularity: (popularity ?? 0).toDouble(),
+      posterPath: posterPath,
+      releaseDate: releaseDate ?? '',
+      title: title ?? '',
+      video: video ?? false,
+      voteAverage: (voteAverage ?? 0).toDouble(),
+      voteCount: voteCount ?? 0,
+    );
+  }
+}
+
+extension ListMovieResponseMapper on List<MovieResponse> {
+  List<MovieModel> toMovieModelList() {
+    return map((e) => e.toMovieModel()).toList();
+  }
+}
