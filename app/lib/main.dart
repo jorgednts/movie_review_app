@@ -1,6 +1,18 @@
+import 'package:app/src/data/remote/data_source/tmdb_remote_data_source_impl.dart';
+import 'package:app/src/domain/repository/tmdb_repository.dart';
+import 'package:app/src/presentation/ui/home/home_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+import 'src/data/remote/data_source/tmdb_remote_data_source.dart';
+import 'src/data/repository/tmdb_repository_impl.dart';
+import 'src/domain/use_case/get_popular_movies_use_case.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+  debugPrint('API KEY = ${dotenv.get('TMDB_API_KEY')}');
+
   runApp(const MyApp());
 }
 
@@ -55,6 +67,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  late TMDBRemoteDataSource tmdbRemoteDataSource;
+  late TMDBRepository tmdbRepository;
+  late GetPopularMoviesUseCase getMoviesUseCase;
+  late HomeViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    tmdbRemoteDataSource = TMDBRemoteDataSourceImpl();
+    tmdbRepository = TMDBRepositoryImpl(
+      tmdbRemoteDataSource: tmdbRemoteDataSource,
+    );
+    getMoviesUseCase = GetPopularMoviesUseCase(tmdbRepository: tmdbRepository);
+    viewModel = HomeViewModel(getPopularMoviesUseCase: getMoviesUseCase);
+  }
 
   void _incrementCounter() {
     setState(() {
