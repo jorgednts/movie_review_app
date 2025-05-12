@@ -8,14 +8,14 @@ class HomeViewModel extends BaseViewModel {
   HomeViewModel({required GetPopularMoviesUseCase getPopularMoviesUseCase})
     : _getPopularMoviesUseCase = getPopularMoviesUseCase;
 
-  late final Command0<void> getPopularMoviesCommand;
+  late final Command0<void> fetchMovies;
 
   final List<MovieModel> movies = [];
 
   @override
-  Future<void> onInit() async {
-    getPopularMoviesCommand = Command0(_getPopularMovies);
-    getPopularMoviesCommand.execute();
+  void onInit() {
+    fetchMovies = Command0(_getPopularMovies);
+    fetchMovies.execute();
   }
 
   Future<Result<void>> _getPopularMovies() async {
