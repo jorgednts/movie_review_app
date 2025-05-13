@@ -1,5 +1,7 @@
 import 'package:app/src/data/remote/model/movie_response.dart';
+import 'package:app/src/data/remote/model/tv_series_response.dart';
 import 'package:app/src/domain/model/movie_model.dart';
+import 'package:app/src/domain/model/tv_series_model.dart';
 
 extension MovieResponseMapper on MovieResponse {
   MovieModel toMovieModel() {
@@ -28,5 +30,34 @@ extension MovieResponseMapper on MovieResponse {
 extension ListMovieResponseMapper on List<MovieResponse> {
   List<MovieModel> toMovieModelList() {
     return map((e) => e.toMovieModel()).toList();
+  }
+}
+
+extension TVSeriesResponseMapper on TVSeriesResponse {
+  TVSeriesModel toTVSeriesModel() {
+    return TVSeriesModel(
+      backdropPath: backdropPath ?? '',
+      firstAirDate: firstAirDate ?? '',
+      genreIds:
+      (genreIds ?? [])
+          .map((e) => int.tryParse(e.toString()) ?? -1)
+          .toList(),
+      id: id ?? 0,
+      name: name ?? '',
+      originCountry: (originCountry ?? []).map((e) => e).toList(),
+      originalLanguage: originalLanguage ?? '',
+      originalName: originalName ?? '',
+      overview: overview ?? '',
+      popularity: (popularity ?? 0.0),
+      posterPath: posterPath ?? '',
+      voteAverage: (voteAverage ?? 0.0),
+      voteCount: voteCount ?? 0,
+    );
+  }
+}
+
+extension ListTVSeriesResponseMapper on List<TVSeriesResponse> {
+  List<TVSeriesModel> toTVSeriesModelList() {
+    return map((e) => e.toTVSeriesModel()).toList();
   }
 }

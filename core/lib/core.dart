@@ -8,3 +8,4 @@ export 'src/utils/result.dart';
 export 'src/abstractions/base_view_model.dart';
 export 'src/abstractions/base_change_notifier_view_model.dart';
 export 'src/abstractions/base_view.dart';
+export 'src/abstractions/base_use_case.dart';
