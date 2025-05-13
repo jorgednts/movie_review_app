@@ -4,6 +4,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:internationalization/internationalization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +23,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Movie Review App',
-      localizationsDelegates: [],
+      onGenerateTitle: (context) => AppIntl.of(context).app_name,
+      localizationsDelegates: [
+        AppIntl.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: ThemeData.from(
         colorScheme: AppTheme.lightColorScheme,
         useMaterial3: true,
       ),
       routerConfig: AppRouter.router,
+      supportedLocales: AppIntl.delegate.supportedLocales,
     );
   }
 }
