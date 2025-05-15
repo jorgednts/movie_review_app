@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -34,7 +36,7 @@ class CarouselComponent extends WidgetbookComponent {
                           child: CarouselSlider(
                             useDynamicItemExtent: true,
                             controller: CarouselController(),
-                            onTapItem: (index) => print('item tapped $index'),
+                            onTapItem: (index) => log('item tapped $index'),
                             children: List.generate(
                               20,
                               (index) => PosterCard(
