@@ -5,7 +5,6 @@ class PosterCard extends StatelessWidget {
   const PosterCard({
     super.key,
     required this.posterPath,
-    required this.rating,
     this.borderRadius = Dimensions.radiusMd,
     this.boxFit = BoxFit.scaleDown,
     this.height,
@@ -15,7 +14,6 @@ class PosterCard extends StatelessWidget {
   });
 
   final String posterPath;
-  final double rating;
   final double borderRadius;
   final BoxFit boxFit;
   final double? height;
@@ -25,19 +23,19 @@ class PosterCard extends StatelessWidget {
 
   static const posterImageFlex = 750;
   static const posterInfoFlex = 250;
-  static const posterSpacingFlex = 1;
-  static const posterImageProportion =
-      750 / (posterImageFlex + posterInfoFlex + posterSpacingFlex);
+  static const posterImageProportion = 750 / (posterImageFlex + posterInfoFlex);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: Dimensions.spacingXs,
       children: [
         Expanded(
           flex: posterImageFlex,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(borderRadius),
+              topRight: Radius.circular(borderRadius),
+            ),
             child: ColoredBox(
               color: Theme.of(context).colorScheme.surfaceContainerHigh,
               child: CustomNetworkImage(
@@ -61,13 +59,15 @@ class PosterCard extends StatelessWidget {
             ),
           ),
         ),
-        Spacer(flex: posterSpacingFlex),
         Expanded(
           flex: posterInfoFlex,
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(borderRadius),
+                bottomRight: Radius.circular(borderRadius),
+              ),
             ),
             padding: EdgeInsets.all(Dimensions.spacingSm),
             width: double.infinity,

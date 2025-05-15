@@ -17,22 +17,15 @@ class PosterCardComponent extends WidgetbookComponent {
                     spacing: Dimensions.spacingMd,
                     children: [
                       SizedBox(
-                        height: 280,
+                        height: 300,
                         width: 150,
                         child: PosterCard(
                           posterPath:
                               'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
-                          rating: 7.123,
-                          infoWidget: Column(
-                            children: [
-                              Text(
-                                'Warfare'.toUpperCase(),
-                                style: Theme.of(context).textTheme.titleSmall
-                                    ?.copyWith(fontWeight: FontWeight.w400),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                          infoWidget: TMDBInfoCard(
+                            title: 'Warfare',
+                            voteAverage: 7.1,
+                            releaseYear: '2023',
                           ),
                         ),
                       ),
@@ -42,22 +35,10 @@ class PosterCardComponent extends WidgetbookComponent {
                         child: PosterCard(
                           posterPath:
                               'https://image.tmdb.org/t/p/w500/j8XwH2PxBPzbtO19BTF9Ukbf.jpg',
-                          rating: 7.123,
-                          infoWidget: PosterCard(
-                            posterPath:
-                                'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
-                            rating: 7.123,
-                            infoWidget: Column(
-                              children: [
-                                Text(
-                                  'Untitled'.toUpperCase(),
-                                  style: Theme.of(context).textTheme.titleSmall
-                                      ?.copyWith(fontWeight: FontWeight.w400),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
+                          infoWidget: TMDBInfoCard(
+                            title: 'Warfare',
+                            voteAverage: 7.1,
+                            releaseYear: '2023',
                           ),
                         ),
                       ),

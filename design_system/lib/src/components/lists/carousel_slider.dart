@@ -8,6 +8,7 @@ class CarouselSlider extends StatelessWidget {
     required this.children,
     required this.controller,
     this.onTapItem,
+    this.minItemExtent = 120,
     this.useDynamicItemExtent = false,
   }) : assert(itemExtent != null || useDynamicItemExtent);
 
@@ -16,6 +17,7 @@ class CarouselSlider extends StatelessWidget {
   final CarouselController controller;
   final void Function(int index)? onTapItem;
   final bool useDynamicItemExtent;
+  final double minItemExtent;
 
   double getDynamicItemExtent(double maxHeight) {
     final posterImageHeight = PosterCard.posterImageProportion * maxHeight;
@@ -28,14 +30,16 @@ class CarouselSlider extends StatelessWidget {
       builder: (context, constraints) {
         final carouselHeight = constraints.maxHeight;
         return CarouselView(
-          itemExtent:   useDynamicItemExtent
-              ? getDynamicItemExtent(carouselHeight)
-              : itemExtent!,
+          itemExtent:
+              useDynamicItemExtent
+                  ? getDynamicItemExtent(carouselHeight)
+                  : itemExtent!,
           controller: controller,
           onTap: onTapItem,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimensions.radiusMd),
           ),
+          shrinkExtent: minItemExtent,
           itemSnapping: true,
           children: children,
         );

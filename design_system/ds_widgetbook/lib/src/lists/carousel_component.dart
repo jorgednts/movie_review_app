@@ -13,13 +13,24 @@ class CarouselComponent extends WidgetbookComponent {
             name: 'Carousel',
             builder: (context) {
               return Scaffold(
+                appBar: AppBar(
+                  centerTitle: false,
+                  title: Text(
+                    'Carousel Slider Component',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 body: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Dimensions.spacingMd,
+                        padding: const EdgeInsets.only(
+                          left: Dimensions.spacingMd,
+                          top: Dimensions.spacingMd,
+                          bottom: Dimensions.spacingMd,
                         ),
                         child: Text(
                           'Popular Movies',
@@ -42,21 +53,10 @@ class CarouselComponent extends WidgetbookComponent {
                               (index) => PosterCard(
                                 posterPath:
                                     'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
-                                rating: 7.123,
-                                infoWidget: Column(
-                                  children: [
-                                    Text(
-                                      'Warfaresadkldjsmf kjldfgriofjediofmsdlfkmd'
-                                          .toUpperCase(),
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleSmall?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
+                                infoWidget: TMDBInfoCard(
+                                  title: 'Warfare Very Long Title',
+                                  voteAverage: 7.1,
+                                  releaseYear: '2023',
                                 ),
                               ),
                             ),
