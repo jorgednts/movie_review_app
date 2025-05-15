@@ -1,2 +1,2 @@
 // Cards
-  export 'cards/generic_card.dart';
+  export 'cards/poster_card.dart';

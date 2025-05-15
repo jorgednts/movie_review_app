@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-import 'package:ds_widgetbook/src/cards/generic_card_component.dart';
+import 'package:ds_widgetbook/src/cards/poster_card_component.dart';
+import 'package:ds_widgetbook/src/lists/carousel_component.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:design_system/design_system.dart';
@@ -28,16 +29,16 @@ class DSWidgetbook extends StatelessWidget {
           themes: [
             WidgetbookTheme(
               name: 'Light',
-              data: AppTheme.light,
+              data: CustomTheme.fromContext(context).light(),
             ),
             WidgetbookTheme(
               name: 'Dark',
-              data: AppTheme.dark,
+              data: CustomTheme.fromContext(context).dark(),
             ),
           ],
         ),
       ],
-      directories: [GenericCardComponent()],
+      directories: [PosterCardComponent(), CarouselComponent()],
     );
   }
 }

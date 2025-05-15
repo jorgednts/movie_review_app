@@ -30,10 +30,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData.from(
-        colorScheme: AppTheme.lightColorScheme,
-        useMaterial3: true,
-      ),
+      theme: CustomTheme.fromContext(context).light(),
+      darkTheme: CustomTheme.fromContext(context).dark(),
       routerConfig: AppRouter.router,
       supportedLocales: AppIntl.delegate.supportedLocales,
     );
