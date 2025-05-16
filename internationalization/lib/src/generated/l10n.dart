@@ -65,6 +65,26 @@ class AppIntl {
     );
   }
 
+  /// `Home`
+  String get shell_home {
+    return Intl.message('Home', name: 'shell_home', desc: '', args: []);
+  }
+
+  /// `Buscar`
+  String get shell_search {
+    return Intl.message('Buscar', name: 'shell_search', desc: '', args: []);
+  }
+
+  /// `Resenhas`
+  String get shell_reviews {
+    return Intl.message('Resenhas', name: 'shell_reviews', desc: '', args: []);
+  }
+
+  /// `Config.`
+  String get shell_settings {
+    return Intl.message('Config.', name: 'shell_settings', desc: '', args: []);
+  }
+
   /// `Filmes Populares`
   String get home_popular_movies_title {
     return Intl.message(

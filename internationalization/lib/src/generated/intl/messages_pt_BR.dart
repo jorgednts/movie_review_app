@@ -35,5 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Séries de TV Melhores Avaliadas",
     ),
+    "shell_home": MessageLookupByLibrary.simpleMessage("Home"),
+    "shell_reviews": MessageLookupByLibrary.simpleMessage("Resenhas"),
+    "shell_search": MessageLookupByLibrary.simpleMessage("Buscar"),
+    "shell_settings": MessageLookupByLibrary.simpleMessage("Config."),
   };
 }

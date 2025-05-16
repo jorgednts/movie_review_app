@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      themeMode: ThemeMode.system,
       theme: CustomTheme.fromContext(context).light(),
       darkTheme: CustomTheme.fromContext(context).dark(),
       routerConfig: AppRouter.router,

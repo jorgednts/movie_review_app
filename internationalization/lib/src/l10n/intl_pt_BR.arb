@@ -1,6 +1,10 @@
 {
   "@@locale": "pt_BR",
   "app_name": "Movie Review App",
+  "shell_home": "Home",
+  "shell_search": "Buscar",
+  "shell_reviews": "Resenhas",
+  "shell_settings": "Config.",
   "home_popular_movies_title": "Filmes Populares",
   "home_popular_tv_series_title": "Séries de TV Populares",
   "home_top_rated_movies_title": "Filmes Melhores Avaliados",
