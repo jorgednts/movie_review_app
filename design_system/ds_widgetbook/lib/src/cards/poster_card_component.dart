@@ -20,7 +20,7 @@ class PosterCardComponent extends WidgetbookComponent {
                         height: 300,
                         width: 150,
                         child: PosterCard(
-                          posterPath:
+                          posterUrl:
                               'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
                           infoWidget: TMDBInfoCard(
                             title: 'Warfare',
@@ -33,7 +33,7 @@ class PosterCardComponent extends WidgetbookComponent {
                         height: 280,
                         width: 150,
                         child: PosterCard(
-                          posterPath:
+                          posterUrl:
                               'https://image.tmdb.org/t/p/w500/j8XwH2PxBPzbtO19BTF9Ukbf.jpg',
                           infoWidget: TMDBInfoCard(
                             title: 'Warfare',

@@ -9,7 +9,7 @@ extension MovieResponseMapper on MovieResponse {
   MovieModel toMovieModel() {
     return MovieModel(
       adult: adult ?? false,
-      backdropPath: backdropPath,
+      backdropPath: backdropPath ?? '',
       genreIds:
           (genreIds ?? [])
               .map((e) => int.tryParse(e.toString()) ?? -1)
@@ -19,7 +19,7 @@ extension MovieResponseMapper on MovieResponse {
       originalTitle: originalTitle ?? '',
       overview: overview ?? '',
       popularity: (popularity ?? 0).toDouble(),
-      posterPath: posterPath,
+      posterPath: posterPath ?? '',
       releaseDate: releaseDate ?? '',
       title: title ?? '',
       video: video ?? false,

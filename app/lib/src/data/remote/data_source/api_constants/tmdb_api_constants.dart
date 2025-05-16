@@ -3,4 +3,6 @@ abstract class TMDBApiConstants {
   static const popularEndpoint = 'popular';
   static const topRatedEndpoint = 'top_rated';
   static const guestSessionEndpoint = 'authentication/guest_session/new';
+  static const searchMovieEndpoint = 'search/movie';
+  static const searchTVSeriesEndpoint = 'search/tv';
 }

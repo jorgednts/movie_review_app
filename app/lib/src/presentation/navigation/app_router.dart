@@ -4,9 +4,11 @@ import 'package:app/src/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/get_top_rated_movies_use_case.dart';
 import 'package:app/src/domain/use_case/get_top_rated_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/search_movies_use_case.dart';
+import 'package:app/src/domain/use_case/search_tv_series_use_case.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
-import 'package:app/src/presentation/ui/home/home_view.dart';
-import 'package:app/src/presentation/ui/home/home_view_model.dart';
+import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
+import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -35,6 +37,12 @@ class AppRouter {
                   tmdbRepository: repository,
                 ),
                 createGuestSessionUseCase: CreateGuestSessionUseCase(
+                  tmdbRepository: repository,
+                ),
+                searchMoviesUseCase: SearchMoviesUseCase(
+                  tmdbRepository: repository,
+                ),
+                searchTVSeriesUseCase: SearchTVSeriesUseCase(
                   tmdbRepository: repository,
                 ),
               );

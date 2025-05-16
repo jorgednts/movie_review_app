@@ -1,13 +1,13 @@
 class MovieModel {
   final bool adult;
-  final String? backdropPath;
+  final String backdropPath;
   final List<int> genreIds;
   final int id;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
   final double popularity;
-  final String? posterPath;
+  final String posterPath;
   final String releaseDate;
   final String title;
   final bool video;
@@ -16,14 +16,14 @@ class MovieModel {
 
   const MovieModel({
     required this.adult,
-    this.backdropPath,
+    required this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
     required this.popularity,
-    this.posterPath,
+    required this.posterPath,
     required this.releaseDate,
     required this.title,
     required this.video,
@@ -31,6 +31,7 @@ class MovieModel {
     required this.voteCount,
   });
 
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
 
   @override
   bool operator ==(Object other) {

@@ -1,4 +1,8 @@
 {
   "@@locale": "en",
-  "app_name": "Movie Review App"
+  "app_name": "Movie Review App",
+  "home_popular_movies_title": "Popular Movies",
+  "home_popular_tv_series_title": "Popular TV Series",
+  "home_top_rated_movies_title": "Top Rated Movies",
+  "home_top_rated_tv_series_title": "Top Rated TV Series"
 }

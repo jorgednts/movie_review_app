@@ -31,9 +31,17 @@ class MockCustomHttpClient extends _i1.Mock implements _i2.CustomHttpClient {
   }
 
   @override
-  _i3.Future<dynamic> get(String? url, {Map<String, dynamic>? headers}) =>
+  _i3.Future<dynamic> get(
+    String? url, {
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? queryParameters,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#get, [url], {#headers: headers}),
+            Invocation.method(
+              #get,
+              [url],
+              {#headers: headers, #queryParameters: queryParameters},
+            ),
             returnValue: _i3.Future<dynamic>.value(),
           )
           as _i3.Future<dynamic>);

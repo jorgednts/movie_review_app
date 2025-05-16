@@ -64,6 +64,46 @@ class AppIntl {
       args: [],
     );
   }
+
+  /// `Filmes Populares`
+  String get home_popular_movies_title {
+    return Intl.message(
+      'Filmes Populares',
+      name: 'home_popular_movies_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Séries de TV Populares`
+  String get home_popular_tv_series_title {
+    return Intl.message(
+      'Séries de TV Populares',
+      name: 'home_popular_tv_series_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filmes Melhores Avaliados`
+  String get home_top_rated_movies_title {
+    return Intl.message(
+      'Filmes Melhores Avaliados',
+      name: 'home_top_rated_movies_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Séries de TV Melhores Avaliadas`
+  String get home_top_rated_tv_series_title {
+    return Intl.message(
+      'Séries de TV Melhores Avaliadas',
+      name: 'home_top_rated_tv_series_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppIntl> {

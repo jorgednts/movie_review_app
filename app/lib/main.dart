@@ -9,7 +9,6 @@ import 'package:internationalization/internationalization.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  debugPrint('API KEY = ${dotenv.get('TMDB_API_KEY')}');
 
   runApp(
     MultiProvider(providers: Dependencies.providers, child: const MyApp()),

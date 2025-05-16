@@ -12,9 +12,13 @@ class CustomHttpClientImpl implements CustomHttpClient {
   CustomHttpClientImpl(this._client);
 
   @override
-  Future<dynamic> get(String url, {Map<String, dynamic>? headers}) async {
+  Future<dynamic> get(
+    String url, {
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     final response = await _client.get(
-      Uri.parse(url),
+      Uri.parse(url).replace(queryParameters: queryParameters),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${dotenv.env['TMDB_API_TOKEN']}',

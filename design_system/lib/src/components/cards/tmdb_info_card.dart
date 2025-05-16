@@ -40,7 +40,7 @@ class TMDBInfoCard extends StatelessWidget {
                   size: Dimensions.iconSizeXs,
                 ),
                 Text(
-                  voteAverage.toString(),
+                  voteAverage.toStringAsFixed(1),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(

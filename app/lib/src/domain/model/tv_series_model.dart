@@ -29,6 +29,8 @@ class TVSeriesModel {
     required this.voteCount,
   });
 
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

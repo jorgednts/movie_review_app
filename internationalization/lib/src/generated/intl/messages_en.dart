@@ -23,5 +23,17 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "app_name": MessageLookupByLibrary.simpleMessage("Movie Review App"),
+    "home_popular_movies_title": MessageLookupByLibrary.simpleMessage(
+      "Popular Movies",
+    ),
+    "home_popular_tv_series_title": MessageLookupByLibrary.simpleMessage(
+      "Popular TV Series",
+    ),
+    "home_top_rated_movies_title": MessageLookupByLibrary.simpleMessage(
+      "Top Rated Movies",
+    ),
+    "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
+      "Top Rated TV Series",
+    ),
   };
 }

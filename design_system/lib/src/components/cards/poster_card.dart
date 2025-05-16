@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PosterCard extends StatelessWidget {
   const PosterCard({
     super.key,
-    required this.posterPath,
+    required this.posterUrl,
     this.borderRadius = Dimensions.radiusMd,
     this.boxFit = BoxFit.scaleDown,
     this.height,
@@ -13,7 +13,7 @@ class PosterCard extends StatelessWidget {
     required this.infoWidget,
   });
 
-  final String posterPath;
+  final String posterUrl;
   final double borderRadius;
   final BoxFit boxFit;
   final double? height;
@@ -39,7 +39,7 @@ class PosterCard extends StatelessWidget {
             child: ColoredBox(
               color: Theme.of(context).colorScheme.surfaceContainerHigh,
               child: CustomNetworkImage(
-                url: posterPath,
+                url: posterUrl,
                 boxFit: BoxFit.cover,
                 height: height,
                 width: width,

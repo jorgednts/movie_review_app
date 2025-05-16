@@ -51,7 +51,7 @@ class CarouselComponent extends WidgetbookComponent {
                             children: List.generate(
                               20,
                               (index) => PosterCard(
-                                posterPath:
+                                posterUrl:
                                     'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
                                 infoWidget: TMDBInfoCard(
                                   title: 'Warfare Very Long Title',
