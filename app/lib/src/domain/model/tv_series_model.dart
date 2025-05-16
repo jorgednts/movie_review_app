@@ -28,4 +28,48 @@ class TVSeriesModel {
     required this.voteAverage,
     required this.voteCount,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is TVSeriesModel &&
+        other.backdropPath == backdropPath &&
+        other.firstAirDate == firstAirDate &&
+        _listEquals(other.genreIds, genreIds) &&
+        other.id == id &&
+        other.name == name &&
+        _listEquals(other.originCountry, originCountry) &&
+        other.originalLanguage == originalLanguage &&
+        other.originalName == originalName &&
+        other.overview == overview &&
+        other.popularity == popularity &&
+        other.posterPath == posterPath &&
+        other.voteAverage == voteAverage &&
+        other.voteCount == voteCount;
+  }
+
+  @override
+  int get hashCode =>
+      backdropPath.hashCode ^
+      firstAirDate.hashCode ^
+      genreIds.hashCode ^
+      id.hashCode ^
+      name.hashCode ^
+      originCountry.hashCode ^
+      originalLanguage.hashCode ^
+      originalName.hashCode ^
+      overview.hashCode ^
+      popularity.hashCode ^
+      posterPath.hashCode ^
+      voteAverage.hashCode ^
+      voteCount.hashCode;
+
+  bool _listEquals(List a, List b) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
 }

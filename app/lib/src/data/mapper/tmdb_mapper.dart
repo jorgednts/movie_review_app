@@ -1,5 +1,7 @@
+import 'package:app/src/data/remote/model/guest_session_response.dart';
 import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/domain/model/guest_session_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 
@@ -39,9 +41,9 @@ extension TVSeriesResponseMapper on TVSeriesResponse {
       backdropPath: backdropPath ?? '',
       firstAirDate: firstAirDate ?? '',
       genreIds:
-      (genreIds ?? [])
-          .map((e) => int.tryParse(e.toString()) ?? -1)
-          .toList(),
+          (genreIds ?? [])
+              .map((e) => int.tryParse(e.toString()) ?? -1)
+              .toList(),
       id: id ?? 0,
       name: name ?? '',
       originCountry: (originCountry ?? []).map((e) => e).toList(),
@@ -59,5 +61,15 @@ extension TVSeriesResponseMapper on TVSeriesResponse {
 extension ListTVSeriesResponseMapper on List<TVSeriesResponse> {
   List<TVSeriesModel> toTVSeriesModelList() {
     return map((e) => e.toTVSeriesModel()).toList();
+  }
+}
+
+extension GuestSessionResponseMapper on GuestSessionResponse {
+  GuestSessionModel toGuestSessionModel() {
+    return GuestSessionModel(
+      success: success,
+      guestSessionId: guestSessionId,
+      expiresAt: expiresAt,
+    );
   }
 }

@@ -29,4 +29,9 @@ class TMDBRepositoryImpl implements TMDBRepository {
   Future<Result<List<TVSeriesModel>>> getTopRatedTVSeries() async {
     return await _tmdbRemoteDataSource.getTopRatedTVSeries();
   }
+
+  @override
+  Future<Result<String>> createGuestSession() async {
+    return await _tmdbRemoteDataSource.createGuestSession();
+  }
 }

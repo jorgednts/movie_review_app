@@ -3,6 +3,7 @@ import 'package:app/src/data/remote/client/custom_http_client.dart';
 import 'package:app/src/data/remote/data_source/api_constants/tmdb_api_constants.dart';
 import 'package:app/src/data/remote/data_source/tmdb_remote_data_source.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
+import 'package:app/src/data/remote/model/guest_session_response.dart';
 import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
 import 'package:app/src/domain/model/movie_model.dart';
@@ -25,6 +26,24 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
       fromJsonT: fromJsonT,
     );
     return paginated.results;
+  }
+
+  @override
+  Future<Result<String>> createGuestSession() async {
+    try {
+      final data = await _client.get(
+        '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.guestSessionEndpoint}',
+      );
+
+      final session = GuestSessionResponse.fromJson(data);
+      if (session.success) {
+        return Result.ok(session.guestSessionId);
+      } else {
+        return Result.error(Exception('Falha ao criar sessão'));
+      }
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:app/src/domain/repository/tmdb_repository.dart';
+import 'package:app/src/domain/use_case/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/get_top_rated_movies_use_case.dart';
@@ -31,6 +32,9 @@ class AppRouter {
                   tmdbRepository: repository,
                 ),
                 getTopRatedTVSeriesUseCase: GetTopRatedTVSeriesUseCase(
+                  tmdbRepository: repository,
+                ),
+                createGuestSessionUseCase: CreateGuestSessionUseCase(
                   tmdbRepository: repository,
                 ),
               );

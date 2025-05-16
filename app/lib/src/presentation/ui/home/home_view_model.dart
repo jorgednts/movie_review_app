@@ -1,5 +1,6 @@
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
+import 'package:app/src/domain/use_case/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/get_top_rated_movies_use_case.dart';
@@ -13,28 +14,33 @@ class HomeViewModel extends BaseViewModel {
   final GetPopularTVSeriesUseCase _getPopularTVSeriesUseCase;
   final GetTopRatedMoviesUseCase _getTopRatedMoviesUseCase;
   final GetTopRatedTVSeriesUseCase _getTopRatedTVSeriesUseCase;
+  final CreateGuestSessionUseCase _createGuestSessionUseCase;
 
   HomeViewModel({
     required GetPopularMoviesUseCase getPopularMoviesUseCase,
     required GetPopularTVSeriesUseCase getPopularTVSeriesUseCase,
     required GetTopRatedMoviesUseCase getTopRatedMoviesUseCase,
     required GetTopRatedTVSeriesUseCase getTopRatedTVSeriesUseCase,
+    required CreateGuestSessionUseCase createGuestSessionUseCase,
   }) : _getPopularMoviesUseCase = getPopularMoviesUseCase,
        _getPopularTVSeriesUseCase = getPopularTVSeriesUseCase,
        _getTopRatedMoviesUseCase = getTopRatedMoviesUseCase,
-       _getTopRatedTVSeriesUseCase = getTopRatedTVSeriesUseCase;
+       _getTopRatedTVSeriesUseCase = getTopRatedTVSeriesUseCase,
+       _createGuestSessionUseCase = createGuestSessionUseCase;
 
   // Commands
   late final Command0<void> fetchPopularMovies;
   late final Command0<void> fetchPopularTVSeries;
   late final Command0<void> fetchTopRatedMovies;
   late final Command0<void> fetchTopRatedTVSeries;
+  late final Command0<void> createGuestSession;
 
   // Other Variables
   final List<MovieModel> popularMovies = [];
   final List<TVSeriesModel> popularTVSeries = [];
   final List<MovieModel> topRatedMovies = [];
   final List<TVSeriesModel> topRatedTVSeries = [];
+  String? guestSessionId;
 
   @override
   void onInit() {
@@ -42,11 +48,13 @@ class HomeViewModel extends BaseViewModel {
     fetchPopularTVSeries = Command0(_getPopularTVSeries);
     fetchTopRatedMovies = Command0(_getTopRatedMovies);
     fetchTopRatedTVSeries = Command0(_getTopRatedTVSeries);
+    createGuestSession = Command0(_createGuestSession);
 
     fetchPopularMovies.execute();
     fetchPopularTVSeries.execute();
     fetchTopRatedMovies.execute();
     fetchTopRatedTVSeries.execute();
+    createGuestSession.execute();
   }
 
   Future<Result> _getPopularMovies() async {
@@ -100,6 +108,19 @@ class HomeViewModel extends BaseViewModel {
       },
       onError: (error) {
         debugPrint(error.toString());
+      },
+    );
+    return response;
+  }
+
+  Future<Result<void>> _createGuestSession() async {
+    final response = await _createGuestSessionUseCase.call(NoParam());
+    response.handle(
+      onOk: (result) {
+        guestSessionId = result;
+      },
+      onError: (error) {
+        guestSessionId = null;
       },
     );
     return response;

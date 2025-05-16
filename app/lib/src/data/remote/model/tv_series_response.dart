@@ -30,25 +30,20 @@ class TVSeriesResponse {
   });
 
   factory TVSeriesResponse.fromJson(Map<String, dynamic> json) {
-    try {
-      final result = TVSeriesResponse(
-        backdropPath: json['backdrop_path'] ?? '',
-        firstAirDate: json['first_air_date'] ?? '',
-        genreIds: List.from(json['genre_ids'] ?? []),
-        id: json['id'] ?? 0,
-        name: json['name'] ?? '',
-        originCountry: List<String>.from(json['origin_country'] ?? []),
-        originalLanguage: json['original_language'] ?? '',
-        originalName: json['original_name'] ?? '',
-        overview: json['overview'] ?? '',
-        popularity: (json['popularity'] ?? 0.0).toDouble(),
-        posterPath: json['poster_path'] ?? '',
-        voteAverage: json['vote_average'] ?? 0.0,
-        voteCount: json['vote_count'] ?? 0,
-      );
-      return result;
-    } catch (e) {
-      rethrow;
-    }
+    return TVSeriesResponse(
+      backdropPath: json['backdrop_path'] ?? '',
+      firstAirDate: json['first_air_date'] ?? '',
+      genreIds: List.from(json['genre_ids'] ?? []),
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      originCountry: List<String>.from(json['origin_country'] ?? []),
+      originalLanguage: json['original_language'] ?? '',
+      originalName: json['original_name'] ?? '',
+      overview: json['overview'] ?? '',
+      popularity: (json['popularity'] ?? 0.0).toDouble(),
+      posterPath: json['poster_path'] ?? '',
+      voteAverage: json['vote_average'] ?? 0.0,
+      voteCount: json['vote_count'] ?? 0,
+    );
   }
 }
