@@ -15,14 +15,33 @@ enum AppRoute {
 }
 
 extension AppRouteExtension on AppRoute {
+  String nameValue(BuildContext context) {
+    switch (this) {
+      case AppRoute.home:
+        return AppIntl.of(context).shell_home;
+      case AppRoute.search:
+        return AppIntl.of(context).shell_search;
+      case AppRoute.review:
+        return AppIntl.of(context).shell_reviews;
+      case AppRoute.settings:
+        return AppIntl.of(context).shell_settings;
+      default:
+        throw UnimplementedError();
+    }
+  }
+
   BottomNavigationBarItem toBottomNavigationBarItem(BuildContext context) {
-    final name = switch (this) {
-      AppRoute.home => AppIntl.of(context).shell_home,
-      AppRoute.search => AppIntl.of(context).shell_search,
-      AppRoute.review => AppIntl.of(context).shell_reviews,
-      AppRoute.settings => AppIntl.of(context).shell_settings,
-      AppRoute.details => throw UnimplementedError(),
-    };
-    return BottomNavigationBarItem(icon: Icon(icon), label: name);
+    return BottomNavigationBarItem(icon: Icon(icon), label: nameValue(context));
+  }
+
+  NavigationRailDestination toNavigationRailDestination(BuildContext context) {
+    return NavigationRailDestination(
+      icon: Icon(icon),
+      label: Text(nameValue(context)),
+    );
+  }
+
+  Widget toNavigationDestination(BuildContext context) {
+    return NavigationDestination(icon: Icon(icon), label: nameValue(context));
   }
 }

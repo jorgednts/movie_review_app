@@ -1,4 +1,5 @@
 import 'package:design_system/design_system.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CarouselSlider extends StatelessWidget {
@@ -29,19 +30,23 @@ class CarouselSlider extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final carouselHeight = constraints.maxHeight;
-        return CarouselView(
-          itemExtent:
-              useDynamicItemExtent
-                  ? getDynamicItemExtent(carouselHeight)
-                  : itemExtent!,
-          controller: controller,
-          onTap: onTapItem,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimensions.radiusMd),
+        return ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
           ),
-          shrinkExtent: minItemExtent,
-          itemSnapping: true,
-          children: children,
+          child: CarouselView(
+            itemExtent:
+                useDynamicItemExtent
+                    ? getDynamicItemExtent(carouselHeight)
+                    : itemExtent!,
+            controller: controller,
+            onTap: onTapItem,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Dimensions.radiusMd),
+            ),
+            shrinkExtent: minItemExtent,
+            children: children,
+          ),
         );
       },
     );
