@@ -2,13 +2,13 @@ import 'package:app/src/data/remote/model/request/movie_paginated_request_parame
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
-import 'package:app/src/domain/use_case/create_guest_session_use_case.dart';
-import 'package:app/src/domain/use_case/get_popular_movies_use_case.dart';
-import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
-import 'package:app/src/domain/use_case/get_top_rated_movies_use_case.dart';
-import 'package:app/src/domain/use_case/get_top_rated_tv_series_use_case.dart';
-import 'package:app/src/domain/use_case/search_movies_use_case.dart';
-import 'package:app/src/domain/use_case/search_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_top_rated_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/search_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/search_tv_series_use_case.dart';
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 
@@ -56,6 +56,17 @@ class HomeViewModel extends BaseViewModel {
 
   @override
   void onInit() {
+    super.onInit();
+
+    fetchPopularMovies.execute();
+    fetchPopularTVSeries.execute();
+    fetchTopRatedMovies.execute();
+    fetchTopRatedTVSeries.execute();
+    createGuestSession.execute();
+  }
+
+  @override
+  void initCommands() {
     fetchPopularMovies = Command0(_getPopularMovies);
     fetchPopularTVSeries = Command0(_getPopularTVSeries);
     fetchTopRatedMovies = Command0(_getTopRatedMovies);
@@ -63,18 +74,10 @@ class HomeViewModel extends BaseViewModel {
     createGuestSession = Command0(_createGuestSession);
     searchMovies = Command0(_searchMovies);
     searchTVSeries = Command0(_searchTVSeries);
-
-    fetchPopularMovies.execute();
-    fetchPopularTVSeries.execute();
-    fetchTopRatedMovies.execute();
-    fetchTopRatedTVSeries.execute();
-    createGuestSession.execute();
-    searchMovies.execute();
-    searchTVSeries.execute();
   }
 
   Future<Result> _getPopularMovies() async {
-    return await fetchData<NoParam, List<MovieModel>>(
+    return await request<NoParam, List<MovieModel>>(
       useCase: _getPopularMoviesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -88,7 +91,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _getPopularTVSeries() async {
-    return await fetchData<NoParam, List<TVSeriesModel>>(
+    return await request<NoParam, List<TVSeriesModel>>(
       useCase: _getPopularTVSeriesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -102,7 +105,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result> _getTopRatedMovies() async {
-    return await fetchData<NoParam, List<MovieModel>>(
+    return await request<NoParam, List<MovieModel>>(
       useCase: _getTopRatedMoviesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -116,7 +119,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _getTopRatedTVSeries() async {
-    return await fetchData<NoParam, List<TVSeriesModel>>(
+    return await request<NoParam, List<TVSeriesModel>>(
       useCase: _getTopRatedTVSeriesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -130,7 +133,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _createGuestSession() async {
-    return await fetchData<NoParam, String>(
+    return await request<NoParam, String>(
       useCase: _createGuestSessionUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -143,7 +146,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _searchMovies() async {
-    return await fetchData<MoviePaginatedRequestParameters, List<MovieModel>>(
+    return await request<MoviePaginatedRequestParameters, List<MovieModel>>(
       useCase: _searchMoviesUseCase,
       input: MoviePaginatedRequestParameters(query: 'Hunger Games'),
       onSuccess: (result) {
@@ -158,15 +161,15 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _searchTVSeries() async {
-    return await fetchData<
+    return await request<
       TVSeriesPaginatedRequestParameters,
       List<TVSeriesModel>
     >(
       useCase: _searchTVSeriesUseCase,
       input: TVSeriesPaginatedRequestParameters(query: 'Friends'),
       onSuccess: (result) {
-        for (var tvSerie in result) {
-          debugPrint('TV SERIES SEARCH: ${tvSerie.name}');
+        for (var tvSeries in result) {
+          debugPrint('TV SERIES SEARCH: ${tvSeries.name}');
         }
       },
       onError: (error) {

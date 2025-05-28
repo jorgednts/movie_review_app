@@ -1,15 +1,21 @@
+import 'package:app/src/domain/repository/auth_repository.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
-import 'package:app/src/domain/use_case/create_guest_session_use_case.dart';
-import 'package:app/src/domain/use_case/get_popular_movies_use_case.dart';
-import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
-import 'package:app/src/domain/use_case/get_top_rated_movies_use_case.dart';
-import 'package:app/src/domain/use_case/get_top_rated_tv_series_use_case.dart';
-import 'package:app/src/domain/use_case/search_movies_use_case.dart';
-import 'package:app/src/domain/use_case/search_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/auth/check_user_logged_use_case.dart';
+import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
+import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
+import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_top_rated_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/search_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/search_tv_series_use_case.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/navigation/custom_shell_branch.dart';
 import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
+import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,8 +27,22 @@ class AppRouter {
     routes: [
       StatefulShellRoute.indexedStack(
         builder:
-            (context, state, navigationShell) =>
-                ShellView(navigationShell: navigationShell),
+            (context, state, navigationShell) => Provider(
+              create: (context) {
+                final repository = context.read<AuthRepository>();
+                return ShellViewModel(
+                  signInUseCase: SignInUseCase(authRepository: repository),
+                  signOutUseCase: SignOutUseCase(authRepository: repository),
+                  createUserUseCase: CreateUserUseCase(
+                    authRepository: repository,
+                  ),
+                  checkUserLoggedUseCase: CheckUserLoggedUseCase(
+                    authRepository: repository,
+                  ),
+                );
+              },
+              child: ShellView(navigationShell: navigationShell),
+            ),
         branches:
             customShellBranches
                 .map((item) => item.buildStatefulShellBranch())

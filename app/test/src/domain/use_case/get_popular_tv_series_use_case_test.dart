@@ -1,6 +1,6 @@
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
-import 'package:app/src/domain/use_case/get_popular_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
 import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

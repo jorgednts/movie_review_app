@@ -14,6 +14,9 @@ dependencies:
   flutter_svg: ^2.1.0
   google_fonts: ^6.2.1
 
+  core:
+    path: ../core
+
   internationalization:
     path: ../internationalization
 

@@ -6,7 +6,8 @@ enum AppRoute {
   search(path: '/search', icon: Icons.search),
   review(path: '/review', icon: Icons.reviews),
   settings(path: '/settings', icon: Icons.settings),
-  details(path: '/details', icon: Icons.movie_creation_outlined);
+  details(path: '/details', icon: Icons.movie_creation_outlined),
+  login(path: '/login', icon: Icons.login);
 
   final String path;
   final IconData icon;

@@ -85,6 +85,196 @@ class AppIntl {
     return Intl.message('Config.', name: 'shell_settings', desc: '', args: []);
   }
 
+  /// `Sair`
+  String get shell_sign_out {
+    return Intl.message('Sair', name: 'shell_sign_out', desc: '', args: []);
+  }
+
+  /// `Entrar`
+  String get shell_sign_in {
+    return Intl.message('Entrar', name: 'shell_sign_in', desc: '', args: []);
+  }
+
+  /// `Criar Usuário`
+  String get shell_create_user {
+    return Intl.message(
+      'Criar Usuário',
+      name: 'shell_create_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Criação de Conta`
+  String get shell_create_user_title {
+    return Intl.message(
+      'Criação de Conta',
+      name: 'shell_create_user_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get shell_sign_in_title {
+    return Intl.message(
+      'Login',
+      name: 'shell_sign_in_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Novo por aqui? Crie uma conta!`
+  String get shell_create_user_message {
+    return Intl.message(
+      'Novo por aqui? Crie uma conta!',
+      name: 'shell_create_user_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entre com sua conta Ciné!`
+  String get shell_sign_in_message {
+    return Intl.message(
+      'Entre com sua conta Ciné!',
+      name: 'shell_sign_in_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `e-mail`
+  String get shell_email {
+    return Intl.message('e-mail', name: 'shell_email', desc: '', args: []);
+  }
+
+  /// `senha`
+  String get shell_password {
+    return Intl.message('senha', name: 'shell_password', desc: '', args: []);
+  }
+
+  /// `e-mail não pode estar vazio`
+  String get shell_email_empty_error {
+    return Intl.message(
+      'e-mail não pode estar vazio',
+      name: 'shell_email_empty_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `insira um e-mail válido`
+  String get shell_email_invalid_error {
+    return Intl.message(
+      'insira um e-mail válido',
+      name: 'shell_email_invalid_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `senha não pode estar vazia`
+  String get shell_password_empty_error {
+    return Intl.message(
+      'senha não pode estar vazia',
+      name: 'shell_password_empty_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `senha deve ter no mínimo 6 caracteres`
+  String get shell_password_short_error {
+    return Intl.message(
+      'senha deve ter no mínimo 6 caracteres',
+      name: 'shell_password_short_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ou`
+  String get shell_or {
+    return Intl.message('ou', name: 'shell_or', desc: '', args: []);
+  }
+
+  /// `Bem-vindo(a) de volta!`
+  String get shell_welcome_back {
+    return Intl.message(
+      'Bem-vindo(a) de volta!',
+      name: 'shell_welcome_back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bem-vindo(a) ao Ciné!`
+  String get shell_welcome {
+    return Intl.message(
+      'Bem-vindo(a) ao Ciné!',
+      name: 'shell_welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops :(`
+  String get shell_oops {
+    return Intl.message('Ops :(', name: 'shell_oops', desc: '', args: []);
+  }
+
+  /// `Login realizado com sucesso!`
+  String get shell_sign_in_success_message {
+    return Intl.message(
+      'Login realizado com sucesso!',
+      name: 'shell_sign_in_success_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conta criada com sucesso!`
+  String get shell_sign_up_success_message {
+    return Intl.message(
+      'Conta criada com sucesso!',
+      name: 'shell_sign_up_success_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout realizado com sucesso!`
+  String get shell_sign_out_success_message {
+    return Intl.message(
+      'Logout realizado com sucesso!',
+      name: 'shell_sign_out_success_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Algo deu errado, por favor tente novamente mais tarde.`
+  String get shell_error_message {
+    return Intl.message(
+      'Algo deu errado, por favor tente novamente mais tarde.',
+      name: 'shell_error_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carregando...`
+  String get shell_loading_message {
+    return Intl.message(
+      'Carregando...',
+      name: 'shell_loading_message',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Filmes Populares`
   String get home_popular_movies_title {
     return Intl.message(

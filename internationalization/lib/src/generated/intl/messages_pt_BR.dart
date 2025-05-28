@@ -35,9 +35,59 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Séries de TV Melhores Avaliadas",
     ),
+    "shell_create_user": MessageLookupByLibrary.simpleMessage("Criar Usuário"),
+    "shell_create_user_message": MessageLookupByLibrary.simpleMessage(
+      "Novo por aqui? Crie uma conta!",
+    ),
+    "shell_create_user_title": MessageLookupByLibrary.simpleMessage(
+      "Criação de Conta",
+    ),
+    "shell_email": MessageLookupByLibrary.simpleMessage("e-mail"),
+    "shell_email_empty_error": MessageLookupByLibrary.simpleMessage(
+      "e-mail não pode estar vazio",
+    ),
+    "shell_email_invalid_error": MessageLookupByLibrary.simpleMessage(
+      "insira um e-mail válido",
+    ),
+    "shell_error_message": MessageLookupByLibrary.simpleMessage(
+      "Algo deu errado, por favor tente novamente mais tarde.",
+    ),
     "shell_home": MessageLookupByLibrary.simpleMessage("Home"),
+    "shell_loading_message": MessageLookupByLibrary.simpleMessage(
+      "Carregando...",
+    ),
+    "shell_oops": MessageLookupByLibrary.simpleMessage("Ops :("),
+    "shell_or": MessageLookupByLibrary.simpleMessage("ou"),
+    "shell_password": MessageLookupByLibrary.simpleMessage("senha"),
+    "shell_password_empty_error": MessageLookupByLibrary.simpleMessage(
+      "senha não pode estar vazia",
+    ),
+    "shell_password_short_error": MessageLookupByLibrary.simpleMessage(
+      "senha deve ter no mínimo 6 caracteres",
+    ),
     "shell_reviews": MessageLookupByLibrary.simpleMessage("Resenhas"),
     "shell_search": MessageLookupByLibrary.simpleMessage("Buscar"),
     "shell_settings": MessageLookupByLibrary.simpleMessage("Config."),
+    "shell_sign_in": MessageLookupByLibrary.simpleMessage("Entrar"),
+    "shell_sign_in_message": MessageLookupByLibrary.simpleMessage(
+      "Entre com sua conta Ciné!",
+    ),
+    "shell_sign_in_success_message": MessageLookupByLibrary.simpleMessage(
+      "Login realizado com sucesso!",
+    ),
+    "shell_sign_in_title": MessageLookupByLibrary.simpleMessage("Login"),
+    "shell_sign_out": MessageLookupByLibrary.simpleMessage("Sair"),
+    "shell_sign_out_success_message": MessageLookupByLibrary.simpleMessage(
+      "Logout realizado com sucesso!",
+    ),
+    "shell_sign_up_success_message": MessageLookupByLibrary.simpleMessage(
+      "Conta criada com sucesso!",
+    ),
+    "shell_welcome": MessageLookupByLibrary.simpleMessage(
+      "Bem-vindo(a) ao Ciné!",
+    ),
+    "shell_welcome_back": MessageLookupByLibrary.simpleMessage(
+      "Bem-vindo(a) de volta!",
+    ),
   };
 }

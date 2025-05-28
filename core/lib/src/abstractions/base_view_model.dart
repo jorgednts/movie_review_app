@@ -1,13 +1,19 @@
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class BaseViewModel {
   BaseViewModel() {
     onInit();
   }
 
-  void onInit();
+  @mustCallSuper
+  void onInit() {
+    initCommands();
+  }
 
-  Future<Result<OutputType>> fetchData<InputType, OutputType>({
+  void initCommands();
+
+  Future<Result<OutputType>> request<InputType, OutputType>({
     required BaseUseCase<InputType, OutputType> useCase,
     required InputType input,
     required void Function(OutputType data) onSuccess,
