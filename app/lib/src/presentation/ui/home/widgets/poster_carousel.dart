@@ -18,6 +18,11 @@ class PosterCarousel<T> extends StatelessWidget {
   final Command command;
   final PosterCard Function(T item) cardBuilder;
 
+  double getDynamicItemExtent(double maxHeight) {
+    final posterImageHeight = PosterCard.posterImageProportion * maxHeight;
+    return posterImageHeight * (2 / 3);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,10 +45,21 @@ class PosterCarousel<T> extends StatelessWidget {
               if (command.running) {
                 return Center(child: CircularProgressIndicator());
               }
-              return CarouselSlider(
-                useDynamicItemExtent: true,
-                controller: CarouselController(),
-                children: items.map<PosterCard>(cardBuilder).toList(),
+              return LayoutBuilder(
+                builder: (_, constraints) {
+                  const itemsPadding = Dimensions.spacingSm;
+                  final viewportDimension = constraints.maxWidth;
+                  final itemExtent = getDynamicItemExtent(
+                    constraints.maxHeight,
+                  ) + itemsPadding;
+                  return CarouselSlider(
+                    itemExtent: itemExtent,
+                    viewportDimension: viewportDimension,
+                    padding: itemsPadding,
+                    controller: CarouselController(),
+                    children: items.map<PosterCard>(cardBuilder).toList(),
+                  );
+                },
               );
             },
           ),

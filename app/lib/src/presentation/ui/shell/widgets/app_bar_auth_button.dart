@@ -25,29 +25,28 @@ class AppBarAuthButton extends StatelessWidget {
             if (checkUserLoggedCommand.running) {
               return SizedBox();
             }
-            return InkWell(
-              onTap: userValueNotifier.value == null ? onSignIn : onSignOut,
-              overlayColor: WidgetStateColor.transparent,
-              child: Container(
-                height: constraints.maxHeight * 0.6,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-                padding: EdgeInsets.all(6),
-                child: ValueListenableBuilder(
-                  valueListenable: userValueNotifier,
-                  builder: (context, user, child) {
-                    return FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Icon(
-                        user == null ? Icons.login : Icons.logout,
-                        color: Theme.of(context).colorScheme.surface,
+            return ValueListenableBuilder<UserModel?>(
+              valueListenable: userValueNotifier,
+              builder:
+                  (context, user, child) => InkWell(
+                    onTap: user == null ? onSignIn : onSignOut,
+                    overlayColor: WidgetStateColor.transparent,
+                    child: Container(
+                      height: constraints.maxHeight * 0.6,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
-                    );
-                  },
-                ),
-              ),
+                      padding: EdgeInsets.all(6),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Icon(
+                          user == null ? Icons.login : Icons.logout,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  ),
             );
           },
         );

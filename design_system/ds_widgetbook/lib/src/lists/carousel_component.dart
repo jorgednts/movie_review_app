@@ -44,22 +44,40 @@ class CarouselComponent extends WidgetbookComponent {
                         ),
                         child: SizedBox(
                           height: 350,
-                          child: CarouselSlider(
-                            useDynamicItemExtent: true,
-                            controller: CarouselController(),
-                            onTapItem: (index) => log('item tapped $index'),
-                            children: List.generate(
-                              20,
-                              (index) => PosterCard(
-                                posterUrl:
-                                    'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
-                                infoWidget: TMDBInfoCard(
-                                  title: 'Warfare Very Long Title',
-                                  voteAverage: 7.1,
-                                  releaseYear: '2023',
+                          child: LayoutBuilder(
+                            builder: (_, constraints) {
+                              double getDynamicItemExtent(double maxHeight) {
+                                final posterImageHeight =
+                                    PosterCard.posterImageProportion *
+                                    maxHeight;
+                                return posterImageHeight * (2 / 3);
+                              }
+
+                              const itemsPadding = Dimensions.spacingSm;
+                              final viewportDimension = constraints.maxWidth;
+                              final itemExtent =
+                                  getDynamicItemExtent(constraints.maxHeight) +
+                                  itemsPadding;
+                              return CarouselSlider(
+                                itemExtent: itemExtent,
+                                viewportDimension: viewportDimension,
+                                padding: itemsPadding,
+                                controller: CarouselController(),
+                                onTapItem: (index) => log('item tapped $index'),
+                                children: List.generate(
+                                  20,
+                                  (index) => PosterCard(
+                                    posterUrl:
+                                        'https://image.tmdb.org/t/p/w500/j8tqBXwH2PxBPzbtO19BTF9Ukbf.jpg',
+                                    infoWidget: TMDBInfoCard(
+                                      title: 'Warfare Very Long Title',
+                                      voteAverage: 7.1,
+                                      releaseYear: '2023',
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         ),
                       ),

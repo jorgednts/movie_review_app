@@ -1,23 +1,108 @@
 PODS:
+  - Firebase/Auth (11.10.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 11.10.0)
+  - Firebase/CoreOnly (11.10.0):
+    - FirebaseCore (~> 11.10.0)
+  - firebase_auth (5.5.4):
+    - Firebase/Auth (= 11.10.0)
+    - firebase_core
+    - Flutter
+  - firebase_core (3.13.1):
+    - Firebase/CoreOnly (= 11.10.0)
+    - Flutter
+  - FirebaseAppCheckInterop (11.13.0)
+  - FirebaseAuth (11.10.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.10.0)
+    - FirebaseCoreExtension (~> 11.10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
+    - RecaptchaInterop (~> 101.0)
+  - FirebaseAuthInterop (11.13.0)
+  - FirebaseCore (11.10.0):
+    - FirebaseCoreInternal (~> 11.10.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCoreExtension (11.10.0):
+    - FirebaseCore (~> 11.10.0)
+  - FirebaseCoreInternal (11.10.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - Flutter (1.0.0)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.1.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (4.5.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - RecaptchaInterop (101.0.0)
 
 DEPENDENCIES:
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
 
+SPEC REPOS:
+  trunk:
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - RecaptchaInterop
+
 EXTERNAL SOURCES:
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
+  firebase_core:
+    :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
 SPEC CHECKSUMS:
+  Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
+  firebase_auth: 519455ee22dea9cb8b4e05d7821f93f77db88882
+  firebase_core: 3c2f323cae65c97a636a05a23b17730ef93df2cf
+  FirebaseAppCheckInterop: 72066489c209823649a997132bcd9269bc33a4bb
+  FirebaseAuth: c4146bdfdc87329f9962babd24dae89373f49a32
+  FirebaseAuthInterop: 4fa327ec3c551a80a6929561f83af80b1dd44937
+  FirebaseCore: 8344daef5e2661eb004b177488d6f9f0f24251b7
+  FirebaseCoreExtension: 6f357679327f3614e995dc7cf3f2d600bdc774ac
+  FirebaseCoreInternal: ef4505d2afb1d0ebbc33162cb3795382904b5679
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  GTMSessionFetcher: fc75fc972958dceedee61cb662ae1da7a83a91cf
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
 
-PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+PODFILE CHECKSUM: 251cb053df7158f337c0712f2ab29f4e0fa474ce
 
 COCOAPODS: 1.16.2
