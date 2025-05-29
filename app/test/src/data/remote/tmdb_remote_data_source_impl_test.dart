@@ -40,59 +40,46 @@ void main() {
       final result = await dataSource.getPopularMovies();
       expect(result, isA<Result<List<MovieModel>>>());
     });
-    test(
-      'GIVEN a call'
-          'WHEN getPopularMovies is called unsuccessfully '
-          'THEN it should return an error',
-        () async {
-          when(
-            mockClient.get(any, headers: anyNamed('headers')),
-          ).thenThrow(Exception('Error'));
-          final result = await dataSource.getPopularMovies();
-          expect(result, isA<Error>());
-        }
-    );
+    test('GIVEN a call'
+        'WHEN getPopularMovies is called unsuccessfully '
+        'THEN it should return an error', () async {
+      when(
+        mockClient.get(any, headers: anyNamed('headers')),
+      ).thenThrow(Exception('Error'));
+      final result = await dataSource.getPopularMovies();
+      expect(result, isA<Error>());
+    });
   });
 
-
   group('getPopularTVSeries', () {
-    test(
-      'GIVEN a call '
-          'WHEN getPopularTVSeries is called '
-          'THEN it should call once',
-          () async {
-        when(
-          mockClient.get(any, headers: anyNamed('headers')),
-        ).thenAnswer((_) async => TestResources.mockTVSeriesPaginatedResponse);
-        await dataSource.getPopularTVSeries();
-        verify(mockClient.get(any)).called(1);
-      },
-    );
+    test('GIVEN a call '
+        'WHEN getPopularTVSeries is called '
+        'THEN it should call once', () async {
+      when(
+        mockClient.get(any, headers: anyNamed('headers')),
+      ).thenAnswer((_) async => TestResources.mockTVSeriesPaginatedResponse);
+      await dataSource.getPopularTVSeries();
+      verify(mockClient.get(any)).called(1);
+    });
 
-    test(
-      'GIVEN a call '
-          'WHEN getPopularTVSeries is called successfully '
-          'THEN it should return a list of tv series',
-          () async {
-        when(
-          mockClient.get(any, headers: anyNamed('headers')),
-        ).thenAnswer((_) async => TestResources.mockTVSeriesPaginatedResponse);
-        final result = await dataSource.getPopularTVSeries();
-        expect(result, isA<Result<List<TVSeriesModel>>>());
-      },
-    );
+    test('GIVEN a call '
+        'WHEN getPopularTVSeries is called successfully '
+        'THEN it should return a list of tv series', () async {
+      when(
+        mockClient.get(any, headers: anyNamed('headers')),
+      ).thenAnswer((_) async => TestResources.mockTVSeriesPaginatedResponse);
+      final result = await dataSource.getPopularTVSeries();
+      expect(result, isA<Result<List<TVSeriesModel>>>());
+    });
 
-    test(
-      'GIVEN a call '
-          'WHEN getPopularTVSeries is called unsuccessfully '
-          'THEN it should return an error',
-          () async {
-        when(
-          mockClient.get(any, headers: anyNamed('headers')),
-        ).thenThrow(Exception('Error'));
-        final result = await dataSource.getPopularTVSeries();
-        expect(result, isA<Error>());
-      },
-    );
+    test('GIVEN a call '
+        'WHEN getPopularTVSeries is called unsuccessfully '
+        'THEN it should return an error', () async {
+      when(
+        mockClient.get(any, headers: anyNamed('headers')),
+      ).thenThrow(Exception('Error'));
+      final result = await dataSource.getPopularTVSeries();
+      expect(result, isA<Error>());
+    });
   });
 }

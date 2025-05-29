@@ -1,7 +1,8 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseView<T extends BaseChangeNotifierViewModel> extends StatefulWidget {
+abstract class BaseView<T extends BaseChangeNotifierViewModel>
+    extends StatefulWidget {
   final T viewModel;
 
   const BaseView({super.key, required this.viewModel});
@@ -12,7 +13,8 @@ abstract class BaseView<T extends BaseChangeNotifierViewModel> extends StatefulW
   Widget build(BuildContext context, T viewModel);
 }
 
-class _BaseViewState<T extends BaseChangeNotifierViewModel> extends State<BaseView<T>> {
+class _BaseViewState<T extends BaseChangeNotifierViewModel>
+    extends State<BaseView<T>> {
   bool _initialized = false;
 
   @override

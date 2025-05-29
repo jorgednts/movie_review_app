@@ -155,7 +155,10 @@ class _SignInDialogState extends State<SignInDialog> {
                       controller: emailController,
                       label: AppIntl.of(context).shell_email,
                       validator: (value) {
-                        return FormFieldValidators.validateEmail(value, context);
+                        return FormFieldValidators.validateEmail(
+                          value,
+                          context,
+                        );
                       },
                     ),
                     DefaultTextFormField(
@@ -199,7 +202,8 @@ class _SignInDialogState extends State<SignInDialog> {
             if (state != AuthDialogState.init)
               TextButton(
                 onPressed:
-                    () => handleTextButtonPress(state == AuthDialogState.signIn),
+                    () =>
+                        handleTextButtonPress(state == AuthDialogState.signIn),
                 child: Text(
                   state.messageLabel(context, state, inverse: true),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(

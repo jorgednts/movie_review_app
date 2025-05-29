@@ -1,3 +1,1 @@
-class NullUserException implements Exception {
-
-}
+class NullUserException implements Exception {}

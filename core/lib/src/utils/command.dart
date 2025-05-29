@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:core/src/utils/result.dart';
 import 'package:flutter/foundation.dart';
 
-
-
 /// Defines a command action that returns a [Result] of type [T].
 /// Used by [Command0] for actions without arguments.
 typedef CommandAction0<T> = Future<Result<T>> Function();

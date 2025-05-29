@@ -23,8 +23,9 @@ void main() {
   provideDummy<Result<List<MovieModel>>>(Result.ok([]));
 
   test('should get list of popular movies from repository', () async {
-    when(mockRepository.getPopularMovies())
-        .thenAnswer((_) async => Result.ok(TestResources.mockMovieList));
+    when(
+      mockRepository.getPopularMovies(),
+    ).thenAnswer((_) async => Result.ok(TestResources.mockMovieList));
 
     final result = await useCase.call(NoParam());
 
@@ -33,8 +34,9 @@ void main() {
   });
 
   test('should return error when repository fails', () async {
-    when(mockRepository.getPopularMovies())
-        .thenAnswer((_) async => Result.error(Exception('Failed')));
+    when(
+      mockRepository.getPopularMovies(),
+    ).thenAnswer((_) async => Result.error(Exception('Failed')));
 
     final result = await useCase.call(NoParam());
 

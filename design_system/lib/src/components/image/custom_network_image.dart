@@ -35,7 +35,6 @@ class CustomNetworkImage extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) {
             return errorWidget ?? DefaultErrorWidget();
           },
-
         );
   }
 }

@@ -32,7 +32,10 @@ class _PulsatingOpacityContainerState extends State<PulsatingOpacityContainer>
     _controller = AnimationController(duration: widget.duration, vsync: this)
       ..repeat(reverse: true);
 
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOutCubic);
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOutCubic,
+    );
   }
 
   @override

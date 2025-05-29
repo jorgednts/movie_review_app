@@ -46,10 +46,7 @@ class _RotatingAnimatedCircleState extends State<RotatingAnimatedCircle>
         color: Theme.of(context).colorScheme.onSurface,
       ),
       padding: widget.padding,
-      child: RotationTransition(
-        turns: _controller,
-        child: widget.child,
-      ),
+      child: RotationTransition(turns: _controller, child: widget.child),
     );
   }
 }

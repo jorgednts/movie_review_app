@@ -49,9 +49,9 @@ class PosterCarousel<T> extends StatelessWidget {
                 builder: (_, constraints) {
                   const itemsPadding = Dimensions.spacingSm;
                   final viewportDimension = constraints.maxWidth;
-                  final itemExtent = getDynamicItemExtent(
-                    constraints.maxHeight,
-                  ) + itemsPadding;
+                  final itemExtent =
+                      getDynamicItemExtent(constraints.maxHeight) +
+                      itemsPadding;
                   return CarouselSlider(
                     itemExtent: itemExtent,
                     viewportDimension: viewportDimension,
