@@ -13,10 +13,11 @@ import 'package:app/src/domain/use_case/tmdb/search_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/search_tv_series_use_case.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/navigation/custom_shell_branch.dart';
-import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
+import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class AppRouter {
             (context, state, navigationShell) => Provider(
               create: (context) {
                 final repository = context.read<AuthRepository>();
+                final authChangeNotifier = context.read<AuthChangeNotifier>();
                 return ShellViewModel(
                   signInUseCase: SignInUseCase(authRepository: repository),
                   signOutUseCase: SignOutUseCase(authRepository: repository),
@@ -39,6 +41,8 @@ class AppRouter {
                   checkUserLoggedUseCase: CheckUserLoggedUseCase(
                     authRepository: repository,
                   ),
+                  dialogEventNotifier: DialogEventNotifier<AuthMessageType>(),
+                  authChangeNotifier: authChangeNotifier,
                 );
               },
               child: ShellView(navigationShell: navigationShell),

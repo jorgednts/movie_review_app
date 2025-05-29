@@ -4,25 +4,16 @@ import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 
-enum MessageType { signIn, signOut, createUser }
+enum AuthMessageType { signIn, signOut, createUser }
 
 class ShellViewModel extends BaseViewModel {
   final SignInUseCase _signInUseCase;
   final SignOutUseCase _signOutUseCase;
   final CreateUserUseCase _createUserUseCase;
   final CheckUserLoggedUseCase _checkUserLoggedUseCase;
-
-  ShellViewModel({
-    required SignInUseCase signInUseCase,
-    required SignOutUseCase signOutUseCase,
-    required CreateUserUseCase createUserUseCase,
-    required CheckUserLoggedUseCase checkUserLoggedUseCase,
-  }) : _signInUseCase = signInUseCase,
-       _signOutUseCase = signOutUseCase,
-       _createUserUseCase = createUserUseCase,
-       _checkUserLoggedUseCase = checkUserLoggedUseCase;
+  final DialogEventNotifier<AuthMessageType> _dialogEventNotifier;
+  final AuthChangeNotifier _authChangeNotifier;
 
   // Commands
   late final Command1<void, UserRequest> signIn;
@@ -30,8 +21,19 @@ class ShellViewModel extends BaseViewModel {
   late final Command1<void, UserRequest> createUser;
   late final Command0<void> checkUserLogged;
 
-  ValueNotifier<UserModel?> user = ValueNotifier(null);
-  MessageType resultMessageType = MessageType.signIn;
+  ShellViewModel({
+    required SignInUseCase signInUseCase,
+    required SignOutUseCase signOutUseCase,
+    required CreateUserUseCase createUserUseCase,
+    required CheckUserLoggedUseCase checkUserLoggedUseCase,
+    required DialogEventNotifier<AuthMessageType> dialogEventNotifier,
+    required AuthChangeNotifier authChangeNotifier,
+  }) : _signInUseCase = signInUseCase,
+       _signOutUseCase = signOutUseCase,
+       _createUserUseCase = createUserUseCase,
+       _checkUserLoggedUseCase = checkUserLoggedUseCase,
+       _dialogEventNotifier = dialogEventNotifier,
+       _authChangeNotifier = authChangeNotifier;
 
   @override
   void onInit() {
@@ -48,47 +50,57 @@ class ShellViewModel extends BaseViewModel {
   }
 
   Future<Result> _signIn(UserRequest input) async {
-    resultMessageType = MessageType.signIn;
-    return await request<UserRequest, UserModel?>(
+    return await callUseCase<UserRequest, UserModel?>(
       useCase: _signInUseCase,
       input: input,
       onSuccess: (result) {
-        user.value = result;
+        authChangeNotifier.setUser(result);
       },
-      onError: (error) {},
+      onError: (error) {
+        authChangeNotifier.setUser(null);
+      },
+      onFinally: () {
+        _dialogEventNotifier.trigger(AuthMessageType.signIn);
+      },
     );
   }
 
   Future<Result> _signOut() async {
-    resultMessageType = MessageType.signOut;
-    return await request<NoParam, void>(
+    return await callUseCase<NoParam, void>(
       useCase: _signOutUseCase,
       input: NoParam(),
       onSuccess: (result) {
-        user.value = null;
+        authChangeNotifier.setUser(null);
       },
       onError: (error) {},
+      onFinally: () {
+        _dialogEventNotifier.trigger(AuthMessageType.signOut);
+      },
     );
   }
 
   Future<Result> _createUser(UserRequest input) async {
-    resultMessageType = MessageType.createUser;
-    return await request<UserRequest, bool>(
+    return await callUseCase<UserRequest, bool>(
       useCase: _createUserUseCase,
       input: input,
       onSuccess: (result) {},
       onError: (error) {},
+      onFinally: () {
+        _dialogEventNotifier.trigger(AuthMessageType.createUser);
+      },
     );
   }
 
   Future<Result> _checkUserLogged() async {
-    return await request<NoParam, UserModel?>(
+    return await callUseCase<NoParam, UserModel?>(
       useCase: _checkUserLoggedUseCase,
       input: NoParam(),
       onSuccess: (result) {
-        user.value = result;
+        authChangeNotifier.setUser(result);
       },
-      onError: (error) {},
+      onError: (error) {
+        authChangeNotifier.setUser(null);
+      },
     );
   }
 
@@ -106,4 +118,14 @@ class ShellViewModel extends BaseViewModel {
       }
     }
   }
+
+  bool showLoading() {
+    return signIn.running || signOut.running || createUser.running;
+  }
+
+  /// Getters and Setters
+  DialogEventNotifier<AuthMessageType> get dialogEventNotifier =>
+      _dialogEventNotifier;
+
+  AuthChangeNotifier get authChangeNotifier => _authChangeNotifier;
 }

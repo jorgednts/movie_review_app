@@ -19,7 +19,6 @@ class HomeView extends StatelessWidget {
         child: Column(
           spacing: Dimensions.spacingXl,
           children: [
-            const SizedBox(height: Dimensions.spacingMd),
             PosterCarousel<MovieModel>(
               title: AppIntl.of(context).home_popular_movies_title,
               command: viewModel.fetchPopularMovies,

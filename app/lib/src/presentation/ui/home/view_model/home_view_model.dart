@@ -77,7 +77,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result> _getPopularMovies() async {
-    return await request<NoParam, List<MovieModel>>(
+    return await callUseCase<NoParam, List<MovieModel>>(
       useCase: _getPopularMoviesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -91,7 +91,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _getPopularTVSeries() async {
-    return await request<NoParam, List<TVSeriesModel>>(
+    return await callUseCase<NoParam, List<TVSeriesModel>>(
       useCase: _getPopularTVSeriesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -105,7 +105,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result> _getTopRatedMovies() async {
-    return await request<NoParam, List<MovieModel>>(
+    return await callUseCase<NoParam, List<MovieModel>>(
       useCase: _getTopRatedMoviesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -119,7 +119,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _getTopRatedTVSeries() async {
-    return await request<NoParam, List<TVSeriesModel>>(
+    return await callUseCase<NoParam, List<TVSeriesModel>>(
       useCase: _getTopRatedTVSeriesUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -133,7 +133,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _createGuestSession() async {
-    return await request<NoParam, String>(
+    return await callUseCase<NoParam, String>(
       useCase: _createGuestSessionUseCase,
       input: NoParam(),
       onSuccess: (result) {
@@ -146,7 +146,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _searchMovies() async {
-    return await request<MoviePaginatedRequestParameters, List<MovieModel>>(
+    return await callUseCase<MoviePaginatedRequestParameters, List<MovieModel>>(
       useCase: _searchMoviesUseCase,
       input: MoviePaginatedRequestParameters(query: 'Hunger Games'),
       onSuccess: (result) {
@@ -161,7 +161,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<Result<void>> _searchTVSeries() async {
-    return await request<
+    return await callUseCase<
       TVSeriesPaginatedRequestParameters,
       List<TVSeriesModel>
     >(

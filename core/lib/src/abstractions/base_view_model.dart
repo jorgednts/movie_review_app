@@ -13,14 +13,16 @@ abstract class BaseViewModel {
 
   void initCommands();
 
-  Future<Result<OutputType>> request<InputType, OutputType>({
+  Future<Result<OutputType>> callUseCase<InputType, OutputType>({
     required BaseUseCase<InputType, OutputType> useCase,
     required InputType input,
     required void Function(OutputType data) onSuccess,
     required void Function(Exception error) onError,
+    void Function()? onFinally,
   }) async {
     final response = await useCase.call(input);
-    response.handle(onOk: onSuccess, onError: onError);
+    response.fold(onOk: onSuccess, onError: onError);
+    if (onFinally != null) onFinally();
     return response;
   }
 }

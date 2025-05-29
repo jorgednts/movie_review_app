@@ -22,7 +22,7 @@ sealed class Result<T> {
   /// Creates an error [Result], completed with the specified [error].
   const factory Result.error(Exception error) = Error._;
 
-  void handle({
+  void fold({
     required void Function(T value) onOk,
     required void Function(Exception error) onError,
   }) {

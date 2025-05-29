@@ -15,3 +15,4 @@ export 'package:firebase_core/firebase_core.dart';
 // Utils
 export 'src/utils/command.dart';
 export 'src/utils/result.dart';
+export 'src/utils/dialog_event_notifier.dart';

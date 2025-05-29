@@ -48,13 +48,16 @@ class _PulsatingOpacityContainerState extends State<PulsatingOpacityContainer>
       children: [
         FadeTransition(
           opacity: _animation,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: widget.color.withValues(alpha: 255 * 0.6),
+          child: Opacity(
+            opacity: 0.3,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: widget.color,
+              ),
+              padding: widget.padding,
+              child: widget.child,
             ),
-            padding: widget.padding,
-            child: widget.child,
           ),
         ),
         widget.child,

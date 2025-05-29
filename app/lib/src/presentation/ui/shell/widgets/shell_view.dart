@@ -7,11 +7,12 @@ import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/app_bar_auth_button.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
+import 'package:app/src/presentation/ui/shell/widgets/navigation_bar_auth_button.dart';
+import 'package:app/src/presentation/ui/shell/widgets/user_listenable_widget.dart';
 import 'package:app/src/presentation/utils/window_utils.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:internationalization/internationalization.dart';
 import 'package:provider/provider.dart';
 
 class ShellView extends StatelessWidget {
@@ -22,75 +23,22 @@ class ShellView extends StatelessWidget {
   void showCommandResultDialog(
     BuildContext context,
     bool isError,
-    MessageType message,
+    AuthMessageType message,
   ) {
     showAdaptiveDialog(
       context: context,
       builder:
           (_) =>
               isError
-                  ? CommandResultDialog.error(
-                    titleMessage: getDialogTitleMessage(context, true, message),
-                    subtitleMessage: getDialogSubtitleMessage(
-                      context,
-                      true,
-                      message,
-                    ),
-                  )
-                  : CommandResultDialog.success(
-                    titleMessage: getDialogTitleMessage(
-                      context,
-                      isError,
-                      message,
-                    ),
-                    subtitleMessage: getDialogSubtitleMessage(
-                      context,
-                      isError,
-                      message,
-                    ),
-                  ),
+                  ? CommandResultDialog.error(authMessageType: message)
+                  : CommandResultDialog.success(authMessageType: message),
     );
-  }
-
-  String? getDialogTitleMessage(
-    BuildContext context,
-    bool isError,
-    MessageType resultMessageType,
-  ) {
-    if (isError) {
-      return AppIntl.of(context).shell_oops;
-    }
-    switch (resultMessageType) {
-      case MessageType.signIn:
-        return AppIntl.of(context).shell_welcome_back;
-      case MessageType.signOut:
-        return null;
-      case MessageType.createUser:
-        return AppIntl.of(context).shell_welcome;
-    }
-  }
-
-  String getDialogSubtitleMessage(
-    BuildContext context,
-    bool isError,
-    MessageType resultMessageType,
-  ) {
-    if (isError) {
-      return AppIntl.of(context).shell_error_message;
-    }
-    switch (resultMessageType) {
-      case MessageType.signIn:
-        return AppIntl.of(context).shell_sign_in_success_message;
-      case MessageType.signOut:
-        return AppIntl.of(context).shell_sign_out_success_message;
-      case MessageType.createUser:
-        return AppIntl.of(context).shell_sign_up_success_message;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<ShellViewModel>();
+
     void onSignIn() async {
       viewModel.handleAuthDialogResult(
         await showAdaptiveDialog<AuthDialogResult>(
@@ -111,50 +59,60 @@ class ShellView extends StatelessWidget {
                   horizontal: Dimensions.spacingMd,
                 ),
                 actions: [
-                  AppBarAuthButton(
-                    userValueNotifier: viewModel.user,
-                    onSignIn: onSignIn,
-                    onSignOut: viewModel.signOut.execute,
-                    checkUserLoggedCommand: viewModel.checkUserLogged,
+                  UserListenableWidget(
+                    child: AppBarAuthButton(
+                      onSignIn: onSignIn,
+                      onSignOut: viewModel.signOut.execute,
+                    ),
                   ),
                 ],
               ),
       body: SafeArea(
-        child: DefaultLoadingView(
-          listenables: [
-            viewModel.signIn,
-            viewModel.createUser,
-            viewModel.signOut,
-          ],
-          loadingWidget: Center(child: CustomLoadingWidget()),
-          onError: () {
-            showCommandResultDialog(context, true, viewModel.resultMessageType);
-          },
-          onSuccess: () {
-            showCommandResultDialog(
-              context,
-              false,
-              viewModel.resultMessageType,
+        child: ListenableBuilder(
+          listenable: viewModel.dialogEventNotifier,
+          builder: (context, child) {
+            final dialogMessageType =
+                viewModel.dialogEventNotifier.consumeEvent();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (dialogMessageType != null) {
+                final isError = switch (dialogMessageType) {
+                  AuthMessageType.signIn => false,
+                  AuthMessageType.signOut => false,
+                  AuthMessageType.createUser => false,
+                };
+                showCommandResultDialog(context, isError, dialogMessageType);
+              }
+            });
+            return DefaultLoadingView(
+              listenables: [
+                viewModel.signIn,
+                viewModel.createUser,
+                viewModel.signOut,
+              ],
+              showLoading: viewModel.showLoading,
+              loadingWidget: Center(child: CustomLoadingWidget()),
+              child: Column(
+                children: [
+                  if (WindowUtils.isDesktop(context))
+                    CustomNavigationBar(
+                      navigationShell: navigationShell,
+                      authButton: UserListenableWidget(
+                        child: NavigationBarAuthButton(
+                          onSignIn: onSignIn,
+                          onSignOut: viewModel.signOut.execute,
+                        ),
+                      ),
+                    ),
+                  Expanded(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 1500),
+                      child: navigationShell,
+                    ),
+                  ),
+                ],
+              ),
             );
           },
-          child: Column(
-            children: [
-              if (WindowUtils.isDesktop(context))
-                CustomNavigationBar(
-                  navigationShell: navigationShell,
-                  userModelListenable: viewModel.user,
-                  onSignIn: onSignIn,
-                  onSignOut: viewModel.signOut.execute,
-                  checkUserLoggedCommand: viewModel.checkUserLogged,
-                ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 1500),
-                  child: navigationShell,
-                ),
-              ),
-            ],
-          ),
         ),
       ),
       bottomNavigationBar:

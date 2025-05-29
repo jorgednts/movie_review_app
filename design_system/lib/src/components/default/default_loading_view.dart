@@ -7,27 +7,13 @@ class DefaultLoadingView extends StatelessWidget {
     required this.child,
     this.loadingWidget = const CircularProgressIndicator(),
     required this.listenables,
-    required this.onError,
-    required this.onSuccess,
+    required this.showLoading,
   });
 
   final Widget child;
   final Widget loadingWidget;
   final List<Command> listenables;
-  final void Function() onError;
-  final void Function() onSuccess;
-
-  bool showError() {
-    return listenables.any((command) => command.error);
-  }
-
-  bool showLoading() {
-    return listenables.any((command) => command.running);
-  }
-
-  bool showSuccess() {
-    return listenables.any((command) => command.completed);
-  }
+  final bool Function() showLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +23,6 @@ class DefaultLoadingView extends StatelessWidget {
         AnimatedBuilder(
           animation: Listenable.merge(listenables),
           builder: (context, _) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (showError()) {
-                onError();
-              }
-
-              if (showSuccess()) {
-                onSuccess();
-              }
-            });
-
             if (showLoading()) {
               return Center(
                 child: Container(

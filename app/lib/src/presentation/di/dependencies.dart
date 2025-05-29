@@ -24,6 +24,9 @@ class Dependencies {
 
     // Services
     Provider<AuthService>(create: (_) => AuthServiceImpl()),
+    ChangeNotifierProvider<AuthChangeNotifier>(
+      create: (_) => AuthChangeNotifier(),
+    ),
 
     // Repositories
     ProxyProvider<TMDBRemoteDataSource, TMDBRepository>(
