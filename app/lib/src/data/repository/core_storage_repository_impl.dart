@@ -30,9 +30,9 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
   }
 
   @override
-  Future<Result<List<T>>> getCollectionFromStorage<T extends AppCollectionItemModel>({
-    required GetCollectionRequest<T> request,
-  }) async {
+  Future<Result<List<T>>> getCollectionFromStorage<
+    T extends AppCollectionItemModel
+  >({required GetCollectionRequest<T> request}) async {
     return await _storageService.getCollection<T>(request: request);
   }
 
