@@ -65,6 +65,21 @@ class AppIntl {
     );
   }
 
+  /// `nome`
+  String get common_name {
+    return Intl.message('nome', name: 'common_name', desc: '', args: []);
+  }
+
+  /// `nome não pode estar vazio`
+  String get common_empty_name {
+    return Intl.message(
+      'nome não pode estar vazio',
+      name: 'common_empty_name',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get shell_home {
     return Intl.message('Home', name: 'shell_home', desc: '', args: []);
@@ -83,6 +98,16 @@ class AppIntl {
   /// `Config.`
   String get shell_settings {
     return Intl.message('Config.', name: 'shell_settings', desc: '', args: []);
+  }
+
+  /// `Minha Lista`
+  String get shell_watchlist {
+    return Intl.message(
+      'Minha Lista',
+      name: 'shell_watchlist',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Sair`

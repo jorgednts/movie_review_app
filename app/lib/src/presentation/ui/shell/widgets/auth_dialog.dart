@@ -11,8 +11,8 @@ enum AuthDialogState {
   signIn,
   create;
 
-  String filledButtonLabel(BuildContext context, AuthDialogState state) {
-    switch (state) {
+  String filledButtonLabel(BuildContext context) {
+    switch (this) {
       case AuthDialogState.init:
         return '';
       case AuthDialogState.signIn:
@@ -22,12 +22,8 @@ enum AuthDialogState {
     }
   }
 
-  String messageLabel(
-    BuildContext context,
-    AuthDialogState state, {
-    bool inverse = false,
-  }) {
-    switch (state) {
+  String messageLabel(BuildContext context, {bool inverse = false}) {
+    switch (this) {
       case AuthDialogState.init:
         return '';
       case AuthDialogState.signIn:
@@ -41,8 +37,8 @@ enum AuthDialogState {
     }
   }
 
-  String widgetTitle(BuildContext context, AuthDialogState state) {
-    switch (state) {
+  String widgetTitle(BuildContext context) {
+    switch (this) {
       case AuthDialogState.init:
         return '';
       case AuthDialogState.signIn:
@@ -63,12 +59,15 @@ class SignInDialog extends StatefulWidget {
 class _SignInDialogState extends State<SignInDialog> {
   final _formKey = GlobalKey<FormState>();
   AuthDialogState state = AuthDialogState.init;
-  late TextEditingController emailController, passwordController;
+  late TextEditingController emailController,
+      passwordController,
+      nameController;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    nameController = TextEditingController();
     super.initState();
   }
 
@@ -89,6 +88,7 @@ class _SignInDialogState extends State<SignInDialog> {
     final userRequest = UserRequest(
       email: emailController.text,
       password: passwordController.text,
+      name: nameController.text,
     );
     switch (state) {
       case AuthDialogState.init:
@@ -143,7 +143,7 @@ class _SignInDialogState extends State<SignInDialog> {
           children: [
             if (state != AuthDialogState.init) ...[
               Text(
-                state.widgetTitle(context, state),
+                state.widgetTitle(context),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Form(
@@ -151,26 +151,35 @@ class _SignInDialogState extends State<SignInDialog> {
                 child: Column(
                   spacing: Dimensions.spacingMd,
                   children: [
+                    if (state == AuthDialogState.create)
+                      DefaultTextFormField(
+                        key: ValueKey('name'),
+                        controller: nameController,
+                        label: AppIntl.of(context).common_name,
+                        validator:
+                            (value) => FormFieldValidators.validateString(
+                              value,
+                              context,
+                            ),
+                      ),
                     DefaultTextFormField(
+                      key: ValueKey('email'),
                       controller: emailController,
                       label: AppIntl.of(context).shell_email,
-                      validator: (value) {
-                        return FormFieldValidators.validateEmail(
-                          value,
-                          context,
-                        );
-                      },
+                      validator:
+                          (value) =>
+                              FormFieldValidators.validateEmail(value, context),
                     ),
                     DefaultTextFormField(
+                      key: ValueKey('password'),
                       controller: passwordController,
                       label: AppIntl.of(context).shell_password,
                       obscureText: true,
-                      validator: (value) {
-                        return FormFieldValidators.validatePassword(
-                          value,
-                          context,
-                        );
-                      },
+                      validator:
+                          (value) => FormFieldValidators.validatePassword(
+                            value,
+                            context,
+                          ),
                     ),
                   ],
                 ),
@@ -205,7 +214,7 @@ class _SignInDialogState extends State<SignInDialog> {
                     () =>
                         handleTextButtonPress(state == AuthDialogState.signIn),
                 child: Text(
-                  state.messageLabel(context, state, inverse: true),
+                  state.messageLabel(context, inverse: true),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -226,7 +235,7 @@ class _MessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      state.messageLabel(context, state),
+      state.messageLabel(context),
       style: Theme.of(
         context,
       ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),

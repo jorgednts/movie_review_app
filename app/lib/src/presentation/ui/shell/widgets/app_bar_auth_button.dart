@@ -14,7 +14,7 @@ class AppBarAuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthChangeNotifier>(
+    return Consumer<UserStorageChangeNotifier>(
       builder:
           (context, authChangeNotifier, child) => LayoutBuilder(
             builder: (_, constraints) {

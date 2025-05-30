@@ -8,7 +8,7 @@ class AuthRepositoryImpl implements AuthRepository {
     : _authService = authService;
 
   @override
-  Future<Result<bool>> createUser({required UserRequest request}) async {
+  Future<Result<UserModel>> createUser({required UserRequest request}) async {
     return await _authService.createUser(request: request);
   }
 

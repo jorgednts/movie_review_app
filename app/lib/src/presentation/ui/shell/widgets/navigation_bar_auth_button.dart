@@ -15,7 +15,7 @@ class NavigationBarAuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthChangeNotifier>(
+    return Consumer<UserStorageChangeNotifier>(
       builder: (context, authChangeNotifier, child) {
         final user = authChangeNotifier.user;
         return OutlinedButton(

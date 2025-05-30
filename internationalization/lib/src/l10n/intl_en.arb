@@ -1,10 +1,13 @@
 {
   "@@locale": "en",
   "app_name": "Movie Review App",
+  "common_name": "name",
+  "common_empty_name": "name can't be empty",
   "shell_home": "Home",
   "shell_search": "Search",
   "shell_reviews": "Reviews",
   "shell_settings": "Settings",
+  "shell_watchlist": "Watchlist",
   "shell_sign_out": "Sign Out",
   "shell_sign_in": "Sign In",
   "shell_create_user": "Create User",

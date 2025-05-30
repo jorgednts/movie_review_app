@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';
 
 enum AppRoute {
-  home(path: '/', icon: Icons.home),
+  home(path: '/home', icon: Icons.home),
   search(path: '/search', icon: Icons.search),
   review(path: '/review', icon: Icons.reviews),
   settings(path: '/settings', icon: Icons.settings),
+  watchlist(path: '/watchlist', icon: Icons.bookmark),
   details(path: '/details', icon: Icons.movie_creation_outlined),
   login(path: '/login', icon: Icons.login);
 
@@ -24,8 +25,8 @@ extension AppRouteExtension on AppRoute {
         return AppIntl.of(context).shell_search;
       case AppRoute.review:
         return AppIntl.of(context).shell_reviews;
-      case AppRoute.settings:
-        return AppIntl.of(context).shell_settings;
+      case AppRoute.watchlist:
+        return AppIntl.of(context).shell_watchlist;
       default:
         throw UnimplementedError();
     }

@@ -9,4 +9,12 @@ class UserModel {
   factory UserModel.fromUser(User user) {
     return UserModel(uid: user.uid, email: user.email ?? '');
   }
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(uid: json['uid'] ?? '', email: json['email'] ?? '');
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'uid': uid, 'email': email};
+  }
 }

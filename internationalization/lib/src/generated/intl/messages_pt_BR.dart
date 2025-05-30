@@ -23,6 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "app_name": MessageLookupByLibrary.simpleMessage("Movie Review App"),
+    "common_empty_name": MessageLookupByLibrary.simpleMessage(
+      "nome não pode estar vazio",
+    ),
+    "common_name": MessageLookupByLibrary.simpleMessage("nome"),
     "home_popular_movies_title": MessageLookupByLibrary.simpleMessage(
       "Filmes Populares",
     ),
@@ -83,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shell_sign_up_success_message": MessageLookupByLibrary.simpleMessage(
       "Conta criada com sucesso!",
     ),
+    "shell_watchlist": MessageLookupByLibrary.simpleMessage("Minha Lista"),
     "shell_welcome": MessageLookupByLibrary.simpleMessage(
       "Bem-vindo(a) ao Ciné!",
     ),

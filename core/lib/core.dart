@@ -12,6 +12,9 @@ export 'src/abstractions/base_use_case.dart';
 // Firebase
 export 'package:firebase_core/firebase_core.dart';
 
+// Storage
+export 'src/storage/storage.dart';
+
 // Utils
 export 'src/utils/command.dart';
 export 'src/utils/result.dart';

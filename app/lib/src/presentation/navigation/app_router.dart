@@ -1,9 +1,12 @@
 import 'package:app/src/domain/repository/auth_repository.dart';
+import 'package:app/src/domain/repository/core_storage_repository.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
 import 'package:app/src/domain/use_case/auth/check_user_logged_use_case.dart';
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
+import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
@@ -25,24 +28,35 @@ import 'package:provider/provider.dart';
 class AppRouter {
   static final router = GoRouter(
     initialLocation: AppRoute.home.path,
+    onException: (context, _, _) => context.goNamed(AppRoute.home.name),
     routes: [
       StatefulShellRoute.indexedStack(
         builder:
             (context, state, navigationShell) => Provider(
               create: (context) {
-                final repository = context.read<AuthRepository>();
-                final authChangeNotifier = context.read<AuthChangeNotifier>();
+                final authRepository = context.read<AuthRepository>();
+                final storageRepository = context.read<CoreStorageRepository>();
+                final userStorageNotifier =
+                    context.read<UserStorageChangeNotifier>();
                 return ShellViewModel(
-                  signInUseCase: SignInUseCase(authRepository: repository),
-                  signOutUseCase: SignOutUseCase(authRepository: repository),
+                  signInUseCase: SignInUseCase(authRepository: authRepository),
+                  signOutUseCase: SignOutUseCase(
+                    authRepository: authRepository,
+                  ),
                   createUserUseCase: CreateUserUseCase(
-                    authRepository: repository,
+                    authRepository: authRepository,
                   ),
                   checkUserLoggedUseCase: CheckUserLoggedUseCase(
-                    authRepository: repository,
+                    authRepository: authRepository,
                   ),
                   dialogEventNotifier: DialogEventNotifier<AuthMessageType>(),
-                  authChangeNotifier: authChangeNotifier,
+                  createUserStorageUseCase: CreateUserStorageUseCase(
+                    coreStorageRepository: storageRepository,
+                  ),
+                  getUserStorageUseCase: GetCollectionFromStorageUseCase(
+                    coreStorageRepository: storageRepository,
+                  ),
+                  userChangeNotifier: userStorageNotifier,
                 );
               },
               child: ShellView(navigationShell: navigationShell),
@@ -117,11 +131,11 @@ class AppRouter {
       ],
     ),
     CustomShellBranch(
-      appRoute: AppRoute.settings,
+      appRoute: AppRoute.watchlist,
       routes: [
         GoRoute(
-          path: AppRoute.settings.path,
-          name: AppRoute.settings.name,
+          path: AppRoute.watchlist.path,
+          name: AppRoute.watchlist.name,
           builder: (context, state) => const Placeholder(),
         ),
       ],

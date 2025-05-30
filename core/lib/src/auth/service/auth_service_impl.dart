@@ -29,7 +29,7 @@ class AuthServiceImpl extends AuthService {
   }
 
   @override
-  Future<Result<bool>> createUser({required UserRequest request}) async {
+  Future<Result<UserModel>> createUser({required UserRequest request}) async {
     try {
       final result = await _auth.createUserWithEmailAndPassword(
         email: request.email,
@@ -39,7 +39,7 @@ class AuthServiceImpl extends AuthService {
         return Result.error(NullUserException());
       }
 
-      return Result.ok(true);
+      return Result.ok(UserModel.fromUser(result.user!));
     } on FirebaseAuthException catch (e) {
       return Result.error(CustomFirebaseAuthException.fromCode(e.code));
     } catch (e) {
