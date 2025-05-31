@@ -13,7 +13,6 @@ class AppLogoWidget extends StatelessWidget {
         Theme.of(context).colorScheme.onSurface,
         BlendMode.srcIn,
       ),
-      fit: BoxFit.cover,
     );
   }
 }

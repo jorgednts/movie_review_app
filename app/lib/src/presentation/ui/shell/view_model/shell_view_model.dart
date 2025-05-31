@@ -6,6 +6,7 @@ import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dar
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:core/core.dart';
+import 'package:design_system/design_system.dart';
 
 enum AuthMessageType { signIn, signOut, createUser }
 
@@ -17,6 +18,7 @@ class ShellViewModel extends BaseViewModel {
   final DialogEventNotifier<AuthMessageType> _dialogEventNotifier;
   final CreateUserStorageUseCase _createUserStorageUseCase;
   final UserStorageChangeNotifier _userChangeNotifier;
+  final ThemeNotifier _themeNotifier;
 
   // Commands
   late final Command1<void, UserRequest> signIn;
@@ -33,13 +35,15 @@ class ShellViewModel extends BaseViewModel {
     required UserStorageChangeNotifier userChangeNotifier,
     required CreateUserStorageUseCase createUserStorageUseCase,
     required GetCollectionFromStorageUseCase getUserStorageUseCase,
+    required ThemeNotifier themeNotifier,
   }) : _signInUseCase = signInUseCase,
        _signOutUseCase = signOutUseCase,
        _createUserUseCase = createUserUseCase,
        _checkUserLoggedUseCase = checkUserLoggedUseCase,
        _dialogEventNotifier = dialogEventNotifier,
        _userChangeNotifier = userChangeNotifier,
-       _createUserStorageUseCase = createUserStorageUseCase;
+       _createUserStorageUseCase = createUserStorageUseCase,
+       _themeNotifier = themeNotifier;
 
   @override
   void onInit() {
@@ -144,6 +148,10 @@ class ShellViewModel extends BaseViewModel {
 
   bool showLoading() {
     return signIn.running || signOut.running || createUser.running;
+  }
+
+  void toggleTheme() {
+    _themeNotifier.toggleTheme();
   }
 
   /// Getters and Setters

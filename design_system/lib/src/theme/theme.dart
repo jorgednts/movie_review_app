@@ -1,6 +1,17 @@
 import 'package:design_system/src/theme/text_theme_util.dart';
 import 'package:flutter/material.dart';
 
+class ThemeNotifier extends ChangeNotifier {
+  bool _isDarkTheme = false;
+
+  ThemeMode get themeMode => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+
+  void toggleTheme() {
+    _isDarkTheme = !_isDarkTheme;
+    notifyListeners();
+  }
+}
+
 class CustomTheme {
   final TextTheme textTheme;
 

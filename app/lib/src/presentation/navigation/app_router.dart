@@ -21,6 +21,7 @@ import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
 import 'package:core/core.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -57,6 +58,7 @@ class AppRouter {
                     coreStorageRepository: storageRepository,
                   ),
                   userChangeNotifier: userStorageNotifier,
+                  themeNotifier: context.read<ThemeNotifier>(),
                 );
               },
               child: ShellView(navigationShell: navigationShell),

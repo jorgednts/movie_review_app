@@ -24,13 +24,12 @@ class DefaultLoadingView extends StatelessWidget {
           animation: Listenable.merge(listenables),
           builder: (context, _) {
             if (showLoading()) {
-              return Center(
-                child: Container(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.surface.withValues(alpha: 255 * 0.2),
-                  child: loadingWidget,
-                ),
+              return Container(
+                color: Theme.of(
+                  context,
+                ).scaffoldBackgroundColor.withValues(alpha: 0.5),
+                alignment: Alignment.center,
+                child: loadingWidget,
               );
             } else {
               return Padding(padding: EdgeInsets.zero);

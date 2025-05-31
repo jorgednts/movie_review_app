@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppIntl.of(context).app_name,
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      themeMode: ThemeMode.system,
+      themeMode: themeNotifier.themeMode,
       theme: CustomTheme.fromContext(context).light(),
       darkTheme: CustomTheme.fromContext(context).dark(),
       routerConfig: AppRouter.router,

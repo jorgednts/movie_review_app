@@ -9,11 +9,15 @@ import 'package:app/src/domain/repository/auth_repository.dart';
 import 'package:app/src/domain/repository/core_storage_repository.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
 import 'package:core/core.dart';
+import 'package:design_system/design_system.dart';
 import 'package:http/http.dart' as http show Client;
 import 'package:provider/provider.dart';
 
 class Dependencies {
   static final providers = [
+    // Theme Notifier
+    ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
+
     // Http Client
     Provider<CustomHttpClient>(
       create: (_) => CustomHttpClientImpl(http.Client()),

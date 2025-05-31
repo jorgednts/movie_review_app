@@ -1,14 +1,11 @@
 import 'package:app/src/presentation/navigation/app_router.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
-import 'package:app/src/presentation/ui/common/widgets/app_logo_widget.dart';
 import 'package:app/src/presentation/ui/common/widgets/command_result_dialog.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
-import 'package:app/src/presentation/ui/shell/widgets/app_bar_auth_button.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
 import 'package:app/src/presentation/ui/shell/widgets/navigation_bar_auth_button.dart';
-import 'package:app/src/presentation/ui/shell/widgets/user_listenable_widget.dart';
 import 'package:app/src/presentation/utils/window_utils.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -49,24 +46,6 @@ class ShellView extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar:
-          WindowUtils.isDesktop(context)
-              ? null
-              : AppBar(
-                title: AppLogoWidget(),
-                actionsPadding: EdgeInsets.symmetric(
-                  vertical: Dimensions.spacingXs,
-                  horizontal: Dimensions.spacingMd,
-                ),
-                actions: [
-                  UserListenableWidget(
-                    child: AppBarAuthButton(
-                      onSignIn: onSignIn,
-                      onSignOut: viewModel.signOut.execute,
-                    ),
-                  ),
-                ],
-              ),
       body: SafeArea(
         child: ListenableBuilder(
           listenable: viewModel.dialogEventNotifier,
@@ -92,17 +71,15 @@ class ShellView extends StatelessWidget {
               showLoading: viewModel.showLoading,
               loadingWidget: Center(child: CustomLoadingWidget()),
               child: Column(
+                spacing: Dimensions.spacingMd,
                 children: [
-                  if (WindowUtils.isDesktop(context))
-                    CustomNavigationBar(
-                      navigationShell: navigationShell,
-                      authButton: UserListenableWidget(
-                        child: NavigationBarAuthButton(
-                          onSignIn: onSignIn,
-                          onSignOut: viewModel.signOut.execute,
-                        ),
-                      ),
+                  CustomNavigationBar(
+                    navigationShell: navigationShell,
+                    authButton: NavigationBarAuthButton(
+                      onSignIn: onSignIn,
+                      onSignOut: viewModel.signOut.execute,
                     ),
+                  ),
                   Expanded(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: 1500),
@@ -119,7 +96,7 @@ class ShellView extends StatelessWidget {
           WindowUtils.isDesktop(context)
               ? null
               : NavigationBar(
-                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
                 selectedIndex: navigationShell.currentIndex,
                 onDestinationSelected: navigationShell.goBranch,
                 destinations:

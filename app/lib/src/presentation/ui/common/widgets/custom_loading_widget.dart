@@ -17,26 +17,32 @@ class CustomLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        RotatingAnimatedCircle(
-          radius: radius,
-          padding: padding,
-          child: CustomSvgImage(
-            assetName: ImageConstants.appLogSmallSVG,
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.surface,
-              BlendMode.srcIn,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(Dimensions.spacingLg),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RotatingAnimatedCircle(
+              radius: radius,
+              padding: padding,
+              child: CustomSvgImage(
+                assetName: ImageConstants.appLogSmallSVG,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.surface,
+                  BlendMode.srcIn,
+                ),
+                fit: BoxFit.cover,
+              ),
             ),
-            fit: BoxFit.cover,
-          ),
+            Text(
+              message ?? AppIntl.of(context).shell_loading_message,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ],
         ),
-        Text(
-          message ?? AppIntl.of(context).shell_loading_message,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-      ],
+      ),
     );
   }
 }
