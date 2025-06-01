@@ -18,6 +18,8 @@ import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/navigation/custom_shell_branch.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
+import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart';
+import 'package:app/src/presentation/ui/search/widgets/search_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
 import 'package:core/core.dart';
@@ -98,12 +100,6 @@ class AppRouter {
                   createGuestSessionUseCase: CreateGuestSessionUseCase(
                     tmdbRepository: repository,
                   ),
-                  searchMoviesUseCase: SearchMoviesUseCase(
-                    tmdbRepository: repository,
-                  ),
-                  searchTVSeriesUseCase: SearchTVSeriesUseCase(
-                    tmdbRepository: repository,
-                  ),
                 );
               },
               child: const HomeView(),
@@ -118,7 +114,21 @@ class AppRouter {
         GoRoute(
           path: AppRoute.search.path,
           name: AppRoute.search.name,
-          builder: (context, state) => const Placeholder(),
+          builder:
+              (context, state) => Provider(
+                create: (context) {
+                  final tmdbRepository = context.read<TMDBRepository>();
+                  return SearchViewModel(
+                    searchMoviesUseCase: SearchMoviesUseCase(
+                      tmdbRepository: tmdbRepository,
+                    ),
+                    searchTVSeriesUseCase: SearchTVSeriesUseCase(
+                      tmdbRepository: tmdbRepository,
+                    ),
+                  );
+                },
+                child: const SearchView(),
+              ),
         ),
       ],
     ),

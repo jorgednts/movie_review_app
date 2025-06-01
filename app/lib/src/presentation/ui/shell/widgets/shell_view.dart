@@ -6,7 +6,6 @@ import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
 import 'package:app/src/presentation/ui/shell/widgets/navigation_bar_auth_button.dart';
-import 'package:app/src/presentation/utils/window_utils.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

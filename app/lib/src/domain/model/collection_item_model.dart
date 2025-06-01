@@ -1,12 +1,15 @@
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:internationalization/internationalization.dart';
 
 enum AppCollectionItemType {
-  movie(storageValue: 'movie'),
-  tvSeries(storageValue: 'tv_series');
+  movie(storageValue: 'movie', icon: Icons.local_movies_outlined),
+  tvSeries(storageValue: 'tv_series', icon: Icons.tv);
 
   final String storageValue;
+  final IconData icon;
 
-  const AppCollectionItemType({required this.storageValue});
+  const AppCollectionItemType({required this.storageValue, required this.icon});
 
   static AppCollectionItemType fromStorage(String value) {
     switch (value) {
@@ -15,6 +18,15 @@ enum AppCollectionItemType {
       case 'tv_series':
       default:
         return AppCollectionItemType.tvSeries;
+    }
+  }
+
+  String nameTranslated(BuildContext context) {
+    switch (this) {
+      case AppCollectionItemType.movie:
+        return AppIntl.of(context).common_movies;
+      case AppCollectionItemType.tvSeries:
+        return AppIntl.of(context).common_tv_series;
     }
   }
 }

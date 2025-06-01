@@ -2,6 +2,7 @@ import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/poster_carousel.dart';
+import 'package:app/src/presentation/ui/home/widgets/tmdb_info_card.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';
@@ -29,8 +30,7 @@ class HomeView extends StatelessWidget {
                     infoWidget: TMDBInfoCard(
                       title: movie.title,
                       voteAverage: movie.voteAverage,
-                      releaseYear:
-                          movie.releaseDate.toDateFormat().year.toString(),
+                      releaseYear: movie.releaseYear,
                     ),
                   ),
             ),
@@ -44,8 +44,7 @@ class HomeView extends StatelessWidget {
                     infoWidget: TMDBInfoCard(
                       title: tvSeries.name,
                       voteAverage: tvSeries.voteAverage,
-                      releaseYear:
-                          tvSeries.firstAirDate.toDateFormat().year.toString(),
+                      releaseYear: tvSeries.releaseYear,
                     ),
                   ),
             ),
@@ -59,8 +58,7 @@ class HomeView extends StatelessWidget {
                     infoWidget: TMDBInfoCard(
                       title: movie.title,
                       voteAverage: movie.voteAverage,
-                      releaseYear:
-                          movie.releaseDate.toDateFormat().year.toString(),
+                      releaseYear: movie.releaseYear,
                     ),
                   ),
             ),
@@ -74,8 +72,7 @@ class HomeView extends StatelessWidget {
                     infoWidget: TMDBInfoCard(
                       title: tvSeries.name,
                       voteAverage: tvSeries.voteAverage,
-                      releaseYear:
-                          tvSeries.firstAirDate.toDateFormat().year.toString(),
+                      releaseYear: tvSeries.releaseYear,
                     ),
                   ),
             ),

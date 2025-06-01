@@ -1,5 +1,3 @@
-// core/network/custom_http_client_impl.dart
-
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +16,11 @@ class CustomHttpClientImpl implements CustomHttpClient {
     Map<String, dynamic>? queryParameters,
   }) async {
     final response = await _client.get(
-      Uri.parse(url).replace(queryParameters: queryParameters),
+      Uri.parse(url).replace(
+        queryParameters: queryParameters?.map(
+          (key, value) => MapEntry(key, value.toString()),
+        ),
+      ),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${dotenv.env['TMDB_API_TOKEN']}',

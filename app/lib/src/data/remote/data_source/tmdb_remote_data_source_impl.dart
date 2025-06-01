@@ -9,6 +9,7 @@ import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:core/core.dart';
@@ -20,7 +21,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
     : _client = client;
 
   @override
-  Future<List<T>> getPaginated<T>({
+  Future<BaseTMDBPaginatedResponse<T>> getPaginated<T>({
     required String uri,
     required T Function(Map<String, dynamic>) fromJsonT,
     Map<String, dynamic>? headers,
@@ -35,7 +36,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
       json: data,
       fromJsonT: fromJsonT,
     );
-    return paginated.results;
+    return paginated;
   }
 
   @override
@@ -59,12 +60,12 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   @override
   Future<Result<List<MovieModel>>> getPopularMovies() async {
     try {
-      final movies = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/movie/${TMDBApiConstants.popularEndpoint}',
         fromJsonT: MovieResponse.fromJson,
       );
-      return Result.ok(movies.toMovieModelList());
+      return Result.ok(response.results.toMovieModelList());
     } catch (e) {
       return Result.error(Exception(e));
     }
@@ -73,12 +74,12 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   @override
   Future<Result<List<TVSeriesModel>>> getPopularTVSeries() async {
     try {
-      final tvSeries = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/tv/${TMDBApiConstants.popularEndpoint}',
         fromJsonT: TVSeriesResponse.fromJson,
       );
-      return Result.ok(tvSeries.toTVSeriesModelList());
+      return Result.ok(response.results.toTVSeriesModelList());
     } catch (e) {
       return Result.error(Exception(e));
     }
@@ -87,12 +88,12 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   @override
   Future<Result<List<MovieModel>>> getTopRatedMovies() async {
     try {
-      final movies = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/movie/${TMDBApiConstants.topRatedEndpoint}',
         fromJsonT: MovieResponse.fromJson,
       );
-      return Result.ok(movies.toMovieModelList());
+      return Result.ok(response.results.toMovieModelList());
     } catch (e) {
       return Result.error(Exception(e));
     }
@@ -101,46 +102,52 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   @override
   Future<Result<List<TVSeriesModel>>> getTopRatedTVSeries() async {
     try {
-      final tvSeries = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/tv/${TMDBApiConstants.topRatedEndpoint}',
         fromJsonT: TVSeriesResponse.fromJson,
       );
-      return Result.ok(tvSeries.toTVSeriesModelList());
+      return Result.ok(response.results.toTVSeriesModelList());
     } catch (e) {
       return Result.error(Exception(e));
     }
   }
 
   @override
-  Future<Result<List<MovieModel>>> searchMovies({
+  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> searchMovies({
     required MoviePaginatedRequestParameters params,
   }) async {
     try {
-      final movies = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.searchMovieEndpoint}',
         fromJsonT: MovieResponse.fromJson,
         queryParameters: params,
       );
-      return Result.ok(movies.toMovieModelList());
+      return Result.ok(
+        response.toPaginatedModel<MovieModel>(
+          response.results.toMovieModelList(),
+        ),
+      );
     } catch (e) {
       return Result.error(Exception(e));
     }
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> searchTVSeries({
+  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> searchTVSeries({
     required TVSeriesPaginatedRequestParameters params,
   }) async {
     try {
-      final tvSeries = await getPaginated(
+      final response = await getPaginated(
         uri:
             '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.searchTVSeriesEndpoint}',
         fromJsonT: TVSeriesResponse.fromJson,
         queryParameters: params,
       );
-      return Result.ok(tvSeries.toTVSeriesModelList());
+      return Result.ok(
+        response.toPaginatedModel(response.results.toTVSeriesModelList()),
+      );
     } catch (e) {
       return Result.error(Exception(e));
     }

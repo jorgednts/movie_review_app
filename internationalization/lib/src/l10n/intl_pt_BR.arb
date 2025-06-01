@@ -3,6 +3,12 @@
   "app_name": "Movie Review App",
   "common_name": "nome",
   "common_empty_name": "nome não pode estar vazio",
+  "common_movies": "filmes",
+  "common_tv_series": "séries",
+  "common_of": "de",
+  "common_page": "página",
+  "common_items": "itens",
+  "common_item": "item",
   "shell_home": "Home",
   "shell_search": "Buscar",
   "shell_reviews": "Resenhas",
@@ -33,5 +39,10 @@
   "home_popular_movies_title": "Filmes Populares",
   "home_popular_tv_series_title": "Séries de TV Populares",
   "home_top_rated_movies_title": "Filmes Melhores Avaliados",
-  "home_top_rated_tv_series_title": "Séries de TV Melhores Avaliadas"
+  "home_top_rated_tv_series_title": "Séries de TV Melhores Avaliadas",
+  "search_empty_state": "Ops! Nenhum resultado encontrado.",
+  "search_init_state": "Que tal buscar por um filme ou série? Digite algo e descubra!",
+  "search_error_state": "Ops! Algo deu errado com a sua busca. Por favor, tente novamente mais tarde.",
+  "search_results": "Resultados",
+  "search_loading_more": "carregando mais resultados..."
 }

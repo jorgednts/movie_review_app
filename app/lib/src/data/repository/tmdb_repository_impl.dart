@@ -1,6 +1,7 @@
 import 'package:app/src/data/remote/data_source/tmdb_remote_data_source.dart';
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
@@ -38,14 +39,14 @@ class TMDBRepositoryImpl implements TMDBRepository {
   }
 
   @override
-  Future<Result<List<MovieModel>>> searchMovies({
+  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> searchMovies({
     required MoviePaginatedRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.searchMovies(params: params);
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> searchTVSeries({
+  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> searchTVSeries({
     required TVSeriesPaginatedRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.searchTVSeries(params: params);

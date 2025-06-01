@@ -80,6 +80,36 @@ class AppIntl {
     );
   }
 
+  /// `filmes`
+  String get common_movies {
+    return Intl.message('filmes', name: 'common_movies', desc: '', args: []);
+  }
+
+  /// `séries`
+  String get common_tv_series {
+    return Intl.message('séries', name: 'common_tv_series', desc: '', args: []);
+  }
+
+  /// `de`
+  String get common_of {
+    return Intl.message('de', name: 'common_of', desc: '', args: []);
+  }
+
+  /// `página`
+  String get common_page {
+    return Intl.message('página', name: 'common_page', desc: '', args: []);
+  }
+
+  /// `itens`
+  String get common_items {
+    return Intl.message('itens', name: 'common_items', desc: '', args: []);
+  }
+
+  /// `item`
+  String get common_item {
+    return Intl.message('item', name: 'common_item', desc: '', args: []);
+  }
+
   /// `Home`
   String get shell_home {
     return Intl.message('Home', name: 'shell_home', desc: '', args: []);
@@ -335,6 +365,56 @@ class AppIntl {
     return Intl.message(
       'Séries de TV Melhores Avaliadas',
       name: 'home_top_rated_tv_series_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops! Nenhum resultado encontrado.`
+  String get search_empty_state {
+    return Intl.message(
+      'Ops! Nenhum resultado encontrado.',
+      name: 'search_empty_state',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Que tal buscar por um filme ou série? Digite algo e descubra!`
+  String get search_init_state {
+    return Intl.message(
+      'Que tal buscar por um filme ou série? Digite algo e descubra!',
+      name: 'search_init_state',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops! Algo deu errado com a sua busca. Por favor, tente novamente mais tarde.`
+  String get search_error_state {
+    return Intl.message(
+      'Ops! Algo deu errado com a sua busca. Por favor, tente novamente mais tarde.',
+      name: 'search_error_state',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resultados`
+  String get search_results {
+    return Intl.message(
+      'Resultados',
+      name: 'search_results',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `carregando mais resultados...`
+  String get search_loading_more {
+    return Intl.message(
+      'carregando mais resultados...',
+      name: 'search_loading_more',
       desc: '',
       args: [],
     );

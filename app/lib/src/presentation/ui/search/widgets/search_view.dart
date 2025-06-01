@@ -1,0 +1,142 @@
+import 'package:app/src/domain/model/collection_item_model.dart';
+import 'package:app/src/domain/model/movie_model.dart';
+import 'package:app/src/domain/model/tv_series_model.dart';
+import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
+import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart';
+import 'package:app/src/presentation/ui/search/widgets/loading_more_widget.dart';
+import 'package:app/src/presentation/ui/search/widgets/search_info_widget.dart';
+import 'package:app/src/presentation/ui/search/widgets/search_state_stacked_icon_card.dart';
+import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
+import 'package:design_system/design_system.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class SearchView extends StatelessWidget {
+  const SearchView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = context.read<SearchViewModel>();
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
+      child: Column(
+        spacing: Dimensions.spacingMd,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            spacing: Dimensions.spacingMd,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 600),
+                  child: DefaultSearchBarWithAnchor(
+                    searchController: viewModel.searchController,
+                    onTap: (controller) => controller.openView(),
+                    onChanged: (value, controller) {
+                      if (value.isEmpty) {
+                        controller.closeView(value);
+                        viewModel.initState.value = true;
+                        return;
+                      }
+                      controller.openView();
+                    },
+                    onSearch: viewModel.handleSearch,
+                    suggestions: List.generate(
+                      5,
+                      (index) => 'Suggestion $index',
+                    ),
+                    onSuggestionSelected: viewModel.triggerSearchFromSelection,
+                  ),
+                ),
+              ),
+              SegmentedSwitchButton<AppCollectionItemType>(
+                segments: AppCollectionItemType.values,
+                iconBuilder: (segment) => segment.icon,
+                labelBuilder: (segment) => segment.nameTranslated(context),
+                onSelectionChanged: viewModel.onSegmentChange,
+                initialIndex: AppCollectionItemType.values.indexOf(
+                  viewModel.selectedSegment,
+                ),
+              ),
+            ],
+          ),
+          Flexible(
+            child: ListenableBuilder(
+              listenable: Listenable.merge([
+                viewModel.searchTVSeries,
+                viewModel.searchMovies,
+                viewModel.initState,
+              ]),
+              builder: (context, child) {
+                final isMovie =
+                    viewModel.selectedSegment == AppCollectionItemType.movie;
+                final notifier =
+                    isMovie ? viewModel.searchMovies : viewModel.searchTVSeries;
+
+                if (viewModel.initState.value) {
+                  return child!;
+                }
+
+                if (notifier.isLoading && notifier.items.isEmpty) {
+                  return Center(child: CustomLoadingWidget());
+                }
+
+                if (notifier.error != null && notifier.items.isEmpty) {
+                  return SearchStateStackedIconCard.error();
+                }
+
+                if (notifier.items.isEmpty) {
+                  return SearchStateStackedIconCard.empty();
+                }
+                return Column(
+                  spacing: Dimensions.spacingMd,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SearchInfoWidget(
+                      currentItems: notifier.items.length,
+                      totalItems: notifier.totalItems,
+                    ),
+                    Flexible(
+                      child: PaginatedGrid(
+                        items: notifier.items,
+                        hasMoreItems: () => notifier.hasMore,
+                        scrollController: viewModel.scrollController,
+                        bottomLoadingWidget: LoadingMoreWidget(),
+                        showLoading: () => notifier.isLoading,
+                        onLoadMore: notifier.loadNextPage,
+                        itemBuilder: (index) {
+                          if (isMovie) {
+                            final movie = notifier.items[index] as MovieModel;
+                            return TMDBOverviewPosterCard(
+                              posterUrl: movie.posterUrl,
+                              title: movie.title,
+                              voteAverage: movie.voteAverage,
+                              releaseYear: movie.releaseYear,
+                              overview: movie.overview,
+                            );
+                          } else {
+                            final tvSeries =
+                                notifier.items[index] as TVSeriesModel;
+                            return TMDBOverviewPosterCard(
+                              posterUrl: tvSeries.posterUrl,
+                              title: tvSeries.name,
+                              voteAverage: tvSeries.voteAverage,
+                              releaseYear: tvSeries.releaseYear,
+                              overview: tvSeries.overview,
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+              child: SearchStateStackedIconCard.init(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

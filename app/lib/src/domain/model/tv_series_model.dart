@@ -1,3 +1,5 @@
+import 'package:internationalization/internationalization.dart';
+
 class TVSeriesModel {
   final String backdropPath;
   final String firstAirDate;
@@ -30,6 +32,8 @@ class TVSeriesModel {
   });
 
   String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+
+  String get releaseYear => firstAirDate.toDateFormat().year.toString();
 
   @override
   bool operator ==(Object other) {

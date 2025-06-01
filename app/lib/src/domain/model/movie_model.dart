@@ -1,3 +1,5 @@
+import 'package:internationalization/internationalization.dart';
+
 class MovieModel {
   final bool adult;
   final String backdropPath;
@@ -32,6 +34,8 @@ class MovieModel {
   });
 
   String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+
+  String get releaseYear => releaseDate.toDateFormat().year.toString();
 
   @override
   bool operator ==(Object other) {

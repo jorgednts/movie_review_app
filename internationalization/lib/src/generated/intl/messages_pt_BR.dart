@@ -26,7 +26,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_empty_name": MessageLookupByLibrary.simpleMessage(
       "nome não pode estar vazio",
     ),
+    "common_item": MessageLookupByLibrary.simpleMessage("item"),
+    "common_items": MessageLookupByLibrary.simpleMessage("itens"),
+    "common_movies": MessageLookupByLibrary.simpleMessage("filmes"),
     "common_name": MessageLookupByLibrary.simpleMessage("nome"),
+    "common_of": MessageLookupByLibrary.simpleMessage("de"),
+    "common_page": MessageLookupByLibrary.simpleMessage("página"),
+    "common_tv_series": MessageLookupByLibrary.simpleMessage("séries"),
     "home_popular_movies_title": MessageLookupByLibrary.simpleMessage(
       "Filmes Populares",
     ),
@@ -39,6 +45,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Séries de TV Melhores Avaliadas",
     ),
+    "search_empty_state": MessageLookupByLibrary.simpleMessage(
+      "Ops! Nenhum resultado encontrado.",
+    ),
+    "search_error_state": MessageLookupByLibrary.simpleMessage(
+      "Ops! Algo deu errado com a sua busca. Por favor, tente novamente mais tarde.",
+    ),
+    "search_init_state": MessageLookupByLibrary.simpleMessage(
+      "Que tal buscar por um filme ou série? Digite algo e descubra!",
+    ),
+    "search_loading_more": MessageLookupByLibrary.simpleMessage(
+      "carregando mais resultados...",
+    ),
+    "search_results": MessageLookupByLibrary.simpleMessage("Resultados"),
     "shell_create_user": MessageLookupByLibrary.simpleMessage("Criar Usuário"),
     "shell_create_user_message": MessageLookupByLibrary.simpleMessage(
       "Novo por aqui? Crie uma conta!",

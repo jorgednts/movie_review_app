@@ -45,4 +45,24 @@ class MoviePaginatedRequestParameters extends BaseRequestParameters {
 
     return result;
   }
+
+  MoviePaginatedRequestParameters copyWith({
+    String? query,
+    bool? includeAdult,
+    String? language,
+    String? primaryReleaseYear,
+    String? region,
+    int? page,
+    String? year,
+  }) {
+    return MoviePaginatedRequestParameters(
+      query: query ?? this.query,
+      includeAdult: includeAdult ?? this.includeAdult,
+      language: language ?? this.language,
+      primaryReleaseYear: primaryReleaseYear ?? this.primaryReleaseYear,
+      region: region ?? this.region,
+      page: page ?? this.page,
+      year: year ?? this.year,
+    );
+  }
 }

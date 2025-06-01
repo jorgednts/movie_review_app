@@ -3,21 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:app/src/data/remote/data_source/tmdb_remote_data_source.dart'
-    as _i2;
+    as _i3;
 import 'package:app/src/data/remote/model/base/base_request_parameters.dart'
-    as _i4;
+    as _i5;
+import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart'
+    as _i2;
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart'
-    as _i9;
+    as _i11;
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart'
-    as _i10;
-import 'package:app/src/domain/model/movie_model.dart' as _i7;
-import 'package:app/src/domain/model/tv_series_model.dart' as _i8;
-import 'package:core/core.dart' as _i5;
+    as _i12;
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart' as _i10;
+import 'package:app/src/domain/model/movie_model.dart' as _i8;
+import 'package:app/src/domain/model/tv_series_model.dart' as _i9;
+import 'package:core/core.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -33,21 +36,27 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeBaseTMDBPaginatedResponse_0<T1> extends _i1.SmartFake
+    implements _i2.BaseTMDBPaginatedResponse<T1> {
+  _FakeBaseTMDBPaginatedResponse_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [TMDBRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTMDBRemoteDataSource extends _i1.Mock
-    implements _i2.TMDBRemoteDataSource {
+    implements _i3.TMDBRemoteDataSource {
   MockTMDBRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<List<T>> getPaginated<T>({
+  _i4.Future<_i2.BaseTMDBPaginatedResponse<T>> getPaginated<T>({
     required String? uri,
     required T Function(Map<String, dynamic>)? fromJsonT,
     Map<String, dynamic>? headers,
-    _i4.BaseRequestParameters? queryParameters,
+    _i5.BaseRequestParameters? queryParameters,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#getPaginated, [], {
@@ -56,102 +65,119 @@ class MockTMDBRemoteDataSource extends _i1.Mock
               #headers: headers,
               #queryParameters: queryParameters,
             }),
-            returnValue: _i3.Future<List<T>>.value(<T>[]),
+            returnValue: _i4.Future<_i2.BaseTMDBPaginatedResponse<T>>.value(
+              _FakeBaseTMDBPaginatedResponse_0<T>(
+                this,
+                Invocation.method(#getPaginated, [], {
+                  #uri: uri,
+                  #fromJsonT: fromJsonT,
+                  #headers: headers,
+                  #queryParameters: queryParameters,
+                }),
+              ),
+            ),
           )
-          as _i3.Future<List<T>>);
+          as _i4.Future<_i2.BaseTMDBPaginatedResponse<T>>);
 
   @override
-  _i3.Future<_i5.Result<String>> createGuestSession() =>
+  _i4.Future<_i6.Result<String>> createGuestSession() =>
       (super.noSuchMethod(
             Invocation.method(#createGuestSession, []),
-            returnValue: _i3.Future<_i5.Result<String>>.value(
-              _i6.dummyValue<_i5.Result<String>>(
+            returnValue: _i4.Future<_i6.Result<String>>.value(
+              _i7.dummyValue<_i6.Result<String>>(
                 this,
                 Invocation.method(#createGuestSession, []),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<String>>);
+          as _i4.Future<_i6.Result<String>>);
 
   @override
-  _i3.Future<_i5.Result<List<_i7.MovieModel>>> getPopularMovies() =>
+  _i4.Future<_i6.Result<List<_i8.MovieModel>>> getPopularMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularMovies, []),
-            returnValue: _i3.Future<_i5.Result<List<_i7.MovieModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i7.MovieModel>>>(
+            returnValue: _i4.Future<_i6.Result<List<_i8.MovieModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i8.MovieModel>>>(
                 this,
                 Invocation.method(#getPopularMovies, []),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i7.MovieModel>>>);
+          as _i4.Future<_i6.Result<List<_i8.MovieModel>>>);
 
   @override
-  _i3.Future<_i5.Result<List<_i7.MovieModel>>> getTopRatedMovies() =>
+  _i4.Future<_i6.Result<List<_i8.MovieModel>>> getTopRatedMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedMovies, []),
-            returnValue: _i3.Future<_i5.Result<List<_i7.MovieModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i7.MovieModel>>>(
+            returnValue: _i4.Future<_i6.Result<List<_i8.MovieModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i8.MovieModel>>>(
                 this,
                 Invocation.method(#getTopRatedMovies, []),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i7.MovieModel>>>);
+          as _i4.Future<_i6.Result<List<_i8.MovieModel>>>);
 
   @override
-  _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>> getPopularTVSeries() =>
+  _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>> getPopularTVSeries() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularTVSeries, []),
-            returnValue: _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i8.TVSeriesModel>>>(
+            returnValue: _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i9.TVSeriesModel>>>(
                 this,
                 Invocation.method(#getPopularTVSeries, []),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>);
+          as _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>);
 
   @override
-  _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>> getTopRatedTVSeries() =>
+  _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>> getTopRatedTVSeries() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedTVSeries, []),
-            returnValue: _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i8.TVSeriesModel>>>(
+            returnValue: _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i9.TVSeriesModel>>>(
                 this,
                 Invocation.method(#getTopRatedTVSeries, []),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>);
+          as _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>);
 
   @override
-  _i3.Future<_i5.Result<List<_i7.MovieModel>>> searchMovies({
-    required _i9.MoviePaginatedRequestParameters? params,
-  }) =>
+  _i4.Future<_i6.Result<_i10.BaseTMDBPaginatedModel<_i8.MovieModel>>>
+  searchMovies({required _i11.MoviePaginatedRequestParameters? params}) =>
       (super.noSuchMethod(
             Invocation.method(#searchMovies, [], {#params: params}),
-            returnValue: _i3.Future<_i5.Result<List<_i7.MovieModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i7.MovieModel>>>(
-                this,
-                Invocation.method(#searchMovies, [], {#params: params}),
-              ),
+            returnValue: _i4.Future<
+              _i6.Result<_i10.BaseTMDBPaginatedModel<_i8.MovieModel>>
+            >.value(
+              _i7.dummyValue<
+                _i6.Result<_i10.BaseTMDBPaginatedModel<_i8.MovieModel>>
+              >(this, Invocation.method(#searchMovies, [], {#params: params})),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i7.MovieModel>>>);
+          as _i4.Future<
+            _i6.Result<_i10.BaseTMDBPaginatedModel<_i8.MovieModel>>
+          >);
 
   @override
-  _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>> searchTVSeries({
-    required _i10.TVSeriesPaginatedRequestParameters? params,
-  }) =>
+  _i4.Future<_i6.Result<_i10.BaseTMDBPaginatedModel<_i9.TVSeriesModel>>>
+  searchTVSeries({required _i12.TVSeriesPaginatedRequestParameters? params}) =>
       (super.noSuchMethod(
             Invocation.method(#searchTVSeries, [], {#params: params}),
-            returnValue: _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>.value(
-              _i6.dummyValue<_i5.Result<List<_i8.TVSeriesModel>>>(
+            returnValue: _i4.Future<
+              _i6.Result<_i10.BaseTMDBPaginatedModel<_i9.TVSeriesModel>>
+            >.value(
+              _i7.dummyValue<
+                _i6.Result<_i10.BaseTMDBPaginatedModel<_i9.TVSeriesModel>>
+              >(
                 this,
                 Invocation.method(#searchTVSeries, [], {#params: params}),
               ),
             ),
           )
-          as _i3.Future<_i5.Result<List<_i8.TVSeriesModel>>>);
+          as _i4.Future<
+            _i6.Result<_i10.BaseTMDBPaginatedModel<_i9.TVSeriesModel>>
+          >);
 }

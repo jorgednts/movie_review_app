@@ -1,6 +1,8 @@
+import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
 import 'package:app/src/data/remote/model/guest_session_response.dart';
 import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/guest_session_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
@@ -70,6 +72,17 @@ extension GuestSessionResponseMapper on GuestSessionResponse {
       success: success,
       guestSessionId: guestSessionId,
       expiresAt: expiresAt,
+    );
+  }
+}
+
+extension BaseTMDBPaginatedResponseMapper on BaseTMDBPaginatedResponse {
+  BaseTMDBPaginatedModel<T> toPaginatedModel<T>(List<T> items) {
+    return BaseTMDBPaginatedModel<T>(
+      page: page,
+      results: items,
+      totalPages: totalPages,
+      totalResults: totalResults,
     );
   }
 }

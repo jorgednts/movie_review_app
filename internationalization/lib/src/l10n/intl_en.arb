@@ -3,6 +3,12 @@
   "app_name": "Movie Review App",
   "common_name": "name",
   "common_empty_name": "name can't be empty",
+  "common_movies": "movies",
+  "common_tv_series": "tv series",
+  "common_of": "of",
+  "common_page": "page",
+  "common_items": "items",
+  "common_item": "item",
   "shell_home": "Home",
   "shell_search": "Search",
   "shell_reviews": "Reviews",
@@ -33,5 +39,10 @@
   "home_popular_movies_title": "Popular Movies",
   "home_popular_tv_series_title": "Popular TV Series",
   "home_top_rated_movies_title": "Top Rated Movies",
-  "home_top_rated_tv_series_title": "Top Rated TV Series"
+  "home_top_rated_tv_series_title": "Top Rated TV Series",
+  "search_empty_state": "Oops! No results found.",
+  "search_init_state": "How about searching for a movie or TV series? Type something and discover!",
+  "search_error_state": "Oops! Something went wrong with your search. Please try again later.",
+  "search_results": "Results",
+  "search_loading_more": "loading more results..."
 }

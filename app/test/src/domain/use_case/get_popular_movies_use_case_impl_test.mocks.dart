@@ -6,9 +6,10 @@
 import 'dart:async' as _i3;
 
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart'
-    as _i8;
-import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart'
     as _i9;
+import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart'
+    as _i10;
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart' as _i8;
 import 'package:app/src/domain/model/movie_model.dart' as _i6;
 import 'package:app/src/domain/model/tv_series_model.dart' as _i7;
 import 'package:app/src/domain/repository/tmdb_repository.dart' as _i2;
@@ -104,32 +105,39 @@ class MockTMDBRepository extends _i1.Mock implements _i2.TMDBRepository {
           as _i3.Future<_i4.Result<List<_i7.TVSeriesModel>>>);
 
   @override
-  _i3.Future<_i4.Result<List<_i6.MovieModel>>> searchMovies({
-    required _i8.MoviePaginatedRequestParameters? params,
-  }) =>
+  _i3.Future<_i4.Result<_i8.BaseTMDBPaginatedModel<_i6.MovieModel>>>
+  searchMovies({required _i9.MoviePaginatedRequestParameters? params}) =>
       (super.noSuchMethod(
             Invocation.method(#searchMovies, [], {#params: params}),
-            returnValue: _i3.Future<_i4.Result<List<_i6.MovieModel>>>.value(
-              _i5.dummyValue<_i4.Result<List<_i6.MovieModel>>>(
-                this,
-                Invocation.method(#searchMovies, [], {#params: params}),
-              ),
+            returnValue: _i3.Future<
+              _i4.Result<_i8.BaseTMDBPaginatedModel<_i6.MovieModel>>
+            >.value(
+              _i5.dummyValue<
+                _i4.Result<_i8.BaseTMDBPaginatedModel<_i6.MovieModel>>
+              >(this, Invocation.method(#searchMovies, [], {#params: params})),
             ),
           )
-          as _i3.Future<_i4.Result<List<_i6.MovieModel>>>);
+          as _i3.Future<
+            _i4.Result<_i8.BaseTMDBPaginatedModel<_i6.MovieModel>>
+          >);
 
   @override
-  _i3.Future<_i4.Result<List<_i7.TVSeriesModel>>> searchTVSeries({
-    required _i9.TVSeriesPaginatedRequestParameters? params,
-  }) =>
+  _i3.Future<_i4.Result<_i8.BaseTMDBPaginatedModel<_i7.TVSeriesModel>>>
+  searchTVSeries({required _i10.TVSeriesPaginatedRequestParameters? params}) =>
       (super.noSuchMethod(
             Invocation.method(#searchTVSeries, [], {#params: params}),
-            returnValue: _i3.Future<_i4.Result<List<_i7.TVSeriesModel>>>.value(
-              _i5.dummyValue<_i4.Result<List<_i7.TVSeriesModel>>>(
+            returnValue: _i3.Future<
+              _i4.Result<_i8.BaseTMDBPaginatedModel<_i7.TVSeriesModel>>
+            >.value(
+              _i5.dummyValue<
+                _i4.Result<_i8.BaseTMDBPaginatedModel<_i7.TVSeriesModel>>
+              >(
                 this,
                 Invocation.method(#searchTVSeries, [], {#params: params}),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<List<_i7.TVSeriesModel>>>);
+          as _i3.Future<
+            _i4.Result<_i8.BaseTMDBPaginatedModel<_i7.TVSeriesModel>>
+          >);
 }
