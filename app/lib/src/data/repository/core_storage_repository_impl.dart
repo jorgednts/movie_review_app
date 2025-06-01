@@ -42,4 +42,9 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
   >({required CRUDItemRequest<T> request}) async {
     return await _storageService.updateItemInCollection<T>(request: request);
   }
+
+  @override
+  Future<Result<String>> getUsername({required String uid}) async {
+    return await _storageService.getUsername(uid: uid);
+  }
 }

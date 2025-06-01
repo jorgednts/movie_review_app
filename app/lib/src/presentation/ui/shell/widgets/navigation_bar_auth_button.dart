@@ -23,12 +23,13 @@ class NavigationBarAuthButton extends StatelessWidget {
         Consumer<ThemeNotifier>(
           builder: (_, themeNotifier, child) {
             final themeMode = themeNotifier.themeMode;
-            return IconButton.filledTonal(
+            return IconButton.outlined(
               onPressed: themeNotifier.toggleTheme,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
               icon: Icon(
                 themeMode == ThemeMode.dark
-                    ? Icons.sunny
-                    : Icons.nights_stay,
+                    ? Icons.wb_sunny_outlined
+                    : Icons.nights_stay_outlined,
               ),
             );
           },
@@ -37,23 +38,50 @@ class NavigationBarAuthButton extends StatelessWidget {
           child: Consumer<UserStorageChangeNotifier>(
             builder: (context, authChangeNotifier, child) {
               final user = authChangeNotifier.user;
-              return IconButton.outlined(
-                onPressed: user == null ? onSignIn : onSignOut,
-                icon: Row(
-                  spacing: Dimensions.spacingXs,
-                  children: [
-                    Icon(user == null ? Icons.login : Icons.logout),
-                    Text(
-                      user == null
-                          ? AppIntl.of(context).shell_sign_in
-                          : AppIntl.of(context).shell_sign_out,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              final username =
+                  authChangeNotifier.userStorageModel?.name.toUpperCase() ?? '';
+              return user == null
+                  ? IconButton(
+                    onPressed: onSignIn,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
+                    icon: Icon(Icons.person_outline),
+                  )
+                  : IconButton.filledTonal(
+                    onPressed:
+                        () => showMenu(
+                          context: context,
+                          position: RelativeRect.fromLTRB(
+                            MediaQuery.of(context).size.width,
+                            kToolbarHeight + Dimensions.spacingXs,
+                            0,
+                            0,
+                          ),
+                          items: [
+                            PopupMenuItem(
+                              onTap: onSignOut,
+                              child: ListTile(
+                                title: Text(AppIntl.of(context).shell_sign_out),
+                                leading: Icon(Icons.logout),
+                              ),
+                            ),
+                          ],
+                        ),
+                    icon:
+                        username.isEmpty
+                            ? Icon(Icons.person_outline)
+                            : Text(
+                              username.substring(0, 1),
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.onSecondaryContainer,
+                              ),
+                            ),
+                  );
             },
           ),
         ),

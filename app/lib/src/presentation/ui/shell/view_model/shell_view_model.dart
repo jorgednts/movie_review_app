@@ -4,6 +4,7 @@ import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
@@ -15,6 +16,7 @@ class ShellViewModel extends BaseViewModel {
   final SignOutUseCase _signOutUseCase;
   final CreateUserUseCase _createUserUseCase;
   final CheckUserLoggedUseCase _checkUserLoggedUseCase;
+  final GetUsernameUseCase _getUsernameUseCase;
   final DialogEventNotifier<AuthMessageType> _dialogEventNotifier;
   final CreateUserStorageUseCase _createUserStorageUseCase;
   final UserStorageChangeNotifier _userChangeNotifier;
@@ -35,6 +37,7 @@ class ShellViewModel extends BaseViewModel {
     required UserStorageChangeNotifier userChangeNotifier,
     required CreateUserStorageUseCase createUserStorageUseCase,
     required GetCollectionFromStorageUseCase getUserStorageUseCase,
+    required GetUsernameUseCase getUsernameUseCase,
     required ThemeNotifier themeNotifier,
   }) : _signInUseCase = signInUseCase,
        _signOutUseCase = signOutUseCase,
@@ -43,6 +46,7 @@ class ShellViewModel extends BaseViewModel {
        _dialogEventNotifier = dialogEventNotifier,
        _userChangeNotifier = userChangeNotifier,
        _createUserStorageUseCase = createUserStorageUseCase,
+       _getUsernameUseCase = getUsernameUseCase,
        _themeNotifier = themeNotifier;
 
   @override
@@ -113,6 +117,9 @@ class ShellViewModel extends BaseViewModel {
       input: NoParam(),
       onSuccess: (result) {
         userChangeNotifier.setUser(result);
+        if (result != null) {
+          _getUsername(result.uid);
+        }
       },
       onError: (error) {
         userChangeNotifier.setUser(null);
@@ -127,6 +134,21 @@ class ShellViewModel extends BaseViewModel {
       useCase: _createUserStorageUseCase,
       input: storageRequest,
       onSuccess: (result) {},
+      onError: (error) {},
+    );
+  }
+
+  Future<Result> _getUsername(String uid) async {
+    return await callUseCase<String, String>(
+      useCase: _getUsernameUseCase,
+      input: uid,
+      onSuccess: (result) {
+        if (userChangeNotifier.user != null) {
+          userChangeNotifier.setUserStorageModel(
+            UserStorageModel(user: userChangeNotifier.user!, name: result),
+          );
+        }
+      },
       onError: (error) {},
     );
   }

@@ -5,6 +5,8 @@ abstract class StorageService {
     required CreateUserStorageRequest request,
   });
 
+  Future<Result<String>> getUsername({required String uid});
+
   Future<Result<void>> addItemToCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   });

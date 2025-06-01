@@ -7,6 +7,7 @@ import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
@@ -57,6 +58,9 @@ class AppRouter {
                     coreStorageRepository: storageRepository,
                   ),
                   getUserStorageUseCase: GetCollectionFromStorageUseCase(
+                    coreStorageRepository: storageRepository,
+                  ),
+                  getUsernameUseCase: GetUsernameUseCase(
                     coreStorageRepository: storageRepository,
                   ),
                   userChangeNotifier: userStorageNotifier,

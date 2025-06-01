@@ -6,6 +6,8 @@ abstract class CoreStorageRepository {
     required CreateUserStorageRequest request,
   });
 
+  Future<Result<String>> getUsername({required String uid});
+
   Future<Result<void>> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   });

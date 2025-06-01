@@ -133,4 +133,15 @@ class StorageServiceImpl implements StorageService {
       );
     }
   }
+
+  @override
+  Future<Result<String>> getUsername({required String uid}) async {
+    final response = await _userCollection.doc(uid).get();
+    if (response.exists) {
+      final data = response.data() as Map<String, dynamic>;
+      return Result.ok(data['name'] ?? '');
+    } else {
+      return Result.error(UserNotFoundException());
+    }
+  }
 }

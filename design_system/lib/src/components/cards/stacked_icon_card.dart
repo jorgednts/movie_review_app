@@ -41,7 +41,7 @@ class StackedIconCard extends StatelessWidget {
             child: Card(
               color:
                   messageCardColor ??
-                  Theme.of(context).colorScheme.surfaceContainerLow,
+                  Theme.of(context).colorScheme.surfaceContainerHigh,
               child: Padding(
                 padding: EdgeInsets.all(Dimensions.spacingMd),
                 child: Text(
