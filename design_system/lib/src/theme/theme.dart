@@ -10,6 +10,11 @@ class ThemeNotifier extends ChangeNotifier {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
   }
+
+  void setThemeMode(bool isDarkTheme) {
+    _isDarkTheme = isDarkTheme;
+    notifyListeners();
+  }
 }
 
 class CustomTheme {

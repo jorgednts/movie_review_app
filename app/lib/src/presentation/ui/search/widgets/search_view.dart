@@ -30,23 +30,26 @@ class SearchView extends StatelessWidget {
               Flexible(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 600),
-                  child: DefaultSearchBarWithAnchor(
-                    searchController: viewModel.searchController,
-                    onTap: (controller) => controller.openView(),
-                    onChanged: (value, controller) {
-                      if (value.isEmpty) {
-                        controller.closeView(value);
-                        viewModel.initState.value = true;
-                        return;
-                      }
-                      controller.openView();
+                  child: ListenableBuilder(
+                    listenable: viewModel.getSuggestions,
+                    builder: (_, __) {
+                      return DefaultSearchBarWithAnchor(
+                        searchController: viewModel.searchController,
+                        onTap: (controller) => controller.openView(),
+                        onChanged: (value, controller) {
+                          if (value.isEmpty) {
+                            controller.closeView(value);
+                            viewModel.initState.value = true;
+                            return;
+                          }
+                          controller.openView();
+                        },
+                        onSearch: viewModel.handleSearch,
+                        suggestions: viewModel.suggestions,
+                        onSuggestionSelected:
+                            viewModel.triggerSearchFromSelection,
+                      );
                     },
-                    onSearch: viewModel.handleSearch,
-                    suggestions: List.generate(
-                      5,
-                      (index) => 'Suggestion $index',
-                    ),
-                    onSuggestionSelected: viewModel.triggerSearchFromSelection,
                   ),
                 ),
               ),

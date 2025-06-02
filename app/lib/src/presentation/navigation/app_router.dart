@@ -1,6 +1,9 @@
+import 'package:app/src/domain/repository/app_repository.dart';
 import 'package:app/src/domain/repository/auth_repository.dart';
 import 'package:app/src/domain/repository/core_storage_repository.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
+import 'package:app/src/domain/use_case/app/get_search_suggestion_list_local_use_case.dart';
+import 'package:app/src/domain/use_case/app/update_search_suggestion_list_local_use_case.dart';
 import 'package:app/src/domain/use_case/auth/check_user_logged_use_case.dart';
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
@@ -23,8 +26,8 @@ import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart
 import 'package:app/src/presentation/ui/search/widgets/search_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
+import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +67,7 @@ class AppRouter {
                     coreStorageRepository: storageRepository,
                   ),
                   userChangeNotifier: userStorageNotifier,
-                  themeNotifier: context.read<ThemeNotifier>(),
+                  themeNotifier: context.read<CustomThemeNotifier>(),
                 );
               },
               child: ShellView(navigationShell: navigationShell),
@@ -122,6 +125,7 @@ class AppRouter {
               (context, state) => Provider(
                 create: (context) {
                   final tmdbRepository = context.read<TMDBRepository>();
+                  final appRepository = context.read<AppRepository>();
                   return SearchViewModel(
                     searchMoviesUseCase: SearchMoviesUseCase(
                       tmdbRepository: tmdbRepository,
@@ -129,6 +133,14 @@ class AppRouter {
                     searchTVSeriesUseCase: SearchTVSeriesUseCase(
                       tmdbRepository: tmdbRepository,
                     ),
+                    getSearchSuggestionListLocalUseCase:
+                        GetSearchSuggestionListLocalUseCase(
+                          appRepository: appRepository,
+                        ),
+                    updateSearchSuggestionListLocalUseCase:
+                        UpdateSearchSuggestionListLocalUseCase(
+                          appRepository: appRepository,
+                        ),
                   );
                 },
                 child: const SearchView(),

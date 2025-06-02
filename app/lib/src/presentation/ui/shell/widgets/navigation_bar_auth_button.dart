@@ -1,4 +1,5 @@
 import 'package:app/src/presentation/ui/shell/widgets/user_listenable_widget.dart';
+import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class NavigationBarAuthButton extends StatelessWidget {
     return Row(
       spacing: Dimensions.spacingMd,
       children: [
-        Consumer<ThemeNotifier>(
+        Consumer<CustomThemeNotifier>(
           builder: (_, themeNotifier, child) {
             final themeMode = themeNotifier.themeMode;
             return IconButton.outlined(

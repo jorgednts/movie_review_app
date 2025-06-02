@@ -1,6 +1,7 @@
 import 'package:app/firebase_options.dart';
 import 'package:app/src/presentation/di/dependencies.dart';
 import 'package:app/src/presentation/navigation/app_router.dart';
+import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final themeNotifier = Provider.of<CustomThemeNotifier>(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppIntl.of(context).app_name,

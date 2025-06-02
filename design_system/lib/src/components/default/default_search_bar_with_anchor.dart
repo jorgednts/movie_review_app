@@ -54,7 +54,12 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
                   .map(
                     (suggestion) => ListTile(
                       onTap: () => onSuggestionSelected(suggestion),
-                      title: Text(suggestion),
+                      title: Text(
+                        suggestion,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium
+                      ),
                       trailing: Icon(suggestionTrailingIcon),
                     ),
                   )

@@ -6,8 +6,8 @@ import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dar
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
+import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
 
 enum AuthMessageType { signIn, signOut, createUser }
 
@@ -20,7 +20,7 @@ class ShellViewModel extends BaseViewModel {
   final DialogEventNotifier<AuthMessageType> _dialogEventNotifier;
   final CreateUserStorageUseCase _createUserStorageUseCase;
   final UserStorageChangeNotifier _userChangeNotifier;
-  final ThemeNotifier _themeNotifier;
+  final CustomThemeNotifier _themeNotifier;
 
   // Commands
   late final Command1<void, UserRequest> signIn;
@@ -38,7 +38,7 @@ class ShellViewModel extends BaseViewModel {
     required CreateUserStorageUseCase createUserStorageUseCase,
     required GetCollectionFromStorageUseCase getUserStorageUseCase,
     required GetUsernameUseCase getUsernameUseCase,
-    required ThemeNotifier themeNotifier,
+    required CustomThemeNotifier themeNotifier,
   }) : _signInUseCase = signInUseCase,
        _signOutUseCase = signOutUseCase,
        _createUserUseCase = createUserUseCase,
