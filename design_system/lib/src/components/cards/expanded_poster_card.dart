@@ -36,11 +36,13 @@ class ExpandedPosterCard extends StatelessWidget {
             child: CustomNetworkImage(
               url: posterUrl,
               boxFit: BoxFit.fitHeight,
-              placeholder: placeholder ?? Center(
-                child: DefaultPlaceholder(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
+              placeholder:
+                  placeholder ??
+                  Center(
+                    child: DefaultPlaceholder(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
               errorWidget: Center(
                 child:
                     errorWidget ??

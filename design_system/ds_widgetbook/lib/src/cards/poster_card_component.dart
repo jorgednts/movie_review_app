@@ -34,16 +34,22 @@ class PosterCardComponent extends WidgetbookComponent {
                                       maxLines: 2,
                                       style: Theme.of(
                                         context,
-                                      ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                                      ).textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     spacing: Dimensions.spacingXs,
                                     children: [
                                       Icon(
                                         Icons.star,
-                                        color: Theme.of(context).colorScheme.tertiary,
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.tertiary,
                                         size: Dimensions.iconSizeXs,
                                       ),
                                       Text(
@@ -52,7 +58,9 @@ class PosterCardComponent extends WidgetbookComponent {
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(
                                           context,
-                                        ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                                        ).textTheme.bodySmall?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       Spacer(),
                                       Text(
@@ -61,7 +69,9 @@ class PosterCardComponent extends WidgetbookComponent {
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(
                                           context,
-                                        ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
+                                        ).textTheme.bodyMedium?.copyWith(
+                                          fontStyle: FontStyle.italic,
+                                        ),
                                       ),
                                     ],
                                   ),

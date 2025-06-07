@@ -12,13 +12,13 @@ abstract class CoreStorageRepository {
     required CRUDItemRequest<T> request,
   });
 
-  AsyncResult<void> deleteItemInCollection<
-    T extends AppCollectionItemModel
-  >({required CRUDItemRequest<T> request});
+  AsyncResult<void> deleteItemInCollection<T extends AppCollectionItemModel>({
+    required CRUDItemRequest<T> request,
+  });
 
-  AsyncResult<void> updateItemInCollection<
-    T extends AppCollectionItemModel
-  >({required CRUDItemRequest<T> request});
+  AsyncResult<void> updateItemInCollection<T extends AppCollectionItemModel>({
+    required CRUDItemRequest<T> request,
+  });
 
   AsyncResult<List<T>> getCollectionFromStorage<
     T extends AppCollectionItemModel

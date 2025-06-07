@@ -58,7 +58,7 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
                         suggestion,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyMedium
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       trailing: Icon(suggestionTrailingIcon),
                     ),

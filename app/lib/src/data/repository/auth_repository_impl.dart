@@ -13,9 +13,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  AsyncResult<UserModel> signInWithEmail({
-    required UserRequest request,
-  }) async {
+  AsyncResult<UserModel> signInWithEmail({required UserRequest request}) async {
     return await _authService.signInWithEmail(request: request);
   }
 

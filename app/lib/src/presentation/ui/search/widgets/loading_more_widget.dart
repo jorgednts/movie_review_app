@@ -22,10 +22,7 @@ class _LoadingMoreWidgetState extends State<LoadingMoreWidget>
       vsync: this,
     )..repeat(reverse: true);
 
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   @override
