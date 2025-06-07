@@ -44,5 +44,12 @@
   "search_init_state": "How about searching for a movie or TV series? Type something and discover!",
   "search_error_state": "Oops! Something went wrong with your search. Please try again later.",
   "search_results": "Results",
-  "search_loading_more": "loading more results..."
+  "search_loading_more": "loading more results...",
+  "details_overview": "Overview",
+  "details_add_watchlist": "Add to Watchlist",
+  "details_edit_review": "Add Review",
+  "details_visit_website": "Visit Website",
+  "details_rating": "Vote Average",
+  "details_seasons": "Seasons",
+  "details_season": "Season"
 }

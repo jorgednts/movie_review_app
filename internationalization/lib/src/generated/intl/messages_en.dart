@@ -33,6 +33,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_of": MessageLookupByLibrary.simpleMessage("of"),
     "common_page": MessageLookupByLibrary.simpleMessage("page"),
     "common_tv_series": MessageLookupByLibrary.simpleMessage("tv series"),
+    "details_add_watchlist": MessageLookupByLibrary.simpleMessage(
+      "Add to Watchlist",
+    ),
+    "details_edit_review": MessageLookupByLibrary.simpleMessage("Add Review"),
+    "details_overview": MessageLookupByLibrary.simpleMessage("Overview"),
+    "details_rating": MessageLookupByLibrary.simpleMessage("Vote Average"),
+    "details_season": MessageLookupByLibrary.simpleMessage("Season"),
+    "details_seasons": MessageLookupByLibrary.simpleMessage("Seasons"),
+    "details_visit_website": MessageLookupByLibrary.simpleMessage(
+      "Visit Website",
+    ),
     "home_popular_movies_title": MessageLookupByLibrary.simpleMessage(
       "Popular Movies",
     ),

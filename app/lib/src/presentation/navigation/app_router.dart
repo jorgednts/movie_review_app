@@ -14,12 +14,16 @@ import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_tmdb_item_details_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/search_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/search_tv_series_use_case.dart';
+import 'package:app/src/presentation/common/params/details_params.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/navigation/custom_shell_branch.dart';
+import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
+import 'package:app/src/presentation/ui/details/widgets/details_view.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
 import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart';
@@ -76,6 +80,25 @@ class AppRouter {
             customShellBranches
                 .map((item) => item.buildStatefulShellBranch())
                 .toList(),
+      ),
+      GoRoute(
+        path: '${AppRoute.details.path}/:itemId',
+        name: AppRoute.details.name,
+        builder: (context, state) {
+          final params = state.uri.queryParameters;
+          return Provider(
+            create: (context) {
+              final detailsViewModel = DetailsViewModel(
+                params: DetailsParams.fromJson(params),
+                getTMDBItemDetailsUseCase: GetTMDBItemDetailsUseCase(
+                  tmdbRepository: context.read<TMDBRepository>(),
+                ),
+              );
+              return detailsViewModel;
+            },
+            child: DetailsView(),
+          );
+        },
       ),
     ],
   );

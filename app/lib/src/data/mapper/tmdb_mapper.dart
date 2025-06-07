@@ -1,7 +1,9 @@
+import 'package:app/src/data/remote/model/base/base_tmdb_details_response.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
 import 'package:app/src/data/remote/model/guest_session_response.dart';
 import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/guest_session_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
@@ -83,6 +85,30 @@ extension BaseTMDBPaginatedResponseMapper on BaseTMDBPaginatedResponse {
       results: items,
       totalPages: totalPages,
       totalResults: totalResults,
+    );
+  }
+}
+
+extension BaseTMDBDetailsResponseMapper on BaseTMDBDetailsResponse {
+  BaseTMDBDetailsModel toBaseTMDBDetailsModel() {
+    return BaseTMDBDetailsModel(
+      adult: adult,
+      backdropPath: backdropPath ?? '',
+      genres: genres ?? [],
+      homepage: homepage,
+      id: id,
+      originCountry: originCountry ?? [],
+      originalLanguage: originalLanguage,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath ?? '',
+      status: status,
+      tagline: tagline ?? '',
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+      title: title,
+      date: date ?? '',
+      numberOfSeasons: numberOfSeasons ?? 0,
     );
   }
 }

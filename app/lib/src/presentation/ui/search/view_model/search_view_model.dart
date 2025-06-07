@@ -47,6 +47,7 @@ class SearchViewModel extends BaseViewModel {
   final ValueNotifier<int?> totalResults = ValueNotifier(null);
   final ScrollController scrollController = ScrollController();
   List<String> suggestions = List.empty(growable: true);
+  String language = 'en-US';
 
   @override
   void onInit() {
@@ -65,7 +66,11 @@ class SearchViewModel extends BaseViewModel {
     int page,
   ) async {
     return await _searchMoviesUseCase(
-      MoviePaginatedRequestParameters(query: searchController.text, page: page),
+      MoviePaginatedRequestParameters(
+        query: searchController.text,
+        page: page,
+        language: language,
+      ),
     );
   }
 
@@ -76,6 +81,7 @@ class SearchViewModel extends BaseViewModel {
       TVSeriesPaginatedRequestParameters(
         query: searchController.text,
         page: page,
+        language: language,
       ),
     );
   }

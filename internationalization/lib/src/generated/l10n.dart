@@ -419,6 +419,76 @@ class AppIntl {
       args: [],
     );
   }
+
+  /// `Sinopse`
+  String get details_overview {
+    return Intl.message(
+      'Sinopse',
+      name: 'details_overview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adicionar à Minha Lista`
+  String get details_add_watchlist {
+    return Intl.message(
+      'Adicionar à Minha Lista',
+      name: 'details_add_watchlist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adicionar Resenha`
+  String get details_edit_review {
+    return Intl.message(
+      'Adicionar Resenha',
+      name: 'details_edit_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visitar Website`
+  String get details_visit_website {
+    return Intl.message(
+      'Visitar Website',
+      name: 'details_visit_website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Média de Avaliações`
+  String get details_rating {
+    return Intl.message(
+      'Média de Avaliações',
+      name: 'details_rating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temporadas`
+  String get details_seasons {
+    return Intl.message(
+      'Temporadas',
+      name: 'details_seasons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temporada`
+  String get details_season {
+    return Intl.message(
+      'Temporada',
+      name: 'details_season',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppIntl> {

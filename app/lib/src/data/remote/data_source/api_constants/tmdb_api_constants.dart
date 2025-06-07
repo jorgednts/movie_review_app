@@ -5,4 +5,6 @@ abstract class TMDBApiConstants {
   static const guestSessionEndpoint = 'authentication/guest_session/new';
   static const searchMovieEndpoint = 'search/movie';
   static const searchTVSeriesEndpoint = 'search/tv';
+  static const movieDetailsEndpoint = 'movie';
+  static const tvSeriesDetailsEndpoint = 'tv';
 }

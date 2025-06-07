@@ -17,6 +17,7 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<SearchViewModel>();
+    viewModel.language = Localizations.localeOf(context).toLanguageTag();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
       child: Column(

@@ -1,3 +1,4 @@
+import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class PosterCarousel<T> extends StatelessWidget {
     this.carouselHeight = 350,
     required this.command,
     required this.cardBuilder,
+    required this.onTapItem,
   });
 
   final String title;
@@ -17,6 +19,7 @@ class PosterCarousel<T> extends StatelessWidget {
   final double carouselHeight;
   final Command command;
   final PosterCard Function(T item) cardBuilder;
+  final void Function(int index) onTapItem;
 
   double getDynamicItemExtent(double maxHeight) {
     final posterImageHeight = PosterCard.posterImageProportion * maxHeight;
@@ -43,7 +46,7 @@ class PosterCarousel<T> extends StatelessWidget {
             listenable: command,
             builder: (_, child) {
               if (command.running) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: CustomLoadingWidget());
               }
               return LayoutBuilder(
                 builder: (_, constraints) {
@@ -57,6 +60,7 @@ class PosterCarousel<T> extends StatelessWidget {
                     viewportDimension: viewportDimension,
                     padding: itemsPadding,
                     controller: CarouselController(),
+                    onTapItem: onTapItem,
                     children: items.map<PosterCard>(cardBuilder).toList(),
                   );
                 },

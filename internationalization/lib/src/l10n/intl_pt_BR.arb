@@ -44,5 +44,13 @@
   "search_init_state": "Que tal buscar por um filme ou série? Digite algo e descubra!",
   "search_error_state": "Ops! Algo deu errado com a sua busca. Por favor, tente novamente mais tarde.",
   "search_results": "Resultados",
-  "search_loading_more": "carregando mais resultados..."
+  "search_loading_more": "carregando mais resultados...",
+  "details_overview": "Sinopse",
+  "details_add_watchlist": "Adicionar à Minha Lista",
+  "details_edit_review": "Adicionar Resenha",
+  "details_visit_website": "Visitar Website",
+  "details_rating": "Média de Avaliações",
+  "details_seasons": "Temporadas",
+  "details_season": "Temporada"
+
 }

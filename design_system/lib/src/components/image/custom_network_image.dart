@@ -25,7 +25,7 @@ class CustomNetworkImage extends StatelessWidget {
         ? errorWidget ?? DefaultErrorWidget()
         : Image.network(
           url,
-          fit: BoxFit.cover,
+          fit: boxFit,
           height: height,
           width: width,
           loadingBuilder: (context, child, loadingProgress) {

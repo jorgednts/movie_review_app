@@ -2,14 +2,18 @@ import 'package:app/src/data/mapper/tmdb_mapper.dart';
 import 'package:app/src/data/remote/client/custom_http_client.dart';
 import 'package:app/src/data/remote/data_source/api_constants/tmdb_api_constants.dart';
 import 'package:app/src/data/remote/data_source/tmdb_remote_data_source.dart';
+import 'package:app/src/data/remote/model/base/base_details_request_parameters.dart';
 import 'package:app/src/data/remote/model/base/base_request_parameters.dart';
+import 'package:app/src/data/remote/model/base/base_tmdb_details_response.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
 import 'package:app/src/data/remote/model/guest_session_response.dart';
 import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
+import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:core/core.dart';
@@ -50,7 +54,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
       if (session.success) {
         return Result.ok(session.guestSessionId);
       } else {
-        return Result.error(Exception('Falha ao criar sessão'));
+        return Result.error(Exception());
       }
     } catch (e) {
       return Result.error(Exception(e));
@@ -147,6 +151,39 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
       );
       return Result.ok(
         response.toPaginatedModel(response.results.toTVSeriesModelList()),
+      );
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
+  }
+
+  @override
+  Future<Result<BaseTMDBDetailsModel>> getTMDBItemDetails({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    try {
+      final response = await _client.get(
+        '${TMDBApiConstants.baseUrl}/${params.type == AppCollectionItemType.movie ? TMDBApiConstants.movieDetailsEndpoint : TMDBApiConstants.tvSeriesDetailsEndpoint}/${params.uid}',
+        queryParameters: params.toJson(),
+      );
+      return Result.ok(
+        BaseTMDBDetailsResponse.fromJson(response).toBaseTMDBDetailsModel(),
+      );
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
+  }
+
+  Future<Result<BaseTMDBDetailsModel>> getMovieDetails({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    try {
+      final response = await _client.get(
+        '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.movieDetailsEndpoint}/${params.uid}',
+        queryParameters: params.toJson(),
+      );
+      return Result.ok(
+        BaseTMDBDetailsResponse.fromJson(response).toBaseTMDBDetailsModel(),
       );
     } catch (e) {
       return Result.error(Exception(e));
