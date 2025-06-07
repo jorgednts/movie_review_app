@@ -8,7 +8,7 @@ class CheckUserLoggedUseCase implements BaseUseCase<NoParam, UserModel?> {
     : _authRepository = authRepository;
 
   @override
-  Future<Result<UserModel?>> call(NoParam input) async {
+  AsyncResult<UserModel?> call(NoParam input) async {
     return await _authRepository.checkLoggedUser();
   }
 }

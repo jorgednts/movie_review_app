@@ -9,7 +9,7 @@ typedef TVSeriesPaginatedListNotifier =
     TMDBPaginatedListNotifier<TVSeriesModel>;
 
 typedef TMDBPaginatedFetcher<T> =
-    Future<Result<BaseTMDBPaginatedModel<T>>> Function(int page);
+    AsyncResult<BaseTMDBPaginatedModel<T>> Function(int page);
 
 class TMDBPaginatedListNotifier<T> extends ChangeNotifier {
   final List<T> _items = [];
@@ -35,7 +35,7 @@ class TMDBPaginatedListNotifier<T> extends ChangeNotifier {
 
   Exception? get error => _error;
 
-  Future<Result<void>> loadNextPage() async {
+  AsyncResult<void> loadNextPage() async {
     if (_isLoading || !_hasMore) return const Result.ok(null);
 
     _isLoading = true;

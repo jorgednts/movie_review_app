@@ -8,24 +8,24 @@ class AuthRepositoryImpl implements AuthRepository {
     : _authService = authService;
 
   @override
-  Future<Result<UserModel>> createUser({required UserRequest request}) async {
+  AsyncResult<UserModel> createUser({required UserRequest request}) async {
     return await _authService.createUser(request: request);
   }
 
   @override
-  Future<Result<UserModel>> signInWithEmail({
+  AsyncResult<UserModel> signInWithEmail({
     required UserRequest request,
   }) async {
     return await _authService.signInWithEmail(request: request);
   }
 
   @override
-  Future<Result<UserModel?>> checkLoggedUser() async {
+  AsyncResult<UserModel?> checkLoggedUser() async {
     return await _authService.checkLoggedUser();
   }
 
   @override
-  Future<Result<void>> signOut() async {
+  AsyncResult<void> signOut() async {
     return await _authService.signOut();
   }
 }

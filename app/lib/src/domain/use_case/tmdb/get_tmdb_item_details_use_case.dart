@@ -11,7 +11,7 @@ class GetTMDBItemDetailsUseCase
     : _tmdbRepository = tmdbRepository;
 
   @override
-  Future<Result<BaseTMDBDetailsModel>> call(
+  AsyncResult<BaseTMDBDetailsModel> call(
     BaseDetailsRequestParameters input,
   ) async {
     return await _tmdbRepository.getTMDBItemDetails(params: input);

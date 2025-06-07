@@ -8,7 +8,7 @@ class GetThemeModeLocalUseCase extends BaseUseCase<NoParam, bool> {
     : _appRepository = appRepository;
 
   @override
-  Future<Result<bool>> call(NoParam input) async {
+  AsyncResult<bool> call(NoParam input) async {
     return await _appRepository.getThemeMode();
   }
 }

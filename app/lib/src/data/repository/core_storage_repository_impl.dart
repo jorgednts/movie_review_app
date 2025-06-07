@@ -9,42 +9,42 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
     : _storageService = storageService;
 
   @override
-  Future<Result<void>> createUserStorage({
+  AsyncResult<void> createUserStorage({
     required CreateUserStorageRequest request,
   }) async {
     return await _storageService.createUserStorage(request: request);
   }
 
   @override
-  Future<Result<void>> addItemToCollection<T extends AppCollectionItemModel>({
+  AsyncResult<void> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     return await _storageService.addItemToCollection<T>(request: request);
   }
 
   @override
-  Future<Result<void>> deleteItemInCollection<
-    T extends AppCollectionItemModel
-  >({required CRUDItemRequest<T> request}) async {
+  AsyncResult<void> deleteItemInCollection<T extends AppCollectionItemModel>({
+    required CRUDItemRequest<T> request,
+  }) async {
     return await _storageService.deleteItemInCollection<T>(request: request);
   }
 
   @override
-  Future<Result<List<T>>> getCollectionFromStorage<
+  AsyncResult<List<T>> getCollectionFromStorage<
     T extends AppCollectionItemModel
   >({required GetCollectionRequest<T> request}) async {
     return await _storageService.getCollection<T>(request: request);
   }
 
   @override
-  Future<Result<void>> updateItemInCollection<
-    T extends AppCollectionItemModel
-  >({required CRUDItemRequest<T> request}) async {
+  AsyncResult<void> updateItemInCollection<T extends AppCollectionItemModel>({
+    required CRUDItemRequest<T> request,
+  }) async {
     return await _storageService.updateItemInCollection<T>(request: request);
   }
 
   @override
-  Future<Result<String>> getUsername({required String uid}) async {
+  AsyncResult<String> getUsername({required String uid}) async {
     return await _storageService.getUsername(uid: uid);
   }
 }

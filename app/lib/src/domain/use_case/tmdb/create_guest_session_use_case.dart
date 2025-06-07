@@ -8,7 +8,7 @@ class CreateGuestSessionUseCase implements BaseUseCase<NoParam, String> {
     : _tmdbRepository = tmdbRepository;
 
   @override
-  Future<Result<String>> call(NoParam input) async {
+  AsyncResult<String> call(NoParam input) async {
     return await _tmdbRepository.createGuestSession();
   }
 }

@@ -13,7 +13,7 @@ abstract class BaseViewModel {
 
   void initCommands();
 
-  Future<Result<OutputType>> callUseCase<InputType, OutputType>({
+  AsyncResult<OutputType> callUseCase<InputType, OutputType>({
     required BaseUseCase<InputType, OutputType> useCase,
     required InputType input,
     required void Function(OutputType data) onSuccess,

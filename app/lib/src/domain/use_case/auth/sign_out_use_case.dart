@@ -8,7 +8,7 @@ class SignOutUseCase implements BaseUseCase<NoParam, void> {
     : _authRepository = authRepository;
 
   @override
-  Future<Result<void>> call(NoParam input) async {
+  AsyncResult<void> call(NoParam input) async {
     return await _authRepository.signOut();
   }
 }

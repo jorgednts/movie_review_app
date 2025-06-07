@@ -10,7 +10,7 @@ class GetPopularMoviesUseCase
     : _tmdbRepository = tmdbRepository;
 
   @override
-  Future<Result<List<MovieModel>>> call(NoParam input) async {
+  AsyncResult<List<MovieModel>> call(NoParam input) async {
     return await _tmdbRepository.getPopularMovies();
   }
 }

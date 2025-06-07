@@ -2,25 +2,25 @@ import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:core/core.dart';
 
 abstract class CoreStorageRepository {
-  Future<Result<void>> createUserStorage({
+  AsyncResult<void> createUserStorage({
     required CreateUserStorageRequest request,
   });
 
-  Future<Result<String>> getUsername({required String uid});
+  AsyncResult<String> getUsername({required String uid});
 
-  Future<Result<void>> addItemToCollection<T extends AppCollectionItemModel>({
+  AsyncResult<void> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
-  Future<Result<void>> deleteItemInCollection<
+  AsyncResult<void> deleteItemInCollection<
     T extends AppCollectionItemModel
   >({required CRUDItemRequest<T> request});
 
-  Future<Result<void>> updateItemInCollection<
+  AsyncResult<void> updateItemInCollection<
     T extends AppCollectionItemModel
   >({required CRUDItemRequest<T> request});
 
-  Future<Result<List<T>>> getCollectionFromStorage<
+  AsyncResult<List<T>> getCollectionFromStorage<
     T extends AppCollectionItemModel
   >({required GetCollectionRequest<T> request});
 }

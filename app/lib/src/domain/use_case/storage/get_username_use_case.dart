@@ -8,7 +8,7 @@ class GetUsernameUseCase implements BaseUseCase<String, String> {
     : _coreStorageRepository = coreStorageRepository;
 
   @override
-  Future<Result<String>> call(String input) async {
+  AsyncResult<String> call(String input) async {
     return await _coreStorageRepository.getUsername(uid: input);
   }
 }

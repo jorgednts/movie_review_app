@@ -44,7 +44,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<String>> createGuestSession() async {
+  AsyncResult<String> createGuestSession() async {
     try {
       final data = await _client.get(
         '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.guestSessionEndpoint}',
@@ -62,7 +62,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<List<MovieModel>>> getPopularMovies() async {
+  AsyncResult<List<MovieModel>> getPopularMovies() async {
     try {
       final response = await getPaginated(
         uri:
@@ -76,7 +76,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> getPopularTVSeries() async {
+  AsyncResult<List<TVSeriesModel>> getPopularTVSeries() async {
     try {
       final response = await getPaginated(
         uri:
@@ -90,7 +90,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<List<MovieModel>>> getTopRatedMovies() async {
+  AsyncResult<List<MovieModel>> getTopRatedMovies() async {
     try {
       final response = await getPaginated(
         uri:
@@ -104,7 +104,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> getTopRatedTVSeries() async {
+  AsyncResult<List<TVSeriesModel>> getTopRatedTVSeries() async {
     try {
       final response = await getPaginated(
         uri:
@@ -118,7 +118,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> searchMovies({
+  AsyncResult<BaseTMDBPaginatedModel<MovieModel>> searchMovies({
     required MoviePaginatedRequestParameters params,
   }) async {
     try {
@@ -139,7 +139,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> searchTVSeries({
+  AsyncResult<BaseTMDBPaginatedModel<TVSeriesModel>> searchTVSeries({
     required TVSeriesPaginatedRequestParameters params,
   }) async {
     try {
@@ -158,7 +158,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }
 
   @override
-  Future<Result<BaseTMDBDetailsModel>> getTMDBItemDetails({
+  AsyncResult<BaseTMDBDetailsModel> getTMDBItemDetails({
     required BaseDetailsRequestParameters params,
   }) async {
     try {
@@ -174,7 +174,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
     }
   }
 
-  Future<Result<BaseTMDBDetailsModel>> getMovieDetails({
+  AsyncResult<BaseTMDBDetailsModel> getMovieDetails({
     required BaseDetailsRequestParameters params,
   }) async {
     try {

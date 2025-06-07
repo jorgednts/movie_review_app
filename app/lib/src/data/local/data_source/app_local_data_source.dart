@@ -1,15 +1,13 @@
-import 'package:core/core.dart' show Result;
+import 'package:core/core.dart';
 
 abstract class AppLocalDataSource {
-  Future<Result<void>> setThemeMode({required bool isDarkMode});
+  AsyncResult<void> setThemeMode({required bool isDarkMode});
 
-  Future<Result<bool>> getThemeMode();
+  AsyncResult<bool> getThemeMode();
 
-  Future<Result<void>> updateSearchSuggestions({required String value});
+  AsyncResult<void> updateSearchSuggestions({required String value});
 
-  Future<Result<void>> setSearchSuggestions({
-    required List<String> suggestions,
-  });
+  AsyncResult<void> setSearchSuggestions({required List<String> suggestions});
 
-  Future<Result<List<String>>> getSearchSuggestions();
+  AsyncResult<List<String>> getSearchSuggestions();
 }

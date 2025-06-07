@@ -22,7 +22,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<void>> createUserStorage({
+  AsyncResult<void> createUserStorage({
     required CreateUserStorageRequest request,
   }) async {
     try {
@@ -39,7 +39,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<void>> addItemToCollection<T extends CollectionItemModel>({
+  AsyncResult<void> addItemToCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     try {
@@ -63,7 +63,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<void>> deleteItemInCollection<T extends CollectionItemModel>({
+  AsyncResult<void> deleteItemInCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     try {
@@ -85,7 +85,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<void>> updateItemInCollection<T extends CollectionItemModel>({
+  AsyncResult<void> updateItemInCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     try {
@@ -109,7 +109,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<List<T>>> getCollection<T extends CollectionItemModel>({
+  AsyncResult<List<T>> getCollection<T extends CollectionItemModel>({
     required GetCollectionRequest<T> request,
   }) async {
     try {
@@ -135,7 +135,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  Future<Result<String>> getUsername({required String uid}) async {
+  AsyncResult<String> getUsername({required String uid}) async {
     final response = await _userCollection.doc(uid).get();
     if (response.exists) {
       final data = response.data() as Map<String, dynamic>;

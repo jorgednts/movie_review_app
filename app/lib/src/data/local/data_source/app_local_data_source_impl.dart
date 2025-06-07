@@ -13,7 +13,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  Future<Result<List<String>>> getSearchSuggestions() async {
+  AsyncResult<List<String>> getSearchSuggestions() async {
     try {
       final result = (await _prefs()).getStringList(
         PrefsConstants.searchSuggestionsKey,
@@ -25,7 +25,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  Future<Result<bool>> getThemeMode() async {
+  AsyncResult<bool> getThemeMode() async {
     try {
       final result = (await _prefs()).getBool(PrefsConstants.themeModeKey);
       return Result.ok(result ?? ThemeMode.system == ThemeMode.dark);
@@ -35,7 +35,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  Future<Result<void>> setSearchSuggestions({
+  AsyncResult<void> setSearchSuggestions({
     required List<String> suggestions,
   }) async {
     try {
@@ -53,7 +53,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  Future<Result<void>> updateSearchSuggestions({required String value}) async {
+  AsyncResult<void> updateSearchSuggestions({required String value}) async {
     try {
       final currentList = await getSearchSuggestions();
       switch (currentList) {
@@ -83,7 +83,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  Future<Result<void>> setThemeMode({required bool isDarkMode}) async {
+  AsyncResult<void> setThemeMode({required bool isDarkMode}) async {
     try {
       final result = await (await _prefs()).setBool(
         PrefsConstants.themeModeKey,

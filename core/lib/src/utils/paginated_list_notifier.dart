@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 
-typedef PaginatedFetcher<T> = Future<Result<List<T>>> Function(int page);
+typedef PaginatedFetcher<T> = AsyncResult<List<T>> Function(int page);
 
 class PaginatedListNotifier<T> extends ChangeNotifier {
   final List<T> _items = [];
@@ -24,7 +24,7 @@ class PaginatedListNotifier<T> extends ChangeNotifier {
 
   Exception? get error => _error;
 
-  Future<Result<void>> loadNextPage() async {
+  AsyncResult<void> loadNextPage() async {
     if (_isLoading || !_hasMore) return const Result.ok(null);
 
     _isLoading = true;

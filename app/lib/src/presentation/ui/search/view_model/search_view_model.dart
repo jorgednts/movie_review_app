@@ -62,7 +62,7 @@ class SearchViewModel extends BaseViewModel {
     getSuggestions = Command0(_getSuggestions);
   }
 
-  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> _searchMovies(
+  AsyncResult<BaseTMDBPaginatedModel<MovieModel>> _searchMovies(
     int page,
   ) async {
     return await _searchMoviesUseCase(
@@ -74,7 +74,7 @@ class SearchViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> _searchTVSeries(
+  AsyncResult<BaseTMDBPaginatedModel<TVSeriesModel>> _searchTVSeries(
     int page,
   ) async {
     return await _searchTVSeriesUseCase(
@@ -129,7 +129,7 @@ class SearchViewModel extends BaseViewModel {
     await _getSuggestions();
   }
 
-  Future<Result> _getSuggestions() async {
+  AsyncResult _getSuggestions() async {
     return await callUseCase<NoParam, List<String>>(
       useCase: _getSearchSuggestionListLocalUseCase,
       input: NoParam(),

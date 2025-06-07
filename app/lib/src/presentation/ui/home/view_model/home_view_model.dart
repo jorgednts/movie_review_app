@@ -62,7 +62,7 @@ class HomeViewModel extends BaseViewModel {
     createGuestSession = Command0(_createGuestSession);
   }
 
-  Future<Result> _getPopularMovies() async {
+  AsyncResult _getPopularMovies() async {
     return await callUseCase<NoParam, List<MovieModel>>(
       useCase: _getPopularMoviesUseCase,
       input: NoParam(),
@@ -76,7 +76,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result<void>> _getPopularTVSeries() async {
+  AsyncResult<void> _getPopularTVSeries() async {
     return await callUseCase<NoParam, List<TVSeriesModel>>(
       useCase: _getPopularTVSeriesUseCase,
       input: NoParam(),
@@ -90,7 +90,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _getTopRatedMovies() async {
+  AsyncResult _getTopRatedMovies() async {
     return await callUseCase<NoParam, List<MovieModel>>(
       useCase: _getTopRatedMoviesUseCase,
       input: NoParam(),
@@ -104,7 +104,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result<void>> _getTopRatedTVSeries() async {
+  AsyncResult<void> _getTopRatedTVSeries() async {
     return await callUseCase<NoParam, List<TVSeriesModel>>(
       useCase: _getTopRatedTVSeriesUseCase,
       input: NoParam(),
@@ -118,7 +118,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result<void>> _createGuestSession() async {
+  AsyncResult<void> _createGuestSession() async {
     return await callUseCase<NoParam, String>(
       useCase: _createGuestSessionUseCase,
       input: NoParam(),

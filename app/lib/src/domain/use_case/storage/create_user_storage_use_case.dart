@@ -10,7 +10,7 @@ class CreateUserStorageUseCase
   }) : _coreStorageRepository = coreStorageRepository;
 
   @override
-  Future<Result<void>> call(CreateUserStorageRequest input) async {
+  AsyncResult<void> call(CreateUserStorageRequest input) async {
     return await _coreStorageRepository.createUserStorage(request: input);
   }
 }

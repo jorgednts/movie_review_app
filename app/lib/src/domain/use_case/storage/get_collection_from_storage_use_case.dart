@@ -11,7 +11,7 @@ class GetCollectionFromStorageUseCase<T extends AppCollectionItemModel>
   }) : _coreStorageRepository = coreStorageRepository;
 
   @override
-  Future<Result<List<T>>> call(GetCollectionRequest<T> input) async {
+  AsyncResult<List<T>> call(GetCollectionRequest<T> input) async {
     return await _coreStorageRepository.getCollectionFromStorage(
       request: input,
     );

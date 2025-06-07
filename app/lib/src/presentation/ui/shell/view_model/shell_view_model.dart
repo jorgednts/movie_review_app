@@ -63,7 +63,7 @@ class ShellViewModel extends BaseViewModel {
     checkUserLogged = Command0(_checkUserLogged);
   }
 
-  Future<Result> _signIn(UserRequest input) async {
+  AsyncResult _signIn(UserRequest input) async {
     return await callUseCase<UserRequest, UserModel?>(
       useCase: _signInUseCase,
       input: input,
@@ -79,7 +79,7 @@ class ShellViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _signOut() async {
+  AsyncResult _signOut() async {
     return await callUseCase<NoParam, void>(
       useCase: _signOutUseCase,
       input: NoParam(),
@@ -93,7 +93,7 @@ class ShellViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _createUser(UserRequest input) async {
+  AsyncResult _createUser(UserRequest input) async {
     return await callUseCase<UserRequest, UserModel>(
       useCase: _createUserUseCase,
       input: input,
@@ -111,7 +111,7 @@ class ShellViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _checkUserLogged() async {
+  AsyncResult _checkUserLogged() async {
     return await callUseCase<NoParam, UserModel?>(
       useCase: _checkUserLoggedUseCase,
       input: NoParam(),
@@ -127,7 +127,7 @@ class ShellViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _createUserStorage(
+  AsyncResult _createUserStorage(
     CreateUserStorageRequest storageRequest,
   ) async {
     return await callUseCase<CreateUserStorageRequest, void>(
@@ -138,7 +138,7 @@ class ShellViewModel extends BaseViewModel {
     );
   }
 
-  Future<Result> _getUsername(String uid) async {
+  AsyncResult _getUsername(String uid) async {
     return await callUseCase<String, String>(
       useCase: _getUsernameUseCase,
       input: uid,

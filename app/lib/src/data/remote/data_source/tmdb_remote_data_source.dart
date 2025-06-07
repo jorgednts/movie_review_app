@@ -17,25 +17,25 @@ abstract class TMDBRemoteDataSource {
     BaseRequestParameters? queryParameters,
   });
 
-  Future<Result<String>> createGuestSession();
+  AsyncResult<String> createGuestSession();
 
-  Future<Result<List<MovieModel>>> getPopularMovies();
+  AsyncResult<List<MovieModel>> getPopularMovies();
 
-  Future<Result<List<MovieModel>>> getTopRatedMovies();
+  AsyncResult<List<MovieModel>> getTopRatedMovies();
 
-  Future<Result<List<TVSeriesModel>>> getPopularTVSeries();
+  AsyncResult<List<TVSeriesModel>> getPopularTVSeries();
 
-  Future<Result<List<TVSeriesModel>>> getTopRatedTVSeries();
+  AsyncResult<List<TVSeriesModel>> getTopRatedTVSeries();
 
-  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> searchMovies({
+  AsyncResult<BaseTMDBPaginatedModel<MovieModel>> searchMovies({
     required MoviePaginatedRequestParameters params,
   });
 
-  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> searchTVSeries({
+  AsyncResult<BaseTMDBPaginatedModel<TVSeriesModel>> searchTVSeries({
     required TVSeriesPaginatedRequestParameters params,
   });
 
-  Future<Result<BaseTMDBDetailsModel>> getTMDBItemDetails({
+  AsyncResult<BaseTMDBDetailsModel> getTMDBItemDetails({
     required BaseDetailsRequestParameters params,
   });
 }

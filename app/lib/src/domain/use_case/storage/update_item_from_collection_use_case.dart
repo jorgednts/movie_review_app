@@ -11,7 +11,7 @@ class UpdateItemFromCollectionUseCase<T extends AppCollectionItemModel>
   }) : _coreStorageRepository = coreStorageRepository;
 
   @override
-  Future<Result<void>> call(CRUDItemRequest<T> input) {
+  AsyncResult<void> call(CRUDItemRequest<T> input) {
     return _coreStorageRepository.updateItemInCollection(request: input);
   }
 }

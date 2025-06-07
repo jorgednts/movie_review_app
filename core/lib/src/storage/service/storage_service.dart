@@ -1,25 +1,25 @@
 import 'package:core/core.dart';
 
 abstract class StorageService {
-  Future<Result<void>> createUserStorage({
+  AsyncResult<void> createUserStorage({
     required CreateUserStorageRequest request,
   });
 
-  Future<Result<String>> getUsername({required String uid});
+  AsyncResult<String> getUsername({required String uid});
 
-  Future<Result<void>> addItemToCollection<T extends CollectionItemModel>({
+  AsyncResult<void> addItemToCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
-  Future<Result<void>> deleteItemInCollection<T extends CollectionItemModel>({
+  AsyncResult<void> deleteItemInCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
-  Future<Result<void>> updateItemInCollection<T extends CollectionItemModel>({
+  AsyncResult<void> updateItemInCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
-  Future<Result<List<T>>> getCollection<T extends CollectionItemModel>({
+  AsyncResult<List<T>> getCollection<T extends CollectionItemModel>({
     required GetCollectionRequest<T> request,
   });
 }

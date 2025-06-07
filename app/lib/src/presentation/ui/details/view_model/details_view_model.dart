@@ -32,7 +32,7 @@ class DetailsViewModel extends BaseViewModel {
     getDetails = Command0<void>(_getDetails);
   }
 
-  Future<Result> _getDetails() async {
+  AsyncResult _getDetails() async {
     return await callUseCase<
       BaseDetailsRequestParameters,
       BaseTMDBDetailsModel

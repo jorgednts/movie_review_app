@@ -9,17 +9,17 @@ class AppRepositoryImpl implements AppRepository {
     : _appLocalDataSource = appLocalDataSource;
 
   @override
-  Future<Result<List<String>>> getSearchSuggestions() async {
+  AsyncResult<List<String>> getSearchSuggestions() async {
     return await _appLocalDataSource.getSearchSuggestions();
   }
 
   @override
-  Future<Result<bool>> getThemeMode() async {
+  AsyncResult<bool> getThemeMode() async {
     return await _appLocalDataSource.getThemeMode();
   }
 
   @override
-  Future<Result<void>> setSearchSuggestions({
+  AsyncResult<void> setSearchSuggestions({
     required List<String> suggestions,
   }) async {
     return await _appLocalDataSource.setSearchSuggestions(
@@ -28,12 +28,12 @@ class AppRepositoryImpl implements AppRepository {
   }
 
   @override
-  Future<Result<void>> setThemeMode({required bool isDarkMode}) async {
+  AsyncResult<void> setThemeMode({required bool isDarkMode}) async {
     return await _appLocalDataSource.setThemeMode(isDarkMode: isDarkMode);
   }
 
   @override
-  Future<Result<void>> updateSearchSuggestions({required String value}) async {
+  AsyncResult<void> updateSearchSuggestions({required String value}) async {
     return await _appLocalDataSource.updateSearchSuggestions(value: value);
   }
 }

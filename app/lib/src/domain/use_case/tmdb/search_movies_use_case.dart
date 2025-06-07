@@ -16,7 +16,7 @@ class SearchMoviesUseCase
     : _tmdbRepository = tmdbRepository;
 
   @override
-  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> call(
+  AsyncResult<BaseTMDBPaginatedModel<MovieModel>> call(
     MoviePaginatedRequestParameters input,
   ) async {
     return await _tmdbRepository.searchMovies(params: input);

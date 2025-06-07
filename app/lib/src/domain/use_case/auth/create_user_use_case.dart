@@ -8,7 +8,7 @@ class CreateUserUseCase implements BaseUseCase<UserRequest, UserModel> {
     : _authRepository = authRepository;
 
   @override
-  Future<Result<UserModel>> call(UserRequest input) async {
+  AsyncResult<UserModel> call(UserRequest input) async {
     return await _authRepository.createUser(request: input);
   }
 }

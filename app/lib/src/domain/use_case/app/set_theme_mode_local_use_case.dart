@@ -8,7 +8,7 @@ class SetThemeModeLocalUseCase extends BaseUseCase<bool, void> {
     : _appRepository = appRepository;
 
   @override
-  Future<Result<void>> call(bool input) async {
+  AsyncResult<void> call(bool input) async {
     return await _appRepository.setThemeMode(isDarkMode: input);
   }
 }

@@ -1,7 +1,5 @@
+import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../utils/result.dart';
-import '../auth.dart';
 
 class AuthServiceImpl extends AuthService {
   final FirebaseAuth _auth;
@@ -9,9 +7,7 @@ class AuthServiceImpl extends AuthService {
   AuthServiceImpl() : _auth = FirebaseAuth.instance;
 
   @override
-  Future<Result<UserModel>> signInWithEmail({
-    required UserRequest request,
-  }) async {
+  AsyncResult<UserModel> signInWithEmail({required UserRequest request}) async {
     try {
       final result = await _auth.signInWithEmailAndPassword(
         email: request.email,
@@ -29,7 +25,7 @@ class AuthServiceImpl extends AuthService {
   }
 
   @override
-  Future<Result<UserModel>> createUser({required UserRequest request}) async {
+  AsyncResult<UserModel> createUser({required UserRequest request}) async {
     try {
       final result = await _auth.createUserWithEmailAndPassword(
         email: request.email,
@@ -48,7 +44,7 @@ class AuthServiceImpl extends AuthService {
   }
 
   @override
-  Future<Result<void>> signOut() async {
+  AsyncResult<void> signOut() async {
     try {
       await _auth.signOut();
       return Result.ok(null);
@@ -58,7 +54,7 @@ class AuthServiceImpl extends AuthService {
   }
 
   @override
-  Future<Result<UserModel?>> checkLoggedUser() async {
+  AsyncResult<UserModel?> checkLoggedUser() async {
     try {
       final user = _auth.currentUser;
       if (user == null) {

@@ -1,7 +1,7 @@
-import 'package:core/src/utils/result.dart';
+import 'package:core/core.dart';
 
 abstract class BaseUseCase<InputType, OutputType> {
-  Future<Result<OutputType>> call(InputType input);
+  AsyncResult<OutputType> call(InputType input);
 }
 
 class NoParam {}

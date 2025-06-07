@@ -10,7 +10,7 @@ class GetTopRatedTVSeriesUseCase
     : _tmdbRepository = tmdbRepository;
 
   @override
-  Future<Result<List<TVSeriesModel>>> call(NoParam input) async {
+  AsyncResult<List<TVSeriesModel>> call(NoParam input) async {
     return await _tmdbRepository.getTopRatedTVSeries();
   }
 }

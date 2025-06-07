@@ -16,46 +16,46 @@ class TMDBRepositoryImpl implements TMDBRepository {
     : _tmdbRemoteDataSource = tmdbRemoteDataSource;
 
   @override
-  Future<Result<List<MovieModel>>> getPopularMovies() async {
+  AsyncResult<List<MovieModel>> getPopularMovies() async {
     return await _tmdbRemoteDataSource.getPopularMovies();
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> getPopularTVSeries() async {
+  AsyncResult<List<TVSeriesModel>> getPopularTVSeries() async {
     return await _tmdbRemoteDataSource.getPopularTVSeries();
   }
 
   @override
-  Future<Result<List<MovieModel>>> getTopRatedMovies() async {
+  AsyncResult<List<MovieModel>> getTopRatedMovies() async {
     return await _tmdbRemoteDataSource.getTopRatedMovies();
   }
 
   @override
-  Future<Result<List<TVSeriesModel>>> getTopRatedTVSeries() async {
+  AsyncResult<List<TVSeriesModel>> getTopRatedTVSeries() async {
     return await _tmdbRemoteDataSource.getTopRatedTVSeries();
   }
 
   @override
-  Future<Result<String>> createGuestSession() async {
+  AsyncResult<String> createGuestSession() async {
     return await _tmdbRemoteDataSource.createGuestSession();
   }
 
   @override
-  Future<Result<BaseTMDBPaginatedModel<MovieModel>>> searchMovies({
+  AsyncResult<BaseTMDBPaginatedModel<MovieModel>> searchMovies({
     required MoviePaginatedRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.searchMovies(params: params);
   }
 
   @override
-  Future<Result<BaseTMDBPaginatedModel<TVSeriesModel>>> searchTVSeries({
+  AsyncResult<BaseTMDBPaginatedModel<TVSeriesModel>> searchTVSeries({
     required TVSeriesPaginatedRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.searchTVSeries(params: params);
   }
 
   @override
-  Future<Result<BaseTMDBDetailsModel>> getTMDBItemDetails({
+  AsyncResult<BaseTMDBDetailsModel> getTMDBItemDetails({
     required BaseDetailsRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.getTMDBItemDetails(params: params);

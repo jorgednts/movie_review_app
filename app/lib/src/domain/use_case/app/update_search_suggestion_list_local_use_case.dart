@@ -8,7 +8,7 @@ class UpdateSearchSuggestionListLocalUseCase extends BaseUseCase<String, void> {
     : _appRepository = appRepository;
 
   @override
-  Future<Result<void>> call(String input) async {
+  AsyncResult<void> call(String input) async {
     return await _appRepository.updateSearchSuggestions(value: input);
   }
 }

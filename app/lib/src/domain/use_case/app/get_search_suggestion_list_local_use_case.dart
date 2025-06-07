@@ -9,7 +9,7 @@ class GetSearchSuggestionListLocalUseCase
     : _appRepository = appRepository;
 
   @override
-  Future<Result<List<String>>> call(NoParam input) async {
+  AsyncResult<List<String>> call(NoParam input) async {
     return await _appRepository.getSearchSuggestions();
   }
 }
