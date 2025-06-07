@@ -94,6 +94,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
           children: [
             CarouselView(
               padding: EdgeInsets.only(right: widget.padding),
+              enableSplash: widget.onTapItem != null,
               itemExtent: widget.itemExtent,
               controller: widget.controller,
               onTap: widget.onTapItem,
@@ -139,7 +140,7 @@ class _ArrowWidget extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondaryContainer,
             shape: BoxShape.circle,
           ),
-          padding: EdgeInsets.all(Dimensions.spacingSm),
+          padding: const EdgeInsets.all(Dimensions.spacingSm),
           child: Icon(
             isLeft ? Icons.chevron_left_outlined : Icons.chevron_right_outlined,
             color: Theme.of(context).colorScheme.onSecondaryContainer,

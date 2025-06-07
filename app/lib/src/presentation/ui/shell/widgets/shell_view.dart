@@ -39,7 +39,7 @@ class ShellView extends StatelessWidget {
       viewModel.handleAuthDialogResult(
         await showAdaptiveDialog<AuthDialogResult>(
           context: context,
-          builder: (dialogContext) => SignInDialog(),
+          builder: (dialogContext) => const SignInDialog(),
         ),
       );
     }
@@ -68,7 +68,7 @@ class ShellView extends StatelessWidget {
                 viewModel.signOut,
               ],
               showLoading: viewModel.showLoading,
-              loadingWidget: Center(child: CustomLoadingWidget()),
+              loadingWidget: const Center(child: CustomLoadingWidget()),
               child: Column(
                 spacing: Dimensions.spacingMd,
                 children: [
@@ -81,7 +81,7 @@ class ShellView extends StatelessWidget {
                   ),
                   Expanded(
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: 1500),
+                      constraints: const BoxConstraints(maxWidth: 1500),
                       child: navigationShell,
                     ),
                   ),

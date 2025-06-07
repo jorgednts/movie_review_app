@@ -20,3 +20,4 @@ export 'src/utils/command.dart';
 export 'src/utils/result.dart';
 export 'src/utils/dialog_event_notifier.dart';
 export 'src/utils/paginated_list_notifier.dart';
+export 'src/utils/url_launcher.dart';

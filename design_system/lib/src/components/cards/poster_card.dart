@@ -69,7 +69,7 @@ class PosterCard extends StatelessWidget {
                 bottomRight: Radius.circular(borderRadius),
               ),
             ),
-            padding: EdgeInsets.all(Dimensions.spacingSm),
+            padding: const EdgeInsets.all(Dimensions.spacingSm),
             width: double.infinity,
             child: infoWidget,
           ),

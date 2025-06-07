@@ -82,13 +82,13 @@ class CommandResultDialog extends StatelessWidget {
       title: Center(
         child: PulsatingOpacityContainer(
           color: iconBackgroundColor,
-          padding: EdgeInsets.all(Dimensions.spacingMd),
+          padding: const EdgeInsets.all(Dimensions.spacingMd),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: iconBackgroundColor,
             ),
-            padding: EdgeInsets.all(Dimensions.spacingMd),
+            padding: const EdgeInsets.all(Dimensions.spacingMd),
             child: Icon(icon, color: iconColor),
           ),
         ),

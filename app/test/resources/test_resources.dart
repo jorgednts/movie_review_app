@@ -128,7 +128,7 @@ class TestResources {
   };
 
   static final List<MovieModel> mockMovieList = [
-    MovieModel(
+    const MovieModel(
       adult: false,
       backdropPath: "/path/to/backdrop.jpg",
       genreIds: [28, 12, 878],
@@ -144,7 +144,7 @@ class TestResources {
       voteAverage: 7.8,
       voteCount: 1523,
     ),
-    MovieModel(
+    const MovieModel(
       adult: false,
       backdropPath: "/path/to/backdrop.jpg",
       genreIds: [28, 12, 878],
@@ -160,7 +160,7 @@ class TestResources {
       voteAverage: 7.8,
       voteCount: 1523,
     ),
-    MovieModel(
+    const MovieModel(
       adult: false,
       backdropPath: "/path/to/backdrop.jpg",
       genreIds: [28, 12, 878],

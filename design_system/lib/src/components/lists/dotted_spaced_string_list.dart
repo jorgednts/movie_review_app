@@ -15,7 +15,7 @@ class DottedSpacedStringList extends StatelessWidget {
         items.length * 2 - 1,
         (index) =>
             index % 2 == 0
-                ? Text(
+                ? SelectableText(
                   items[index ~/ 2],
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,

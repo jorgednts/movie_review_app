@@ -29,18 +29,18 @@ class CustomNavigationBar extends StatelessWidget {
           ),
           leading: TextButton(
             onPressed: () => navigationShell.goBranch(0),
-            style: ButtonStyle(overlayColor: WidgetStateColor.transparent),
-            child: AppLogoWidget(),
+            style: const ButtonStyle(overlayColor: WidgetStateColor.transparent),
+            child: const AppLogoWidget(),
           ),
           trailing: authButton,
         )
         : Container(
           height: kToolbarHeight,
-          padding: EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppLogoWidget(),
+              const AppLogoWidget(),
               Align(alignment: Alignment.centerRight, child: authButton),
             ],
           ),

@@ -36,11 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "details_add_watchlist": MessageLookupByLibrary.simpleMessage(
       "Add to Watchlist",
     ),
+    "details_cast": MessageLookupByLibrary.simpleMessage("Cast"),
     "details_edit_review": MessageLookupByLibrary.simpleMessage("Add Review"),
     "details_overview": MessageLookupByLibrary.simpleMessage("Overview"),
     "details_rating": MessageLookupByLibrary.simpleMessage("Vote Average"),
     "details_season": MessageLookupByLibrary.simpleMessage("Season"),
     "details_seasons": MessageLookupByLibrary.simpleMessage("Seasons"),
+    "details_see_less": MessageLookupByLibrary.simpleMessage("see less"),
+    "details_see_more": MessageLookupByLibrary.simpleMessage("see more"),
+    "details_similar": MessageLookupByLibrary.simpleMessage("Similar"),
     "details_visit_website": MessageLookupByLibrary.simpleMessage(
       "Visit Website",
     ),

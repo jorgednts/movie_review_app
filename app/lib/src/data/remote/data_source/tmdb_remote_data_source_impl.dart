@@ -6,13 +6,15 @@ import 'package:app/src/data/remote/model/base/base_details_request_parameters.d
 import 'package:app/src/data/remote/model/base/base_request_parameters.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_details_response.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
-import 'package:app/src/data/remote/model/guest_session_response.dart';
-import 'package:app/src/data/remote/model/movie_response.dart';
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
-import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/data/remote/model/response/credits_response.dart';
+import 'package:app/src/data/remote/model/response/guest_session_response.dart';
+import 'package:app/src/data/remote/model/response/movie_response.dart';
+import 'package:app/src/data/remote/model/response/tv_series_response.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
+import 'package:app/src/domain/model/cast_member_model.dart';
 import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
@@ -163,7 +165,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
   }) async {
     try {
       final response = await _client.get(
-        '${TMDBApiConstants.baseUrl}/${params.type == AppCollectionItemType.movie ? TMDBApiConstants.movieDetailsEndpoint : TMDBApiConstants.tvSeriesDetailsEndpoint}/${params.uid}',
+        '${TMDBApiConstants.baseUrl}/${params.type == AppCollectionItemType.movie ? TMDBApiConstants.movieDetailsEndpoint : TMDBApiConstants.tvSeriesDetailsEndpoint}/${params.id}',
         queryParameters: params.toJson(),
       );
       return Result.ok(
@@ -174,16 +176,55 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
     }
   }
 
-  AsyncResult<BaseTMDBDetailsModel> getMovieDetails({
+  @override
+  AsyncResult<List<MovieModel>> getSimilarMovies({
     required BaseDetailsRequestParameters params,
   }) async {
     try {
+      final response = await getPaginated(
+        uri:
+            '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.movieDetailsEndpoint}/${params.id}/${TMDBApiConstants.similarEndpoint}',
+        fromJsonT: MovieResponse.fromJson,
+        queryParameters: params,
+      );
+      return Result.ok(response.results.toMovieModelList());
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
+  }
+
+  @override
+  AsyncResult<List<TVSeriesModel>> getSimilarTVSeries({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    try {
+      final response = await getPaginated(
+        uri:
+            '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.movieDetailsEndpoint}/${params.id}/${TMDBApiConstants.similarEndpoint}',
+        fromJsonT: TVSeriesResponse.fromJson,
+        queryParameters: params,
+      );
+      return Result.ok(response.results.toTVSeriesModelList());
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
+  }
+
+  @override
+  AsyncResult<List<CastMemberModel>> getCastMembers({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    try {
+      final type =
+          params.type == AppCollectionItemType.movie
+              ? TMDBApiConstants.movieDetailsEndpoint
+              : TMDBApiConstants.tvSeriesDetailsEndpoint;
       final response = await _client.get(
-        '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.movieDetailsEndpoint}/${params.uid}',
+        '${TMDBApiConstants.baseUrl}/$type/${params.id}/${TMDBApiConstants.creditsEndpoint}',
         queryParameters: params.toJson(),
       );
       return Result.ok(
-        BaseTMDBDetailsResponse.fromJson(response).toBaseTMDBDetailsModel(),
+        CreditsResponse.fromJson(response).toCastMemberModelList(),
       );
     } catch (e) {
       return Result.error(Exception(e));

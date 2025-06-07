@@ -135,7 +135,7 @@ class _SignInDialogState extends State<SignInDialog> {
         maxHeight: MediaQuery.sizeOf(context).height * 0.75,
       ),
       onPop: () => context.pop(),
-      title: Center(child: AppLogoCircleWidget()),
+      title: const Center(child: AppLogoCircleWidget()),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -153,7 +153,7 @@ class _SignInDialogState extends State<SignInDialog> {
                   children: [
                     if (state == AuthDialogState.create)
                       DefaultTextFormField(
-                        key: ValueKey('name'),
+                        key: const ValueKey('name'),
                         controller: nameController,
                         label: AppIntl.of(context).common_name,
                         validator:
@@ -163,7 +163,7 @@ class _SignInDialogState extends State<SignInDialog> {
                             ),
                       ),
                     DefaultTextFormField(
-                      key: ValueKey('email'),
+                      key: const ValueKey('email'),
                       controller: emailController,
                       label: AppIntl.of(context).shell_email,
                       validator:
@@ -171,7 +171,7 @@ class _SignInDialogState extends State<SignInDialog> {
                               FormFieldValidators.validateEmail(value, context),
                     ),
                     DefaultTextFormField(
-                      key: ValueKey('password'),
+                      key: const ValueKey('password'),
                       controller: passwordController,
                       label: AppIntl.of(context).shell_password,
                       obscureText: true,
@@ -187,7 +187,7 @@ class _SignInDialogState extends State<SignInDialog> {
             ],
             if (state != AuthDialogState.signIn) ...[
               if (state == AuthDialogState.init)
-                _MessageWidget(state: AuthDialogState.create),
+                const _MessageWidget(state: AuthDialogState.create),
               FilledTextButton(
                 onPressed: () => handleFilledButtonPress(false),
                 label: AppIntl.of(context).shell_create_user,
@@ -202,7 +202,7 @@ class _SignInDialogState extends State<SignInDialog> {
               ),
             if (state != AuthDialogState.create) ...[
               if (state == AuthDialogState.init)
-                _MessageWidget(state: AuthDialogState.signIn),
+                const _MessageWidget(state: AuthDialogState.signIn),
               FilledTextButton(
                 onPressed: () => handleFilledButtonPress(true),
                 label: AppIntl.of(context).shell_sign_in,

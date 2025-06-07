@@ -14,8 +14,8 @@ import 'tmdb_repository_impl_test.mocks.dart';
 void main() {
   late MockTMDBRemoteDataSource mockDataSource;
   late TMDBRepositoryImpl repository;
-  provideDummy<Result<List<MovieModel>>>(Result.ok([]));
-  provideDummy<Result<List<TVSeriesModel>>>(Result.ok([]));
+  provideDummy<Result<List<MovieModel>>>(const Result.ok([]));
+  provideDummy<Result<List<TVSeriesModel>>>(const Result.ok([]));
 
   setUp(() {
     mockDataSource = MockTMDBRemoteDataSource();

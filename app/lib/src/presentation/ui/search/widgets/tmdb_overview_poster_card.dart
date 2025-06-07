@@ -7,6 +7,7 @@ class TMDBOverviewPosterCard extends StatelessWidget {
   final double voteAverage;
   final String releaseYear;
   final String overview;
+  final void Function() onTap;
 
   const TMDBOverviewPosterCard({
     super.key,
@@ -15,14 +16,16 @@ class TMDBOverviewPosterCard extends StatelessWidget {
     required this.voteAverage,
     required this.releaseYear,
     required this.overview,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpandedPosterCard(
       posterUrl: posterUrl,
-      placeholder: _PosterAspectRatio.placeholder(),
-      errorWidget: _PosterAspectRatio.error(),
+      placeholder: const _PosterAspectRatio.placeholder(),
+      errorWidget: const _PosterAspectRatio.error(),
+      onTap: onTap,
       infoWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: Dimensions.spacingMd,

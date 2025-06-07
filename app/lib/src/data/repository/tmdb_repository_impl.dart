@@ -4,6 +4,7 @@ import 'package:app/src/data/remote/model/request/movie_paginated_request_parame
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
+import 'package:app/src/domain/model/cast_member_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/repository/tmdb_repository.dart';
@@ -59,5 +60,26 @@ class TMDBRepositoryImpl implements TMDBRepository {
     required BaseDetailsRequestParameters params,
   }) async {
     return await _tmdbRemoteDataSource.getTMDBItemDetails(params: params);
+  }
+
+  @override
+  AsyncResult<List<MovieModel>> getSimilarMovies({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    return await _tmdbRemoteDataSource.getSimilarMovies(params: params);
+  }
+
+  @override
+  AsyncResult<List<TVSeriesModel>> getSimilarTVSeries({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    return await _tmdbRemoteDataSource.getSimilarTVSeries(params: params);
+  }
+
+  @override
+  AsyncResult<List<CastMemberModel>> getCastMembers({
+    required BaseDetailsRequestParameters params,
+  }) async {
+    return await _tmdbRemoteDataSource.getCastMembers(params: params);
   }
 }

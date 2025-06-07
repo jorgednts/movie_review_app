@@ -32,7 +32,7 @@ class DefaultLoadingView extends StatelessWidget {
                 child: loadingWidget,
               );
             } else {
-              return Padding(padding: EdgeInsets.zero);
+              return const Padding(padding: EdgeInsets.zero);
             }
           },
         ),

@@ -7,6 +7,8 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
   final String overview;
   final String posterUrl;
   final BoxConstraints posterConstraints;
+  final void Function() onHomepagePressed;
+  final bool showHomepageButton;
 
   const AppBarDetailSurfaceWidget({
     super.key,
@@ -14,6 +16,8 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
     required this.overview,
     required this.posterUrl,
     required this.posterConstraints,
+    required this.onHomepagePressed,
+    required this.showHomepageButton,
   });
 
   @override
@@ -26,7 +30,7 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Container(
-            margin: EdgeInsets.only(right: Dimensions.spacingMd),
+            margin: const EdgeInsets.only(right: Dimensions.spacingMd),
             constraints: BoxConstraints(maxHeight: posterConstraints.maxHeight),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -60,13 +64,14 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
                           tooltip: AppIntl.of(context).details_add_watchlist,
                         ),
                       ),
-                      Flexible(
-                        child: RoundedBorderButton(
-                          icon: Icons.open_in_new,
-                          onPressed: () {},
-                          tooltip: AppIntl.of(context).details_visit_website,
+                      if (showHomepageButton)
+                        Flexible(
+                          child: RoundedBorderButton(
+                            icon: Icons.open_in_new,
+                            onPressed: onHomepagePressed,
+                            tooltip: AppIntl.of(context).details_visit_website,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

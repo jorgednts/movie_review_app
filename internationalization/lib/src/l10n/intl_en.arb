@@ -51,5 +51,9 @@
   "details_visit_website": "Visit Website",
   "details_rating": "Vote Average",
   "details_seasons": "Seasons",
-  "details_season": "Season"
+  "details_season": "Season",
+  "details_similar": "Similar",
+  "details_cast": "Cast",
+  "details_see_more": "see more",
+  "details_see_less": "see less"
 }

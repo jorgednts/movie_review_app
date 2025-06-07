@@ -3,9 +3,12 @@ import 'dart:math';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
 import 'package:app/src/presentation/ui/details/widgets/app_bar_detail_surface_widget.dart';
+import 'package:app/src/presentation/ui/details/widgets/cast_members_widget.dart';
+import 'package:app/src/presentation/ui/details/widgets/item_overview_widget.dart';
+import 'package:app/src/presentation/ui/details/widgets/similar_items_widget.dart';
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:internationalization/internationalization.dart';
 import 'package:provider/provider.dart';
 
 class DetailsView extends StatelessWidget {
@@ -20,14 +23,22 @@ class DetailsView extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel.getDetails,
         builder: (context, child) {
-          if (viewModel.getDetails.running) {
-            return const Center(child: CustomLoadingWidget());
-          }
           final item = viewModel.details;
           return DefaultCollapsableAppBarView(
             expandedHeight: expandedHeight,
             title: item?.title ?? '',
-            appBarBackground: CustomNetworkImage(url: item?.backdropUrl ?? ''),
+            appBarBackground: switch (viewModel.getDetails.state) {
+              CommandState.init => const Center(child: CustomLoadingWidget()),
+              CommandState.loading => const Center(
+                child: CustomLoadingWidget(),
+              ),
+              CommandState.error => CustomNetworkImage(
+                url: item?.backdropUrl ?? '',
+              ),
+              CommandState.completed => CustomNetworkImage(
+                url: item?.backdropUrl ?? '',
+              ),
+            },
             appBarSurfaceWidget:
                 item == null
                     ? null
@@ -38,34 +49,52 @@ class DetailsView extends StatelessWidget {
                         maxHeight: expandedHeight * 0.6,
                       ),
                       posterUrl: item.posterUrl,
+                      onHomepagePressed: viewModel.launchUrl,
+                      showHomepageButton:
+                          viewModel.details?.homepage?.isNotEmpty ?? false,
                     ),
             body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: Dimensions.spacingMd,
-                children:
-                    item == null
-                        ? []
-                        : [
-                          DottedSpacedStringList(
-                            items: [
-                              item.releaseYear,
-                              item.originalLanguage.toUpperCase(),
-                              ...item.originCountry,
+              child: LayoutBuilder(
+                builder: (_, constraints) {
+                  final width =
+                      WindowUtils.isDesktop(context)
+                          ? (constraints.maxWidth / 2) - Dimensions.spacingMd
+                          : double.infinity;
+                  return Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.spaceBetween,
+                    runSpacing: Dimensions.spacingMd,
+                    children:
+                        item == null
+                            ? [const Center(child: CustomLoadingWidget())]
+                            : [
+                              Container(
+                                width: width * 0.8,
+                                padding: const EdgeInsets.only(
+                                  right: Dimensions.spacingMd,
+                                ),
+                                child: ItemOverviewWidget(item: item),
+                              ),
+                              SizedBox(
+                                width: width * 1.2,
+                                child: CastMembersWidget(
+                                  castMembers: viewModel.castMembers,
+                                  getCastMembers: viewModel.getCastMembers,
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.symmetric(
+                                  vertical: Dimensions.spacingMd,
+                                ),
+                                child: SimilarItemsWidget(
+                                  getSimilarItems: viewModel.getSimilarItems,
+                                  items: viewModel.similarItems,
+                                ),
+                              ),
                             ],
-                          ),
-                          DottedSpacedStringList(items: item.genres),
-                          if (item.numberOfSeasons > 0)
-                            DottedSpacedStringList(
-                              items: [
-                                '${item.numberOfSeasons} ${item.numberOfSeasons > 1 ? AppIntl.of(context).details_seasons : AppIntl.of(context).details_season}',
-                              ],
-                            ),
-                          Text(
-                            item.overview,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
+                  );
+                },
               ),
             ),
           );

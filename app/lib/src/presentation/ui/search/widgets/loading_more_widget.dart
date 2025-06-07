@@ -18,7 +18,7 @@ class _LoadingMoreWidgetState extends State<LoadingMoreWidget>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       vsync: this,
     )..repeat(reverse: true);
 
@@ -38,7 +38,7 @@ class _LoadingMoreWidgetState extends State<LoadingMoreWidget>
       child: Card(
         color: Theme.of(context).colorScheme.tertiaryContainer,
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Dimensions.spacingSm,
             vertical: Dimensions.spacingSm,
           ),

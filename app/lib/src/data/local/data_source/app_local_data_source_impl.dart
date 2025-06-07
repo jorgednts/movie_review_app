@@ -44,7 +44,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
         suggestions,
       );
       if (result) {
-        return Result.ok(null);
+        return const Result.ok(null);
       }
       return Result.error(Exception());
     } catch (e) {
@@ -59,7 +59,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
       switch (currentList) {
         case Ok<List<String>>():
           if (currentList.value.contains(value)) {
-            return Result.ok(null);
+            return const Result.ok(null);
           }
           if (currentList.value.length == 10) {
             currentList.value.removeAt(0);
@@ -71,7 +71,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
             currentList.value,
           );
           if (result) {
-            return Result.ok(null);
+            return const Result.ok(null);
           }
           return Result.error(Exception());
         case Error<List<String>>():
@@ -90,7 +90,7 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
         isDarkMode,
       );
       if (result) {
-        return Result.ok(null);
+        return const Result.ok(null);
       }
       return Result.error(Exception());
     } catch (e) {

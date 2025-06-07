@@ -40,3 +40,6 @@ export 'navigation/default_navigation_bar.dart';
 // Responsive
 export 'responsive/base_responsive.dart';
 export 'responsive/window_utils.dart';
+
+// Text
+export 'text/expandable_text.dart';

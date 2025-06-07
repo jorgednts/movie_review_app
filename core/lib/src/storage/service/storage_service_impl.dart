@@ -27,7 +27,7 @@ class StorageServiceImpl implements StorageService {
   }) async {
     try {
       await _userCollection.doc(request.user.uid).set(request.toJson());
-      return Result.ok(null);
+      return const Result.ok(null);
     } catch (e) {
       return Result.error(
         FirebaseException(
@@ -51,7 +51,7 @@ class StorageServiceImpl implements StorageService {
       await collectionRef
           .doc(request.collectionItemModel.id)
           .set(request.collectionItemModel.toStorage());
-      return Result.ok(null);
+      return const Result.ok(null);
     } catch (e) {
       return Result.error(
         FirebaseException(
@@ -73,7 +73,7 @@ class StorageServiceImpl implements StorageService {
       );
 
       await collectionRef.doc(request.collectionItemModel.id).delete();
-      return Result.ok(null);
+      return const Result.ok(null);
     } catch (e) {
       return Result.error(
         FirebaseException(
@@ -97,7 +97,7 @@ class StorageServiceImpl implements StorageService {
       await collectionRef
           .doc(request.collectionItemModel.id)
           .update(request.collectionItemModel.toStorage());
-      return Result.ok(null);
+      return const Result.ok(null);
     } catch (e) {
       return Result.error(
         FirebaseException(

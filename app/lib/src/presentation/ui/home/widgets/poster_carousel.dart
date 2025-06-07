@@ -12,6 +12,7 @@ class PosterCarousel<T> extends StatelessWidget {
     required this.command,
     required this.cardBuilder,
     required this.onTapItem,
+    this.titleStyle,
   });
 
   final String title;
@@ -19,7 +20,8 @@ class PosterCarousel<T> extends StatelessWidget {
   final double carouselHeight;
   final Command command;
   final PosterCard Function(T item) cardBuilder;
-  final void Function(int index) onTapItem;
+  final void Function(int index)? onTapItem;
+  final TextStyle? titleStyle;
 
   double getDynamicItemExtent(double maxHeight) {
     final posterImageHeight = PosterCard.posterImageProportion * maxHeight;
@@ -36,7 +38,7 @@ class PosterCarousel<T> extends StatelessWidget {
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(
+          style: titleStyle ?? Theme.of(
             context,
           ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
@@ -46,7 +48,7 @@ class PosterCarousel<T> extends StatelessWidget {
             listenable: command,
             builder: (_, child) {
               if (command.running) {
-                return Center(child: CustomLoadingWidget());
+                return const Center(child: CustomLoadingWidget());
               }
               return LayoutBuilder(
                 builder: (_, constraints) {

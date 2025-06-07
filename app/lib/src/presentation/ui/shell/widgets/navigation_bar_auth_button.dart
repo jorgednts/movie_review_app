@@ -45,7 +45,7 @@ class NavigationBarAuthButton extends StatelessWidget {
                   ? IconButton(
                     onPressed: onSignIn,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    icon: Icon(Icons.person_outline),
+                    icon: const Icon(Icons.person_outline),
                   )
                   : IconButton.filledTonal(
                     onPressed:
@@ -62,14 +62,14 @@ class NavigationBarAuthButton extends StatelessWidget {
                               onTap: onSignOut,
                               child: ListTile(
                                 title: Text(AppIntl.of(context).shell_sign_out),
-                                leading: Icon(Icons.logout),
+                                leading: const Icon(Icons.logout),
                               ),
                             ),
                           ],
                         ),
                     icon:
                         username.isEmpty
-                            ? Icon(Icons.person_outline)
+                            ? const Icon(Icons.person_outline)
                             : Text(
                               username.substring(0, 1),
                               style: Theme.of(

@@ -22,7 +22,7 @@ class CustomNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return url.isEmpty
-        ? errorWidget ?? DefaultErrorWidget()
+        ? errorWidget ?? const DefaultErrorWidget()
         : Image.network(
           url,
           fit: boxFit,
@@ -30,10 +30,10 @@ class CustomNetworkImage extends StatelessWidget {
           width: width,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;
-            return placeholder ?? DefaultPlaceholder();
+            return placeholder ?? const DefaultPlaceholder();
           },
           errorBuilder: (context, error, stackTrace) {
-            return errorWidget ?? DefaultErrorWidget();
+            return errorWidget ?? const DefaultErrorWidget();
           },
         );
   }

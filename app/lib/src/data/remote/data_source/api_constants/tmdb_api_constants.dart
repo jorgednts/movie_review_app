@@ -7,4 +7,6 @@ abstract class TMDBApiConstants {
   static const searchTVSeriesEndpoint = 'search/tv';
   static const movieDetailsEndpoint = 'movie';
   static const tvSeriesDetailsEndpoint = 'tv';
+  static const similarEndpoint = 'similar';
+  static const creditsEndpoint = 'credits';
 }

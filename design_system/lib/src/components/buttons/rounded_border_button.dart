@@ -18,7 +18,7 @@ class RoundedBorderButton extends StatelessWidget {
     return IconButton(
       onPressed: onPressed,
       icon: Icon(icon),
-      padding: EdgeInsets.all(Dimensions.spacingMd),
+      padding: const EdgeInsets.all(Dimensions.spacingMd),
       style: ButtonStyle(
         backgroundColor: WidgetStatePropertyAll<Color>(
           Theme.of(context).colorScheme.surface,

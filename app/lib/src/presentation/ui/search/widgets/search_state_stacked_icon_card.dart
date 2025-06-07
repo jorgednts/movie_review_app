@@ -33,7 +33,7 @@ class SearchStateStackedIconCard extends StatelessWidget {
       case SearchState.empty:
         return StackedIconCard(
           message: AppIntl.of(context).search_empty_state,
-          constraints: BoxConstraints(maxWidth: 250),
+          constraints: const BoxConstraints(maxWidth: 250),
           icon: Icons.search_off,
         );
       case SearchState.init:

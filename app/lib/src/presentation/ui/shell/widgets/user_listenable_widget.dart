@@ -15,7 +15,7 @@ class UserListenableWidget extends StatelessWidget {
       listenable: viewModel.checkUserLogged,
       builder: (_, _) {
         if (viewModel.checkUserLogged.running) {
-          return SizedBox();
+          return const SizedBox();
         }
         return child;
       },

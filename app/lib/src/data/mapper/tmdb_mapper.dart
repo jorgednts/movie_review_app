@@ -1,10 +1,13 @@
 import 'package:app/src/data/remote/model/base/base_tmdb_details_response.dart';
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart';
-import 'package:app/src/data/remote/model/guest_session_response.dart';
-import 'package:app/src/data/remote/model/movie_response.dart';
-import 'package:app/src/data/remote/model/tv_series_response.dart';
+import 'package:app/src/data/remote/model/response/cast_member_response.dart';
+import 'package:app/src/data/remote/model/response/credits_response.dart';
+import 'package:app/src/data/remote/model/response/guest_session_response.dart';
+import 'package:app/src/data/remote/model/response/movie_response.dart';
+import 'package:app/src/data/remote/model/response/tv_series_response.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
+import 'package:app/src/domain/model/cast_member_model.dart';
 import 'package:app/src/domain/model/guest_session_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
@@ -109,6 +112,23 @@ extension BaseTMDBDetailsResponseMapper on BaseTMDBDetailsResponse {
       title: title,
       date: date ?? '',
       numberOfSeasons: numberOfSeasons ?? 0,
+    );
+  }
+}
+
+extension CreditsResponseExtension on CreditsResponse {
+  List<CastMemberModel> toCastMemberModelList() {
+    return cast?.map((e) => e.toCastMemberModel()).toList() ?? [];
+  }
+}
+
+extension CastMemberResponsExtension on CastMemberResponse {
+  CastMemberModel toCastMemberModel() {
+    return CastMemberModel(
+      id: id,
+      name: name ?? '',
+      character: character ?? '',
+      profilePath: profilePath ?? '',
     );
   }
 }

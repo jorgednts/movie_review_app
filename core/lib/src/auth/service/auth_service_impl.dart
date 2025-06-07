@@ -47,7 +47,7 @@ class AuthServiceImpl extends AuthService {
   AsyncResult<void> signOut() async {
     try {
       await _auth.signOut();
-      return Result.ok(null);
+      return const Result.ok(null);
     } catch (e) {
       return Result.error(LogoutException(cause: e.toString()));
     }
@@ -58,7 +58,7 @@ class AuthServiceImpl extends AuthService {
     try {
       final user = _auth.currentUser;
       if (user == null) {
-        return Result.ok(null);
+        return const Result.ok(null);
       }
       return Result.ok(UserModel.fromUser(user));
     } catch (e) {

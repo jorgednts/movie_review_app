@@ -47,7 +47,7 @@ class TMDBInfoCard extends StatelessWidget {
                     context,
                   ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   releaseYear,
                   maxLines: 1,

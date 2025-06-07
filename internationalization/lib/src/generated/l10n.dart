@@ -489,6 +489,41 @@ class AppIntl {
       args: [],
     );
   }
+
+  /// `Similares`
+  String get details_similar {
+    return Intl.message(
+      'Similares',
+      name: 'details_similar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Elenco`
+  String get details_cast {
+    return Intl.message('Elenco', name: 'details_cast', desc: '', args: []);
+  }
+
+  /// `ver mais`
+  String get details_see_more {
+    return Intl.message(
+      'ver mais',
+      name: 'details_see_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ver menos`
+  String get details_see_less {
+    return Intl.message(
+      'ver menos',
+      name: 'details_see_less',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppIntl> {

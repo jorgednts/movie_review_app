@@ -34,12 +34,12 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
             controller: searchController,
             onTap: () => onTap(controller),
             onChanged: (value) => onChanged(value, controller),
-            elevation: WidgetStatePropertyAll<double>(0),
+            elevation: const WidgetStatePropertyAll<double>(0),
             trailing: [IconButton(onPressed: onSearch, icon: Icon(searchIcon))],
           ),
       textInputAction: TextInputAction.search,
       viewTrailing: [
-        IconButton(onPressed: searchController.clear, icon: Icon(Icons.clear)),
+        IconButton(onPressed: searchController.clear, icon: const Icon(Icons.clear)),
         IconButton(
           onPressed: () {
             searchController.closeView(searchController.text);

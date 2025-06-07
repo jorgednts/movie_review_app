@@ -43,7 +43,7 @@ class StackedIconCard extends StatelessWidget {
                   messageCardColor ??
                   Theme.of(context).colorScheme.surfaceContainerHigh,
               child: Padding(
-                padding: EdgeInsets.all(Dimensions.spacingMd),
+                padding: const EdgeInsets.all(Dimensions.spacingMd),
                 child: Text(
                   message,
                   style:
@@ -61,7 +61,7 @@ class StackedIconCard extends StatelessWidget {
             color:
                 iconCardColor ??
                 Theme.of(context).colorScheme.secondaryContainer,
-            shape: CircleBorder(),
+            shape: const CircleBorder(),
             child: Padding(
               padding: messagePadding,
               child: Icon(

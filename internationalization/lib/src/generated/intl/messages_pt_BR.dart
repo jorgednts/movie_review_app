@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "details_add_watchlist": MessageLookupByLibrary.simpleMessage(
       "Adicionar à Minha Lista",
     ),
+    "details_cast": MessageLookupByLibrary.simpleMessage("Elenco"),
     "details_edit_review": MessageLookupByLibrary.simpleMessage(
       "Adicionar Resenha",
     ),
@@ -45,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "details_season": MessageLookupByLibrary.simpleMessage("Temporada"),
     "details_seasons": MessageLookupByLibrary.simpleMessage("Temporadas"),
+    "details_see_less": MessageLookupByLibrary.simpleMessage("ver menos"),
+    "details_see_more": MessageLookupByLibrary.simpleMessage("ver mais"),
+    "details_similar": MessageLookupByLibrary.simpleMessage("Similares"),
     "details_visit_website": MessageLookupByLibrary.simpleMessage(
       "Visitar Website",
     ),

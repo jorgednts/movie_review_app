@@ -41,7 +41,7 @@ class DefaultCollapsableAppBarView extends StatelessWidget {
               leading ??
               BackButton(
                 style: ButtonStyle(
-                  shape: WidgetStatePropertyAll<OutlinedBorder>(CircleBorder()),
+                  shape: const WidgetStatePropertyAll<OutlinedBorder>(CircleBorder()),
                   backgroundColor: WidgetStatePropertyAll<Color>(
                     Theme.of(
                       context,
@@ -51,14 +51,14 @@ class DefaultCollapsableAppBarView extends StatelessWidget {
               ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           title: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: Dimensions.spacingXs,
               horizontal: Dimensions.spacingMd,
             ),
             decoration: BoxDecoration(
               color: Theme.of(
                 context,
-              ).colorScheme.surface.withValues(alpha: 0.8),
+              ).colorScheme.surface.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(Dimensions.radiusLg),
             ),
             child: Text(

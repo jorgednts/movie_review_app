@@ -20,7 +20,7 @@ class SearchInfoWidget extends StatelessWidget {
           AppIntl.of(context).search_results,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        Spacer(),
+        const Spacer(),
         Text(
           '$currentItems ${AppIntl.of(context).common_of} $totalItems ${AppIntl.of(context).common_items}',
           style: Theme.of(context).textTheme.labelMedium,

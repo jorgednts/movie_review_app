@@ -20,7 +20,7 @@ void main() {
     useCase = GetPopularMoviesUseCase(tmdbRepository: mockRepository);
   });
 
-  provideDummy<Result<List<MovieModel>>>(Result.ok([]));
+  provideDummy<Result<List<MovieModel>>>(const Result.ok([]));
 
   test('should get list of popular movies from repository', () async {
     when(

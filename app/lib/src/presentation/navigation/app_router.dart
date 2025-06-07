@@ -12,8 +12,11 @@ import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dar
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_cast_members_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_similar_movies_use_case.dart';
+import 'package:app/src/domain/use_case/tmdb/get_similar_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_tmdb_item_details_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_tv_series_use_case.dart';
@@ -93,10 +96,19 @@ class AppRouter {
                 getTMDBItemDetailsUseCase: GetTMDBItemDetailsUseCase(
                   tmdbRepository: context.read<TMDBRepository>(),
                 ),
+                getSimilarMoviesUseCase: GetSimilarMoviesUseCase(
+                  tmdbRepository: context.read<TMDBRepository>(),
+                ),
+                getSimilarTVSeriesUseCase: GetSimilarTVSeriesUseCase(
+                  tmdbRepository: context.read<TMDBRepository>(),
+                ),
+                getCastMembersUseCase: GetCastMembersUseCase(
+                  repository: context.read<TMDBRepository>(),
+                ),
               );
               return detailsViewModel;
             },
-            child: DetailsView(),
+            child: const DetailsView(),
           );
         },
       ),
