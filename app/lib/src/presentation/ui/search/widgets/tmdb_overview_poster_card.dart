@@ -7,7 +7,8 @@ class TMDBOverviewPosterCard extends StatelessWidget {
   final double voteAverage;
   final String releaseYear;
   final String overview;
-  final void Function() onTap;
+  final int? overviewLines;
+  final void Function()? onTap;
 
   const TMDBOverviewPosterCard({
     super.key,
@@ -17,6 +18,7 @@ class TMDBOverviewPosterCard extends StatelessWidget {
     required this.releaseYear,
     required this.overview,
     required this.onTap,
+    this.overviewLines = 6,
   });
 
   @override
@@ -41,7 +43,8 @@ class TMDBOverviewPosterCard extends StatelessWidget {
           Expanded(
             child: Text(
               overview,
-              maxLines: 6,
+              maxLines: overviewLines,
+              softWrap: true,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyMedium,
             ),

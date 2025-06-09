@@ -8,11 +8,11 @@ abstract class CoreStorageRepository {
 
   AsyncResult<String> getUsername({required String uid});
 
-  AsyncResult<void> addItemToCollection<T extends AppCollectionItemModel>({
+  AsyncResult<bool> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
-  AsyncResult<void> deleteItemInCollection<T extends AppCollectionItemModel>({
+  AsyncResult<bool> deleteItemInCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   });
 
@@ -23,4 +23,8 @@ abstract class CoreStorageRepository {
   AsyncResult<List<T>> getCollectionFromStorage<
     T extends AppCollectionItemModel
   >({required GetCollectionRequest<T> request});
+
+  AsyncResult<bool> checkItemInCollection<T extends CollectionItemModel>({
+    required CheckItemRequest request,
+  });
 }

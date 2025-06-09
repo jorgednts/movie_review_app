@@ -6,6 +6,7 @@ import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
 import 'package:app/src/presentation/ui/shell/widgets/navigation_bar_auth_button.dart';
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,13 +22,10 @@ class ShellView extends StatelessWidget {
     bool isError,
     AuthMessageType message,
   ) {
-    showAdaptiveDialog(
-      context: context,
-      builder:
-          (_) =>
-              isError
-                  ? CommandResultDialog.error(authMessageType: message)
-                  : CommandResultDialog.success(authMessageType: message),
+    CustomModalNavigator.showCustomAdaptiveDialog(
+      isError
+          ? CommandResultDialog.error(authMessageType: message)
+          : CommandResultDialog.success(authMessageType: message),
     );
   }
 
@@ -49,16 +47,16 @@ class ShellView extends StatelessWidget {
         child: ListenableBuilder(
           listenable: viewModel.dialogEventNotifier,
           builder: (context, child) {
-            final dialogMessageType =
+            final messageEventType =
                 viewModel.dialogEventNotifier.consumeEvent();
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (dialogMessageType != null) {
-                final isError = switch (dialogMessageType) {
+              if (messageEventType != null) {
+                final isError = switch (messageEventType) {
                   AuthMessageType.signIn => false,
                   AuthMessageType.signOut => false,
                   AuthMessageType.createUser => false,
                 };
-                showCommandResultDialog(context, isError, dialogMessageType);
+                showCommandResultDialog(context, isError, messageEventType);
               }
             });
             return DefaultLoadingView(

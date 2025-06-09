@@ -42,6 +42,7 @@ class AppCollectionItemModel
   final String posterPath;
   final String title;
   final double voteAverage;
+  final String? review;
 
   AppCollectionItemModel({
     required this.type,
@@ -53,6 +54,7 @@ class AppCollectionItemModel
     required this.posterPath,
     required this.title,
     required this.voteAverage,
+    required this.review,
   });
 
   @override
@@ -67,12 +69,13 @@ class AppCollectionItemModel
       posterPath: json['poster_path'],
       title: json['title'],
       voteAverage: json['vote_average'],
+      review: json['review'],
     );
   }
 
   @override
   Map<String, dynamic> toStorage() {
-    return {
+    final result = {
       'type': type.storageValue,
       'backdrop_path': backdropPath,
       'tmdb_id': tmdbId,
@@ -83,6 +86,10 @@ class AppCollectionItemModel
       'title': title,
       'vote_average': voteAverage,
     };
+    if (review != null) {
+      result['review'] = review!;
+    }
+    return result;
   }
 
   @override

@@ -18,6 +18,9 @@ export 'src/storage/storage.dart';
 // Utils
 export 'src/utils/command.dart';
 export 'src/utils/result.dart';
-export 'src/utils/dialog_event_notifier.dart';
+export 'src/utils/message_event_notifier.dart';
 export 'src/utils/paginated_list_notifier.dart';
 export 'src/utils/url_launcher.dart';
+export 'src/utils/custom_scaffold_messenger.dart';
+export 'src/utils/window_utils.dart';
+export 'src/utils/custom_modal_navigator.dart';

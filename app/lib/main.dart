@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     final themeNotifier = Provider.of<CustomThemeNotifier>(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: CustomScaffoldMessenger.scaffoldMessengerKey,
       onGenerateTitle: (context) => AppIntl.of(context).app_name,
       localizationsDelegates: [
         AppIntl.delegate,

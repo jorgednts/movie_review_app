@@ -16,14 +16,14 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
   }
 
   @override
-  AsyncResult<void> addItemToCollection<T extends AppCollectionItemModel>({
+  AsyncResult<bool> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     return await _storageService.addItemToCollection<T>(request: request);
   }
 
   @override
-  AsyncResult<void> deleteItemInCollection<T extends AppCollectionItemModel>({
+  AsyncResult<bool> deleteItemInCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     return await _storageService.deleteItemInCollection<T>(request: request);
@@ -46,5 +46,12 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
   @override
   AsyncResult<String> getUsername({required String uid}) async {
     return await _storageService.getUsername(uid: uid);
+  }
+
+  @override
+  AsyncResult<bool> checkItemInCollection<T extends CollectionItemModel>({
+    required CheckItemRequest request,
+  }) async {
+    return await _storageService.checkItemInCollection<T>(request: request);
   }
 }

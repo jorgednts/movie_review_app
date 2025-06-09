@@ -39,7 +39,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  AsyncResult<void> addItemToCollection<T extends CollectionItemModel>({
+  AsyncResult<bool> addItemToCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     try {
@@ -51,7 +51,7 @@ class StorageServiceImpl implements StorageService {
       await collectionRef
           .doc(request.collectionItemModel.id)
           .set(request.collectionItemModel.toStorage());
-      return const Result.ok(null);
+      return const Result.ok(true);
     } catch (e) {
       return Result.error(
         FirebaseException(
@@ -63,7 +63,7 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
-  AsyncResult<void> deleteItemInCollection<T extends CollectionItemModel>({
+  AsyncResult<bool> deleteItemInCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
     try {
@@ -73,7 +73,7 @@ class StorageServiceImpl implements StorageService {
       );
 
       await collectionRef.doc(request.collectionItemModel.id).delete();
-      return const Result.ok(null);
+      return const Result.ok(false);
     } catch (e) {
       return Result.error(
         FirebaseException(
@@ -142,6 +142,28 @@ class StorageServiceImpl implements StorageService {
       return Result.ok(data['name'] ?? '');
     } else {
       return Result.error(UserNotFoundException());
+    }
+  }
+
+  @override
+  AsyncResult<bool> checkItemInCollection<T extends CollectionItemModel>({
+    required CheckItemRequest request,
+  }) async {
+    try {
+      final collectionRef = _getCollectionFromUser(
+        request.uid,
+        request.collectionName,
+      );
+      final docSnapshot = await collectionRef.doc(request.itemId).get();
+
+      return Result.ok(docSnapshot.exists);
+    } catch (e) {
+      return Result.error(
+        FirebaseException(
+          plugin: StorageConstants.plugin,
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

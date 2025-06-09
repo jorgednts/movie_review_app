@@ -9,6 +9,7 @@ import 'package:app/src/presentation/ui/search/widgets/loading_more_widget.dart'
 import 'package:app/src/presentation/ui/search/widgets/search_info_widget.dart';
 import 'package:app/src/presentation/ui/search/widgets/search_state_stacked_icon_card.dart';
 import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,9 @@ class SearchView extends StatelessWidget {
     BuildContext context,
     String id,
     AppCollectionItemType type,
+    String storageId,
   ) {
+    final user = context.read<UserStorageChangeNotifier>();
     context.pushNamed(
       AppRoute.details.name,
       pathParameters: {'itemId': id},
@@ -30,6 +33,8 @@ class SearchView extends StatelessWidget {
             itemId: id,
             itemType: type,
             language: Localizations.localeOf(context).toLanguageTag(),
+            itemStorageId: storageId,
+            uid: user.uid,
           ).toJson(),
     );
   }
@@ -143,6 +148,7 @@ class SearchView extends StatelessWidget {
                                     context,
                                     movie.id.toString(),
                                     AppCollectionItemType.movie,
+                                    movie.storageId,
                                   ),
                             );
                           } else {
@@ -159,6 +165,7 @@ class SearchView extends StatelessWidget {
                                     context,
                                     tvSeries.id.toString(),
                                     AppCollectionItemType.tvSeries,
+                                    tvSeries.storageId,
                                   ),
                             );
                           }

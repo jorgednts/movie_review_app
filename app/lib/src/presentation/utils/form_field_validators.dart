@@ -29,7 +29,7 @@ class FormFieldValidators {
 
   static String? validateString(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return AppIntl.of(context).common_empty_name;
+      return AppIntl.of(context).common_empty_field;
     }
     return null;
   }

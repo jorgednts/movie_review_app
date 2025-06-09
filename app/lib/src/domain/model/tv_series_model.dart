@@ -35,6 +35,8 @@ class TVSeriesModel {
 
   String get releaseYear => firstAirDate.toDateFormat().year.toString();
 
+  String get storageId => '$id-$name';
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

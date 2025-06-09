@@ -9,6 +9,8 @@ class DefaultTextFormField extends StatefulWidget {
     this.controller,
     this.decoration,
     this.obscureText = false,
+    this.expands = false,
+    this.autocorrect = false,
   });
 
   final TextEditingController? controller;
@@ -16,6 +18,8 @@ class DefaultTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final InputDecoration? decoration;
   final bool obscureText;
+  final bool expands;
+  final bool autocorrect;
 
   @override
   State<DefaultTextFormField> createState() => _DefaultTextFormFieldState();
@@ -40,6 +44,11 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      expands: widget.expands,
+      autocorrect: widget.autocorrect,
+      maxLines: widget.expands ? null : 1,
+      minLines: widget.expands ? null : 1,
+      textAlignVertical: widget.expands ? TextAlignVertical.top : null,
       decoration:
           widget.decoration ??
           InputDecoration(

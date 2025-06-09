@@ -6,6 +6,7 @@ import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/poster_carousel.dart';
 import 'package:app/src/presentation/ui/home/widgets/tmdb_info_card.dart';
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,9 @@ class HomeView extends StatelessWidget {
     BuildContext context,
     String id,
     AppCollectionItemType type,
+    String storageId,
   ) {
+    final user = context.read<UserStorageChangeNotifier>();
     context.pushNamed(
       AppRoute.details.name,
       pathParameters: {'itemId': id},
@@ -28,6 +31,8 @@ class HomeView extends StatelessWidget {
             itemId: id,
             itemType: type,
             language: Localizations.localeOf(context).toLanguageTag(),
+            itemStorageId: storageId,
+            uid: user.uid,
           ).toJson(),
     );
   }
@@ -59,6 +64,7 @@ class HomeView extends StatelessWidget {
                   context,
                   viewModel.popularMovies[index].id.toString(),
                   AppCollectionItemType.movie,
+                  viewModel.popularMovies[index].storageId,
                 );
               },
             ),
@@ -80,6 +86,7 @@ class HomeView extends StatelessWidget {
                     context,
                     viewModel.popularTVSeries[index].id.toString(),
                     AppCollectionItemType.tvSeries,
+                    viewModel.popularTVSeries[index].storageId,
                   ),
             ),
             PosterCarousel<MovieModel>(
@@ -100,6 +107,7 @@ class HomeView extends StatelessWidget {
                     context,
                     viewModel.topRatedMovies[index].id.toString(),
                     AppCollectionItemType.movie,
+                    viewModel.topRatedMovies[index].storageId,
                   ),
             ),
             PosterCarousel<TVSeriesModel>(
@@ -120,6 +128,7 @@ class HomeView extends StatelessWidget {
                     context,
                     viewModel.topRatedTVSeries[index].id.toString(),
                     AppCollectionItemType.tvSeries,
+                    viewModel.topRatedTVSeries[index].storageId,
                   ),
             ),
           ],

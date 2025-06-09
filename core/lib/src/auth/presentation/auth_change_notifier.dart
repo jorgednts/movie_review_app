@@ -7,6 +7,8 @@ class AuthChangeNotifier extends ChangeNotifier {
 
   UserModel? get user => _user;
 
+  String? get uid => _user?.uid;
+
   void setUser(UserModel? userModel) {
     _user = userModel;
     notifyListeners();

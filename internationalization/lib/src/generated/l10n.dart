@@ -55,11 +55,36 @@ class AppIntl {
     return Localizations.of<AppIntl>(context, AppIntl);
   }
 
-  /// `Movie Review App`
+  /// `Ciné`
   String get app_name {
+    return Intl.message('Ciné', name: 'app_name', desc: '', args: []);
+  }
+
+  /// `Faça login para adicionar itens à sua lista`
+  String get msg_watchlist_auth_needed {
     return Intl.message(
-      'Movie Review App',
-      name: 'app_name',
+      'Faça login para adicionar itens à sua lista',
+      name: 'msg_watchlist_auth_needed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operação não concluída`
+  String get msg_operation_not_completed {
+    return Intl.message(
+      'Operação não concluída',
+      name: 'msg_operation_not_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operação concluída`
+  String get msg_operation_completed {
+    return Intl.message(
+      'Operação concluída',
+      name: 'msg_operation_completed',
       desc: '',
       args: [],
     );
@@ -70,11 +95,11 @@ class AppIntl {
     return Intl.message('nome', name: 'common_name', desc: '', args: []);
   }
 
-  /// `nome não pode estar vazio`
-  String get common_empty_name {
+  /// `campo não pode estar vazio`
+  String get common_empty_field {
     return Intl.message(
-      'nome não pode estar vazio',
-      name: 'common_empty_name',
+      'campo não pode estar vazio',
+      name: 'common_empty_field',
       desc: '',
       args: [],
     );
@@ -108,6 +133,36 @@ class AppIntl {
   /// `item`
   String get common_item {
     return Intl.message('item', name: 'common_item', desc: '', args: []);
+  }
+
+  /// `Salvar`
+  String get common_save {
+    return Intl.message('Salvar', name: 'common_save', desc: '', args: []);
+  }
+
+  /// `Cancelar`
+  String get common_cancel {
+    return Intl.message('Cancelar', name: 'common_cancel', desc: '', args: []);
+  }
+
+  /// `Confirmar`
+  String get common_confirm {
+    return Intl.message(
+      'Confirmar',
+      name: 'common_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmar Operação`
+  String get common_confirm_operation {
+    return Intl.message(
+      'Confirmar Operação',
+      name: 'common_confirm_operation',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Home`
@@ -520,6 +575,66 @@ class AppIntl {
     return Intl.message(
       'ver menos',
       name: 'details_see_less',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deseja remover este item da sua lista?`
+  String get details_remove_watchlist {
+    return Intl.message(
+      'Deseja remover este item da sua lista?',
+      name: 'details_remove_watchlist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deseja remover a resenha deste item?`
+  String get details_remove_review {
+    return Intl.message(
+      'Deseja remover a resenha deste item?',
+      name: 'details_remove_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minha Resenha`
+  String get reviews_my_review {
+    return Intl.message(
+      'Minha Resenha',
+      name: 'reviews_my_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minha Avaliação`
+  String get reviews_my_rating {
+    return Intl.message(
+      'Minha Avaliação',
+      name: 'reviews_my_rating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adicionar Resenha...`
+  String get reviews_add_review {
+    return Intl.message(
+      'Adicionar Resenha...',
+      name: 'reviews_add_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enviar Resenha`
+  String get reviews_submit_review {
+    return Intl.message(
+      'Enviar Resenha',
+      name: 'reviews_submit_review',
       desc: '',
       args: [],
     );

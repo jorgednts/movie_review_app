@@ -37,6 +37,8 @@ class MovieModel {
 
   String get releaseYear => releaseDate.toDateFormat().year.toString();
 
+  String get storageId => '$id-$title';
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

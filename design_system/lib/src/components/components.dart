@@ -20,9 +20,6 @@ export 'default/default_loading_view.dart';
 export 'default/default_search_bar_with_anchor.dart';
 export 'default/default_collapsable_app_bar_view.dart';
 
-//Dialogs
-export 'dialogs/constrained_dialog.dart';
-
 // Images
 export 'image/custom_network_image.dart';
 export 'image/custom_svg_image.dart';
@@ -32,6 +29,11 @@ export 'lists/carousel_slider.dart';
 export 'lists/dotted_spaced_string_list.dart';
 export 'lists/paginated_grid.dart';
 export 'lists/five_stars_rating.dart';
+export 'lists/add_five_stars_rating_widget.dart';
+
+//Modals
+export 'modals/constrained_dialog.dart';
+export 'modals/custom_bottom_sheet.dart';
 
 // Navigation
 export 'navigation/default_navigation_menu.dart';
@@ -39,7 +41,6 @@ export 'navigation/default_navigation_bar.dart';
 
 // Responsive
 export 'responsive/base_responsive.dart';
-export 'responsive/window_utils.dart';
 
 // Text
 export 'text/expandable_text.dart';

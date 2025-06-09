@@ -17,7 +17,7 @@ class ShellViewModel extends BaseViewModel {
   final CreateUserUseCase _createUserUseCase;
   final CheckUserLoggedUseCase _checkUserLoggedUseCase;
   final GetUsernameUseCase _getUsernameUseCase;
-  final DialogEventNotifier<AuthMessageType> _dialogEventNotifier;
+  final MessageEventNotifier<AuthMessageType> _dialogEventNotifier;
   final CreateUserStorageUseCase _createUserStorageUseCase;
   final UserStorageChangeNotifier _userChangeNotifier;
   final CustomThemeNotifier _themeNotifier;
@@ -33,7 +33,7 @@ class ShellViewModel extends BaseViewModel {
     required SignOutUseCase signOutUseCase,
     required CreateUserUseCase createUserUseCase,
     required CheckUserLoggedUseCase checkUserLoggedUseCase,
-    required DialogEventNotifier<AuthMessageType> dialogEventNotifier,
+    required MessageEventNotifier<AuthMessageType> dialogEventNotifier,
     required UserStorageChangeNotifier userChangeNotifier,
     required CreateUserStorageUseCase createUserStorageUseCase,
     required GetCollectionFromStorageUseCase getUserStorageUseCase,
@@ -177,7 +177,7 @@ class ShellViewModel extends BaseViewModel {
   }
 
   /// Getters and Setters
-  DialogEventNotifier<AuthMessageType> get dialogEventNotifier =>
+  MessageEventNotifier<AuthMessageType> get dialogEventNotifier =>
       _dialogEventNotifier;
 
   UserStorageChangeNotifier get userChangeNotifier => _userChangeNotifier;

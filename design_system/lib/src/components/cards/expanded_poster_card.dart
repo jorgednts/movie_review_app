@@ -8,7 +8,7 @@ class ExpandedPosterCard extends StatelessWidget {
   final Widget? placeholder;
   final Widget? errorWidget;
   final Widget infoWidget;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   const ExpandedPosterCard({
     super.key,

@@ -14,6 +14,7 @@ extension MovieStorageExtension on MovieModel {
       posterPath: posterPath,
       title: title,
       voteAverage: voteAverage,
+      review: null
     );
   }
 }
@@ -30,6 +31,7 @@ extension TVSeriesStorageExtension on TVSeriesModel {
       posterPath: posterPath,
       title: name,
       voteAverage: voteAverage,
+      review: null,
     );
   }
 }

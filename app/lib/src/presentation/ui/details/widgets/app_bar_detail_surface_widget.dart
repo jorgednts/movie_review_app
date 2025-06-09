@@ -1,23 +1,27 @@
+import 'package:app/src/domain/model/base_tmdb_details_model.dart';
+import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';
 
 class AppBarDetailSurfaceWidget extends StatelessWidget {
-  final double voteAverage;
-  final String overview;
-  final String posterUrl;
+  final BaseTMDBDetailsModel item;
   final BoxConstraints posterConstraints;
   final void Function() onHomepagePressed;
   final bool showHomepageButton;
+  final AppCollectionItemType type;
+  final Widget watchlistButton;
+  final Widget reviewButton;
 
   const AppBarDetailSurfaceWidget({
     super.key,
-    required this.voteAverage,
-    required this.overview,
-    required this.posterUrl,
+    required this.item,
     required this.posterConstraints,
     required this.onHomepagePressed,
     required this.showHomepageButton,
+    required this.type,
+    required this.watchlistButton,
+    required this.reviewButton,
   });
 
   @override
@@ -43,27 +47,15 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.radiusLg),
                   ),
                   padding: const EdgeInsets.all(Dimensions.spacingSm),
-                  child: FiveStarsRating(rating: voteAverage),
+                  child: FiveStarsRating(rating: item.voteAverage),
                 ),
                 Flexible(
                   child: Row(
                     spacing: Dimensions.spacingMd,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Flexible(
-                        child: RoundedBorderButton(
-                          icon: Icons.edit_note,
-                          onPressed: () {},
-                          tooltip: AppIntl.of(context).details_edit_review,
-                        ),
-                      ),
-                      Flexible(
-                        child: RoundedBorderButton(
-                          icon: Icons.beenhere_outlined,
-                          onPressed: () {},
-                          tooltip: AppIntl.of(context).details_add_watchlist,
-                        ),
-                      ),
+                      Flexible(child: reviewButton),
+                      Flexible(child: watchlistButton),
                       if (showHomepageButton)
                         Flexible(
                           child: RoundedBorderButton(
@@ -87,7 +79,7 @@ class AppBarDetailSurfaceWidget extends StatelessWidget {
               aspectRatio: 2 / 3,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(Dimensions.radiusLg),
-                child: CustomNetworkImage(url: posterUrl),
+                child: CustomNetworkImage(url: item.posterUrl),
               ),
             ),
           ),

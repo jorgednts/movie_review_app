@@ -3,18 +3,17 @@ import 'package:core/core.dart';
 
 enum AppCollectionType { review, watchlist }
 
-final class ReviewItemModel extends AppCollectionModel {
-  ReviewItemModel.review({required super.items}) : super.review();
+final class ReviewModel extends AppCollectionModel {
+  ReviewModel.review({required super.items}) : super.review();
 }
 
-final class WatchlistItemModel extends AppCollectionModel {
-  WatchlistItemModel.watchlist({required super.items}) : super.watchlist();
+final class WatchlistModel extends AppCollectionModel {
+  WatchlistModel.watchlist({required super.items}) : super.watchlist();
 }
 
-class AppCollectionModel<T extends AppCollectionItemModel>
-    implements CollectionModel<T> {
+class AppCollectionModel implements CollectionModel<AppCollectionItemModel> {
   @override
-  final List<T> items;
+  final List<AppCollectionItemModel> items;
   final AppCollectionType collectionType;
 
   AppCollectionModel.review({required this.items})

@@ -3,7 +3,7 @@ import 'package:app/src/domain/repository/core_storage_repository.dart';
 import 'package:core/core.dart';
 
 class DeleteItemFromCollectionUseCase<T extends AppCollectionItemModel>
-    implements BaseUseCase<CRUDItemRequest<T>, void> {
+    implements BaseUseCase<CRUDItemRequest<T>, bool> {
   final CoreStorageRepository _coreStorageRepository;
 
   DeleteItemFromCollectionUseCase({
@@ -11,7 +11,7 @@ class DeleteItemFromCollectionUseCase<T extends AppCollectionItemModel>
   }) : _coreStorageRepository = coreStorageRepository;
 
   @override
-  AsyncResult<void> call(CRUDItemRequest<T> input) {
+  AsyncResult<bool> call(CRUDItemRequest<T> input) {
     return _coreStorageRepository.deleteItemInCollection(request: input);
   }
 }

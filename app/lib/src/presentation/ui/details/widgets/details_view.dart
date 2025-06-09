@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:app/src/domain/model/app_collection_model.dart';
+import 'package:app/src/presentation/ui/common/widgets/collection_operation_button.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
 import 'package:app/src/presentation/ui/details/widgets/app_bar_detail_surface_widget.dart';
@@ -43,15 +45,28 @@ class DetailsView extends StatelessWidget {
                 item == null
                     ? null
                     : AppBarDetailSurfaceWidget(
-                      overview: item.overview,
-                      voteAverage: item.voteAverage,
+                      item: item,
+                      type: viewModel.type,
                       posterConstraints: BoxConstraints(
                         maxHeight: expandedHeight * 0.6,
                       ),
-                      posterUrl: item.posterUrl,
                       onHomepagePressed: viewModel.launchUrl,
                       showHomepageButton:
                           viewModel.details?.homepage?.isNotEmpty ?? false,
+                      reviewButton: CollectionOperationButton(
+                        commandOperation: viewModel.handleReviewOperation,
+                        messageEventNotifier: viewModel.watchlistMessageEventNotifier,
+                        collectionType: AppCollectionType.review,
+                        item: item,
+                        itemType: viewModel.type,
+                      ),
+                      watchlistButton: CollectionOperationButton(
+                        messageEventNotifier: viewModel.watchlistMessageEventNotifier,
+                        commandOperation: viewModel.handleWatchlistOperation,
+                        collectionType: AppCollectionType.watchlist,
+                        item: item,
+                        itemType: viewModel.type,
+                      ),
                     ),
             body: SingleChildScrollView(
               child: LayoutBuilder(

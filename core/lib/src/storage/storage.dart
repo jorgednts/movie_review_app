@@ -5,6 +5,7 @@ export 'domain/model/create_user_storage_request.dart';
 export 'domain/model/crud_item_request.dart';
 export 'domain/model/get_collection_request.dart';
 export 'domain/model/user_storage_model.dart';
+export 'domain/model/check_item_request.dart';
 
 // Exception
 export 'exceptions/null_collection_exception.dart';

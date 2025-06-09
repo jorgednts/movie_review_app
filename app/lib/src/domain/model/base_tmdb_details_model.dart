@@ -1,3 +1,4 @@
+import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:internationalization/internationalization.dart';
 
 class BaseTMDBDetailsModel {
@@ -46,4 +47,23 @@ class BaseTMDBDetailsModel {
   String get releaseYear => date.toDateFormat().year.toString();
 
   String get condensedGenres => genres.join(', ');
+
+  AppCollectionItemModel toCollectionItem(
+    AppCollectionItemType type,
+    String? review,
+    double? userRating,
+  ) {
+    return AppCollectionItemModel(
+      type: type,
+      backdropPath: backdropPath,
+      tmdbId: id,
+      releaseDate: date,
+      originalLanguage: originalLanguage,
+      overview: overview,
+      posterPath: posterPath,
+      title: title,
+      voteAverage: userRating ?? voteAverage,
+      review: review,
+    );
+  }
 }

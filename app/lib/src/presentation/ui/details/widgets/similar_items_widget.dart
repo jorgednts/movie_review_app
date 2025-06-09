@@ -10,6 +10,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
+import 'package:provider/provider.dart';
 
 class SimilarItemsWidget extends StatelessWidget {
   const SimilarItemsWidget({
@@ -25,7 +26,9 @@ class SimilarItemsWidget extends StatelessWidget {
     BuildContext context,
     String id,
     AppCollectionItemType type,
+    String storageId,
   ) {
+    final user = context.read<UserStorageChangeNotifier>();
     context.pushNamed(
       AppRoute.details.name,
       pathParameters: {'itemId': id},
@@ -34,6 +37,8 @@ class SimilarItemsWidget extends StatelessWidget {
             itemId: id,
             itemType: type,
             language: Localizations.localeOf(context).toLanguageTag(),
+            uid: user.user?.uid,
+            itemStorageId: storageId,
           ).toJson(),
     );
   }
@@ -58,10 +63,12 @@ class SimilarItemsWidget extends StatelessWidget {
               ),
             ),
         onTapItem: (index) {
+          final item = items[index] as MovieModel;
           _navigateToDetails(
             context,
-            items[index].id.toString(),
+            item.id.toString(),
             AppCollectionItemType.movie,
+            item.storageId,
           );
         },
       );
@@ -79,12 +86,15 @@ class SimilarItemsWidget extends StatelessWidget {
               releaseYear: tvSeries.releaseYear,
             ),
           ),
-      onTapItem:
-          (index) => _navigateToDetails(
-            context,
-            items[index].id.toString(),
-            AppCollectionItemType.tvSeries,
-          ),
+      onTapItem: (index) {
+        final item = items[index] as MovieModel;
+        _navigateToDetails(
+          context,
+          item.id.toString(),
+          AppCollectionItemType.tvSeries,
+          item.storageId,
+        );
+      },
     );
   }
 }

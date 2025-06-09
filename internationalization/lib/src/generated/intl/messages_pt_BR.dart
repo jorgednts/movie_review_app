@@ -22,9 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "app_name": MessageLookupByLibrary.simpleMessage("Movie Review App"),
-    "common_empty_name": MessageLookupByLibrary.simpleMessage(
-      "nome não pode estar vazio",
+    "app_name": MessageLookupByLibrary.simpleMessage("Ciné"),
+    "common_cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+    "common_confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+    "common_confirm_operation": MessageLookupByLibrary.simpleMessage(
+      "Confirmar Operação",
+    ),
+    "common_empty_field": MessageLookupByLibrary.simpleMessage(
+      "campo não pode estar vazio",
     ),
     "common_item": MessageLookupByLibrary.simpleMessage("item"),
     "common_items": MessageLookupByLibrary.simpleMessage("itens"),
@@ -32,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_name": MessageLookupByLibrary.simpleMessage("nome"),
     "common_of": MessageLookupByLibrary.simpleMessage("de"),
     "common_page": MessageLookupByLibrary.simpleMessage("página"),
+    "common_save": MessageLookupByLibrary.simpleMessage("Salvar"),
     "common_tv_series": MessageLookupByLibrary.simpleMessage("séries"),
     "details_add_watchlist": MessageLookupByLibrary.simpleMessage(
       "Adicionar à Minha Lista",
@@ -43,6 +49,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "details_overview": MessageLookupByLibrary.simpleMessage("Sinopse"),
     "details_rating": MessageLookupByLibrary.simpleMessage(
       "Média de Avaliações",
+    ),
+    "details_remove_review": MessageLookupByLibrary.simpleMessage(
+      "Deseja remover a resenha deste item?",
+    ),
+    "details_remove_watchlist": MessageLookupByLibrary.simpleMessage(
+      "Deseja remover este item da sua lista?",
     ),
     "details_season": MessageLookupByLibrary.simpleMessage("Temporada"),
     "details_seasons": MessageLookupByLibrary.simpleMessage("Temporadas"),
@@ -63,6 +75,25 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Séries de TV Melhores Avaliadas",
+    ),
+    "msg_operation_completed": MessageLookupByLibrary.simpleMessage(
+      "Operação concluída",
+    ),
+    "msg_operation_not_completed": MessageLookupByLibrary.simpleMessage(
+      "Operação não concluída",
+    ),
+    "msg_watchlist_auth_needed": MessageLookupByLibrary.simpleMessage(
+      "Faça login para adicionar itens à sua lista",
+    ),
+    "reviews_add_review": MessageLookupByLibrary.simpleMessage(
+      "Adicionar Resenha...",
+    ),
+    "reviews_my_rating": MessageLookupByLibrary.simpleMessage(
+      "Minha Avaliação",
+    ),
+    "reviews_my_review": MessageLookupByLibrary.simpleMessage("Minha Resenha"),
+    "reviews_submit_review": MessageLookupByLibrary.simpleMessage(
+      "Enviar Resenha",
     ),
     "search_empty_state": MessageLookupByLibrary.simpleMessage(
       "Ops! Nenhum resultado encontrado.",

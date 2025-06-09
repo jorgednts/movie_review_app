@@ -8,7 +8,10 @@ import 'package:app/src/domain/use_case/auth/check_user_logged_use_case.dart';
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
+import 'package:app/src/domain/use_case/storage/add_item_to_collection_use_case.dart';
+import 'package:app/src/domain/use_case/storage/check_item_in_collection_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/delete_item_from_collection_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
@@ -25,10 +28,13 @@ import 'package:app/src/domain/use_case/tmdb/search_tv_series_use_case.dart';
 import 'package:app/src/presentation/common/params/details_params.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/navigation/custom_shell_branch.dart';
+import 'package:app/src/presentation/ui/details/data/operation_command_request.dart';
 import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
 import 'package:app/src/presentation/ui/details/widgets/details_view.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/home_view.dart';
+import 'package:app/src/presentation/ui/reviews/view_model/reviews_view_model.dart';
+import 'package:app/src/presentation/ui/reviews/widgets/reviews_view.dart';
 import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart';
 import 'package:app/src/presentation/ui/search/widgets/search_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
@@ -41,6 +47,7 @@ import 'package:provider/provider.dart';
 
 class AppRouter {
   static final router = GoRouter(
+    navigatorKey: CustomModalNavigator.modalNavigatorKey,
     initialLocation: AppRoute.home.path,
     onException: (context, _, _) => context.goNamed(AppRoute.home.name),
     routes: [
@@ -63,7 +70,7 @@ class AppRouter {
                   checkUserLoggedUseCase: CheckUserLoggedUseCase(
                     authRepository: authRepository,
                   ),
-                  dialogEventNotifier: DialogEventNotifier<AuthMessageType>(),
+                  dialogEventNotifier: MessageEventNotifier<AuthMessageType>(),
                   createUserStorageUseCase: CreateUserStorageUseCase(
                     coreStorageRepository: storageRepository,
                   ),
@@ -105,6 +112,21 @@ class AppRouter {
                 getCastMembersUseCase: GetCastMembersUseCase(
                   repository: context.read<TMDBRepository>(),
                 ),
+                addItemToCollectionUseCase: AddItemToCollectionUseCase(
+                  coreStorageRepository: context.read<CoreStorageRepository>(),
+                ),
+                checkItemInCollectionUseCase: CheckItemInCollectionUseCase(
+                  coreStorageRepository: context.read<CoreStorageRepository>(),
+                ),
+                deleteItemFromCollectionUseCase:
+                    DeleteItemFromCollectionUseCase(
+                      coreStorageRepository:
+                          context.read<CoreStorageRepository>(),
+                    ),
+                watchlistMessageEventNotifier:
+                    MessageEventNotifier<OperationMessageType>(),
+                reviewMessageEventNotifier:
+                    MessageEventNotifier<OperationMessageType>(),
               );
               return detailsViewModel;
             },
@@ -184,12 +206,16 @@ class AppRouter {
       ],
     ),
     CustomShellBranch(
-      appRoute: AppRoute.review,
+      appRoute: AppRoute.reviews,
       routes: [
         GoRoute(
-          path: AppRoute.review.path,
-          name: AppRoute.review.name,
-          builder: (context, state) => const Placeholder(),
+          path: AppRoute.reviews.path,
+          name: AppRoute.reviews.name,
+          builder:
+              (context, state) => Provider(
+                create: (context) => ReviewsViewModel(),
+                child: const ReviewsView(),
+              ),
         ),
       ],
     ),

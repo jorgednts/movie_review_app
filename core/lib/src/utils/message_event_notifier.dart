@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class DialogEventNotifier<T> extends ChangeNotifier {
+class MessageEventNotifier<T> extends ChangeNotifier {
   T? _dialogEventType;
 
   void trigger(T type) {
