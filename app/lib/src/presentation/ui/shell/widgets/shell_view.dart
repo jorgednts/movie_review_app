@@ -1,7 +1,7 @@
-import 'package:app/src/presentation/navigation/app_router.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/ui/common/widgets/command_result_dialog.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
+import 'package:app/src/presentation/ui/shell/dependency/shell_dependency.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
@@ -34,11 +34,13 @@ class ShellView extends StatelessWidget {
     final viewModel = context.watch<ShellViewModel>();
 
     void onSignIn() async {
-      viewModel.handleAuthDialogResult(
-        await showAdaptiveDialog<AuthDialogResult>(
-          context: context,
-          builder: (dialogContext) => const SignInDialog(),
-        ),
+      (await CustomModalNavigator.showCustomAdaptiveDialog<AuthDialogResult>(
+        const SignInDialog(),
+      )).fold(
+        onOk: (result) {
+          viewModel.handleAuthDialogResult(result);
+        },
+        onError: (error) {},
       );
     }
 
@@ -97,7 +99,7 @@ class ShellView extends StatelessWidget {
                 selectedIndex: navigationShell.currentIndex,
                 onDestinationSelected: navigationShell.goBranch,
                 destinations:
-                    AppRouter.customShellBranches
+                    ShellDependency.customShellBranches
                         .map(
                           (item) =>
                               item.appRoute.toNavigationDestination(context),

@@ -1,6 +1,6 @@
-import 'package:app/src/presentation/navigation/app_router.dart';
 import 'package:app/src/presentation/navigation/app_routes.dart';
 import 'package:app/src/presentation/ui/common/widgets/app_logo_widget.dart';
+import 'package:app/src/presentation/ui/shell/dependency/shell_dependency.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class CustomNavigationBar extends StatelessWidget {
         ? DefaultNavigationBar(
           navigationMenu: DefaultNavigationMenu(
             destinations:
-                AppRouter.customShellBranches
+                ShellDependency.customShellBranches
                     .map((item) => item.appRoute.nameValue(context))
                     .toList(),
             onDestinationSelected: navigationShell.goBranch,
@@ -30,7 +30,9 @@ class CustomNavigationBar extends StatelessWidget {
           ),
           leading: TextButton(
             onPressed: () => navigationShell.goBranch(0),
-            style: const ButtonStyle(overlayColor: WidgetStateColor.transparent),
+            style: const ButtonStyle(
+              overlayColor: WidgetStateColor.transparent,
+            ),
             child: const AppLogoWidget(),
           ),
           trailing: authButton,
