@@ -87,7 +87,7 @@ class SimilarItemsWidget extends StatelessWidget {
             ),
           ),
       onTapItem: (index) {
-        final item = items[index] as MovieModel;
+        final item = items[index] as TVSeriesModel;
         _navigateToDetails(
           context,
           item.id.toString(),

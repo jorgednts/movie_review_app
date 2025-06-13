@@ -695,6 +695,26 @@ class AppIntl {
     );
   }
 
+  /// `Minha Lista`
+  String get watchlist_my_watchlist {
+    return Intl.message(
+      'Minha Lista',
+      name: 'watchlist_my_watchlist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops! Nenhum item encontrado na sua lista. Adicione alguns agora!`
+  String get watchlist_empty_state {
+    return Intl.message(
+      'Ops! Nenhum item encontrado na sua lista. Adicione alguns agora!',
+      name: 'watchlist_empty_state',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sua watchlist personalizada está te esperando!\nEntre com sua conta para acessar seus filmes e séries salvos.`
   String get watchlist_login_required_message {
     return Intl.message(

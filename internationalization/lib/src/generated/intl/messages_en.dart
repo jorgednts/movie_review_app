@@ -161,8 +161,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "shell_watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
     "shell_welcome": MessageLookupByLibrary.simpleMessage("Welcome to Ciné!"),
     "shell_welcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+    "watchlist_empty_state": MessageLookupByLibrary.simpleMessage(
+      "Oops! No items found in your watchlist. Add some now!",
+    ),
     "watchlist_login_required_message": MessageLookupByLibrary.simpleMessage(
       "Your personalized watchlist is waiting.\nSign in to access your saved movies and TV series.",
+    ),
+    "watchlist_my_watchlist": MessageLookupByLibrary.simpleMessage(
+      "My Watchlist",
     ),
   };
 }

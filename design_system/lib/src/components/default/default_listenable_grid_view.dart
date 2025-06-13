@@ -53,6 +53,7 @@ class DefaultListenableGridView<T, M> extends StatelessWidget {
             case CommandState.loading:
               return loadingStateWidget;
             case CommandState.error:
+              return errorStateWidget;
             case CommandState.completed:
               final result = fetchList.result as Ok<List<T>>;
               return Column(

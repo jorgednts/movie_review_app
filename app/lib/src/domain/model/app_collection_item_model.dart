@@ -73,7 +73,7 @@ class AppCollectionItemModel
       overview: json['overview'],
       posterPath: json['poster_path'],
       title: json['title'],
-      voteAverage: json['vote_average'],
+      voteAverage: double.parse(json['vote_average'].toString()),
       review: json['review'],
     );
   }

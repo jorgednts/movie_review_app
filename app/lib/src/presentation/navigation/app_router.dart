@@ -39,9 +39,10 @@ import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart
 import 'package:app/src/presentation/ui/search/widgets/search_view.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
 import 'package:app/src/presentation/ui/shell/widgets/shell_view.dart';
+import 'package:app/src/presentation/ui/watchlist/view_model/watchlist_view_model.dart';
+import 'package:app/src/presentation/ui/watchlist/widgets/watchlist_view.dart';
 import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -243,7 +244,29 @@ class AppRouter {
         GoRoute(
           path: AppRoute.watchlist.path,
           name: AppRoute.watchlist.name,
-          builder: (context, state) => const Placeholder(),
+          builder:
+              (_, state) => Provider(
+                create:
+                    (context) => WatchlistViewModel(
+                      getCollectionFromStorageUseCase:
+                          GetCollectionFromStorageUseCase(
+                            coreStorageRepository:
+                                context.read<CoreStorageRepository>(),
+                          ),
+                      addItemToCollectionUseCase: AddItemToCollectionUseCase(
+                        coreStorageRepository:
+                            context.read<CoreStorageRepository>(),
+                      ),
+                      deleteItemFromCollectionUseCase:
+                          DeleteItemFromCollectionUseCase(
+                            coreStorageRepository:
+                                context.read<CoreStorageRepository>(),
+                          ),
+                      messageEventNotifier:
+                          MessageEventNotifier<DefaultMessageType>(),
+                    ),
+                child: const WatchlistView(),
+              ),
         ),
       ],
     ),

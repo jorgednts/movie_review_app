@@ -75,5 +75,7 @@
   "reviews_submit_review": "Enviar Resenha",
   "reviews_empty_state": "Ops! Nenhuma resenha encontrada. Adicione sua primeira resenha agora!",
   "reviews_login_required_message": "Suas resenhas estão guardadas aqui!\nFaça login para visualizar e gerenciar suas anotações.",
+  "watchlist_my_watchlist": "Minha Lista",
+  "watchlist_empty_state": "Ops! Nenhum item encontrado na sua lista. Adicione alguns agora!",
   "watchlist_login_required_message": "Sua watchlist personalizada está te esperando!\nEntre com sua conta para acessar seus filmes e séries salvos."
 }

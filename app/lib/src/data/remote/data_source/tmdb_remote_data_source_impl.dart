@@ -200,7 +200,7 @@ class TMDBRemoteDataSourceImpl implements TMDBRemoteDataSource {
     try {
       final response = await getPaginated(
         uri:
-            '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.movieDetailsEndpoint}/${params.id}/${TMDBApiConstants.similarEndpoint}',
+            '${TMDBApiConstants.baseUrl}/${TMDBApiConstants.tvSeriesDetailsEndpoint}/${params.id}/${TMDBApiConstants.similarEndpoint}',
         fromJsonT: TVSeriesResponse.fromJson,
         queryParameters: params,
       );

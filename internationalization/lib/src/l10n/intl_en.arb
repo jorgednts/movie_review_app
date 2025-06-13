@@ -75,5 +75,7 @@
   "reviews_submit_review": "Submit Review",
   "reviews_empty_state": "Oops! No reviews found. Add your first review now!",
   "reviews_login_required_message": "Your personal reviews are saved here.\nLog in to view and manage your notes.",
+  "watchlist_my_watchlist": "My Watchlist",
+  "watchlist_empty_state": "Oops! No items found in your watchlist. Add some now!",
   "watchlist_login_required_message": "Your personalized watchlist is waiting.\nSign in to access your saved movies and TV series."
 }
