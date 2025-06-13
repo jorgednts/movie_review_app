@@ -57,8 +57,13 @@ class AppCollectionItemModel
     required this.review,
   });
 
-  @override
-  AppCollectionItemModel fromStorage(Map<String, dynamic> json) {
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+
+  String get backdropUrl => 'https://image.tmdb.org/t/p/original/$backdropPath';
+
+  String get releaseYear => releaseDate.toDateFormat().year.toString();
+
+  static AppCollectionItemModel fromStorage(Map<String, dynamic> json) {
     return AppCollectionItemModel(
       type: AppCollectionItemType.fromStorage(json['type']),
       backdropPath: json['backdrop_path'],
@@ -94,4 +99,29 @@ class AppCollectionItemModel
 
   @override
   String get id => '$tmdbId-$title';
+
+  AppCollectionItemModel copyWith({
+    String? backdropPath,
+    int? tmdbId,
+    String? releaseDate,
+    String? originalLanguage,
+    String? overview,
+    String? posterPath,
+    String? title,
+    double? voteAverage,
+    String? review,
+  }) {
+    return AppCollectionItemModel(
+      type: type,
+      backdropPath: backdropPath ?? this.backdropPath,
+      tmdbId: tmdbId ?? this.tmdbId,
+      releaseDate: releaseDate ?? this.releaseDate,
+      originalLanguage: originalLanguage ?? this.originalLanguage,
+      overview: overview ?? this.overview,
+      posterPath: posterPath ?? this.posterPath,
+      title: title ?? this.title,
+      voteAverage: voteAverage ?? this.voteAverage,
+      review: review ?? this.review,
+    );
+  }
 }

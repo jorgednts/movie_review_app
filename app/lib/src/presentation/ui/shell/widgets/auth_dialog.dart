@@ -155,6 +155,7 @@ class _SignInDialogState extends State<SignInDialog> {
                       DefaultTextFormField(
                         key: const ValueKey('name'),
                         controller: nameController,
+                        maxLines: 1,
                         label: AppIntl.of(context).common_name,
                         validator:
                             (value) => FormFieldValidators.validateString(
@@ -165,6 +166,7 @@ class _SignInDialogState extends State<SignInDialog> {
                     DefaultTextFormField(
                       key: const ValueKey('email'),
                       controller: emailController,
+                      maxLines: 1,
                       label: AppIntl.of(context).shell_email,
                       validator:
                           (value) =>
@@ -173,6 +175,7 @@ class _SignInDialogState extends State<SignInDialog> {
                     DefaultTextFormField(
                       key: const ValueKey('password'),
                       controller: passwordController,
+                      maxLines: 1,
                       label: AppIntl.of(context).shell_password,
                       obscureText: true,
                       validator:

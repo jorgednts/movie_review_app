@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_confirm_operation": MessageLookupByLibrary.simpleMessage(
       "Confirm Operation",
     ),
+    "common_edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "common_empty_field": MessageLookupByLibrary.simpleMessage(
       "field can\'t be empty",
     ),
@@ -38,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_of": MessageLookupByLibrary.simpleMessage("of"),
     "common_page": MessageLookupByLibrary.simpleMessage("page"),
     "common_save": MessageLookupByLibrary.simpleMessage("Save"),
+    "common_try_again": MessageLookupByLibrary.simpleMessage("Try Again"),
     "common_tv_series": MessageLookupByLibrary.simpleMessage("tv series"),
     "details_add_watchlist": MessageLookupByLibrary.simpleMessage(
       "Add to Watchlist",
@@ -72,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Top Rated TV Series",
     ),
+    "msg_generic_error": MessageLookupByLibrary.simpleMessage(
+      "Oops! It seems something went wrong, but don\'t worry! You can try again later.",
+    ),
     "msg_operation_completed": MessageLookupByLibrary.simpleMessage(
       "Operation completed",
     ),
@@ -82,8 +87,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Log in to add items to watchlist",
     ),
     "reviews_add_review": MessageLookupByLibrary.simpleMessage("Add Review..."),
+    "reviews_empty_state": MessageLookupByLibrary.simpleMessage(
+      "Oops! No reviews found. Add your first review now!",
+    ),
+    "reviews_login_required_message": MessageLookupByLibrary.simpleMessage(
+      "Your personal reviews are saved here.\nLog in to view and manage your notes.",
+    ),
     "reviews_my_rating": MessageLookupByLibrary.simpleMessage("My Rating"),
     "reviews_my_review": MessageLookupByLibrary.simpleMessage("My Review"),
+    "reviews_my_reviews": MessageLookupByLibrary.simpleMessage("My Reviews"),
     "reviews_submit_review": MessageLookupByLibrary.simpleMessage(
       "Submit Review",
     ),
@@ -149,5 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "shell_watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
     "shell_welcome": MessageLookupByLibrary.simpleMessage("Welcome to Ciné!"),
     "shell_welcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+    "watchlist_login_required_message": MessageLookupByLibrary.simpleMessage(
+      "Your personalized watchlist is waiting.\nSign in to access your saved movies and TV series.",
+    ),
   };
 }

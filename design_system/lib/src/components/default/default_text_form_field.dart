@@ -11,6 +11,11 @@ class DefaultTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.expands = false,
     this.autocorrect = false,
+    this.enabled = true,
+    this.minLines,
+    this.maxLines,
+    this.constraints,
+    this.keyboardType,
   });
 
   final TextEditingController? controller;
@@ -20,6 +25,11 @@ class DefaultTextFormField extends StatefulWidget {
   final bool obscureText;
   final bool expands;
   final bool autocorrect;
+  final bool enabled;
+  final BoxConstraints? constraints;
+  final int? minLines;
+  final int? maxLines;
+  final TextInputType? keyboardType;
 
   @override
   State<DefaultTextFormField> createState() => _DefaultTextFormFieldState();
@@ -46,12 +56,15 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       controller: widget.controller,
       expands: widget.expands,
       autocorrect: widget.autocorrect,
-      maxLines: widget.expands ? null : 1,
-      minLines: widget.expands ? null : 1,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
+      readOnly: !widget.enabled,
+      keyboardType: widget.keyboardType,
       textAlignVertical: widget.expands ? TextAlignVertical.top : null,
       decoration:
           widget.decoration ??
           InputDecoration(
+            constraints: widget.constraints,
             labelText: widget.label,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radiusLg),

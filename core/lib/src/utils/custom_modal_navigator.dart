@@ -18,16 +18,9 @@ class CustomModalNavigator {
         isDismissible: isDismissible,
         shape: shape,
         backgroundColor: backgroundColor ?? Colors.transparent,
-        enableDrag: false,
+        enableDrag: true,
         isScrollControlled: true,
-        constraints:
-            constraints ??
-            BoxConstraints(
-              maxWidth:
-                  WindowUtils.isDesktop(context)
-                      ? 600
-                      : WindowUtils.widthOf(context) * 0.85,
-            ),
+        useSafeArea: true,
         builder: (_) => bottomSheet,
       );
       return Result.ok(result);

@@ -8,11 +8,11 @@ class CustomBottomSheet extends StatelessWidget {
     this.backgroundColor,
     this.padding = const EdgeInsets.all(Dimensions.spacingMd),
     this.borderRadius = Dimensions.radiusLg,
-    required this.title,
+    this.title,
   });
 
   final Widget content;
-  final String title;
+  final String? title;
   final Color? backgroundColor;
   final EdgeInsets padding;
   final double borderRadius;
@@ -21,21 +21,22 @@ class CustomBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(borderRadius)),
         color: Theme.of(context).colorScheme.surface,
       ),
       padding: padding,
       child: Column(
         spacing: Dimensions.spacingMd,
         children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.bold,
+          if (title != null)
+            Text(
+              title!,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
           Expanded(child: content),
         ],
       ),

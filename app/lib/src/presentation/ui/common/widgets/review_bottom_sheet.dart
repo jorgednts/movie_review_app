@@ -1,21 +1,15 @@
-import 'package:app/src/domain/model/base_tmdb_details_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
-import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/presentation/utils/form_field_validators.dart';
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
 
 class ReviewBottomSheet extends StatefulWidget {
-  const ReviewBottomSheet({
-    super.key,
-    required this.details,
-    required this.type,
-  });
+  const ReviewBottomSheet({super.key, required this.item});
 
-  final BaseTMDBDetailsModel details;
-  final AppCollectionItemType type;
+  final AppCollectionItemModel item;
 
   @override
   State<ReviewBottomSheet> createState() => _ReviewBottomSheetState();
@@ -26,6 +20,19 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController reviewController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() {
+    if (widget.item.review != null) {
+      rating = widget.item.voteAverage;
+      reviewController.text = widget.item.review!;
+    }
+  }
+
   void updateRating(double newRating) {
     setState(() {
       rating = newRating;
@@ -33,95 +40,165 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
   }
 
   @override
+  void dispose() {
+    reviewController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CustomBottomSheet(
-      title: AppIntl.of(context).reviews_my_review,
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: Dimensions.spacingMd,
-        children: [
-          AspectRatio(
-            aspectRatio: 3,
-            child: TMDBOverviewPosterCard(
-              title: widget.details.title,
-              posterUrl: widget.details.posterUrl,
-              voteAverage: widget.details.voteAverage,
-              releaseYear: widget.details.releaseYear,
-              overview: '',
-              onTap: null,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: RichText(
-                  text: TextSpan(
-                    text: AppIntl.of(context).reviews_my_rating,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: WindowUtils.heightOf(context) * 0.9,
+        maxWidth:
+            WindowUtils.isDesktop(context)
+                ? WindowUtils.widthOf(context) * 0.9
+                : double.infinity,
+      ),
+      child: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.viewInsetsOf(context).bottom,
+        ),
+        child: LayoutBuilder(
+          builder:
+              (_, constraints) => Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(Dimensions.radiusLg),
+                  ),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: Dimensions.spacingMd,
+                  children: [
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(Dimensions.radiusLg),
+                          ),
+                          child: CustomNetworkImage(
+                            url: widget.item.backdropUrl,
+                            width: double.infinity,
+                            boxFit: BoxFit.cover,
+                          ),
+                        ),
+                        Container(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth * 0.8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surface.withValues(alpha: 0.8),
+                            borderRadius: BorderRadius.circular(
+                              Dimensions.radiusLg,
+                            ),
+                          ),
+                          margin: const EdgeInsets.only(
+                            top: Dimensions.spacingXs,
+                            left: Dimensions.spacingXs,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.spacingSm,
+                            vertical: Dimensions.spacingXs,
+                          ),
+                          child: Text(
+                            widget.item.title,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: [
-                      TextSpan(
-                        text: ' (${rating.toStringAsFixed(1)})',
-                        style: Theme.of(context).textTheme.titleMedium,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Dimensions.spacingMd,
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                child: AddFiveStarsRatingWidget(
-                  onRatingChanged: updateRating,
-                  initialRating: rating,
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Form(
-              key: formKey,
-              child: DefaultTextFormField(
-                label: AppIntl.of(context).reviews_add_review,
-                controller: reviewController,
-                expands: true,
-                autocorrect: true,
-                validator:
-                    (value) =>
-                        FormFieldValidators.validateString(value, context),
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () => context.pop(),
-                child: Text(
-                  AppIntl.of(context).common_cancel,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              FilledButton(
-                onPressed: () {
-                  if (formKey.currentState?.validate() ?? false) {
-                    context.pop(
-                      widget.details.toCollectionItem(
-                        widget.type,
-                        reviewController.text,
-                        rating,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: AppIntl.of(context).reviews_my_rating,
+                              style: Theme.of(context).textTheme.titleLarge,
+                              children: [
+                                TextSpan(
+                                  text: ' (${rating.toStringAsFixed(1)})',
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                          AddFiveStarsRatingWidget(
+                            onRatingChanged: updateRating,
+                            initialRating: rating,
+                          ),
+                        ],
                       ),
-                    );
-                  }
-                },
-                child: Text(AppIntl.of(context).reviews_submit_review),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Dimensions.spacingMd,
+                      ),
+                      child: Form(
+                        key: formKey,
+                        child: DefaultTextFormField(
+                          controller: reviewController,
+                          label: AppIntl.of(context).reviews_add_review,
+                          validator:
+                              (value) => FormFieldValidators.validateString(
+                                value,
+                                context,
+                              ),
+                          keyboardType: TextInputType.multiline,
+                          minLines: 5,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: Dimensions.spacingMd,
+                        left: Dimensions.spacingMd,
+                        right: Dimensions.spacingMd,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () => context.pop(),
+                            child: Text(
+                              AppIntl.of(context).common_cancel,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          FilledButton(
+                            onPressed: () {
+                              if (formKey.currentState?.validate() ?? false) {
+                                context.pop(
+                                  widget.item.copyWith(
+                                    review: reviewController.text,
+                                    voteAverage: rating,
+                                  ),
+                                );
+                              }
+                            },
+                            child: Text(
+                              AppIntl.of(context).reviews_submit_review,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

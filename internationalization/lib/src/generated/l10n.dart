@@ -90,6 +90,16 @@ class AppIntl {
     );
   }
 
+  /// `Oops! Parece que algo deu errado, mas não se preocupe! Você pode tentar novamente mais tarde.`
+  String get msg_generic_error {
+    return Intl.message(
+      'Oops! Parece que algo deu errado, mas não se preocupe! Você pode tentar novamente mais tarde.',
+      name: 'msg_generic_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `nome`
   String get common_name {
     return Intl.message('nome', name: 'common_name', desc: '', args: []);
@@ -135,6 +145,11 @@ class AppIntl {
     return Intl.message('item', name: 'common_item', desc: '', args: []);
   }
 
+  /// `Editar`
+  String get common_edit {
+    return Intl.message('Editar', name: 'common_edit', desc: '', args: []);
+  }
+
   /// `Salvar`
   String get common_save {
     return Intl.message('Salvar', name: 'common_save', desc: '', args: []);
@@ -160,6 +175,16 @@ class AppIntl {
     return Intl.message(
       'Confirmar Operação',
       name: 'common_confirm_operation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tentar Novamente`
+  String get common_try_again {
+    return Intl.message(
+      'Tentar Novamente',
+      name: 'common_try_again',
       desc: '',
       args: [],
     );
@@ -610,6 +635,16 @@ class AppIntl {
     );
   }
 
+  /// `Minha Resenhas`
+  String get reviews_my_reviews {
+    return Intl.message(
+      'Minha Resenhas',
+      name: 'reviews_my_reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Minha Avaliação`
   String get reviews_my_rating {
     return Intl.message(
@@ -635,6 +670,36 @@ class AppIntl {
     return Intl.message(
       'Enviar Resenha',
       name: 'reviews_submit_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops! Nenhuma resenha encontrada. Adicione sua primeira resenha agora!`
+  String get reviews_empty_state {
+    return Intl.message(
+      'Ops! Nenhuma resenha encontrada. Adicione sua primeira resenha agora!',
+      name: 'reviews_empty_state',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suas resenhas estão guardadas aqui!\nFaça login para visualizar e gerenciar suas anotações.`
+  String get reviews_login_required_message {
+    return Intl.message(
+      'Suas resenhas estão guardadas aqui!\nFaça login para visualizar e gerenciar suas anotações.',
+      name: 'reviews_login_required_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sua watchlist personalizada está te esperando!\nEntre com sua conta para acessar seus filmes e séries salvos.`
+  String get watchlist_login_required_message {
+    return Intl.message(
+      'Sua watchlist personalizada está te esperando!\nEntre com sua conta para acessar seus filmes e séries salvos.',
+      name: 'watchlist_login_required_message',
       desc: '',
       args: [],
     );

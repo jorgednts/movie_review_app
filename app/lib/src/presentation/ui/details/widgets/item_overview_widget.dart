@@ -22,7 +22,7 @@ class ItemOverviewWidget extends StatelessWidget {
             ...item.originCountry,
           ],
         ),
-        DottedSpacedStringList(items: item.genres),
+        if (item.genres.isNotEmpty) DottedSpacedStringList(items: item.genres),
         if (item.numberOfSeasons > 0)
           DottedSpacedStringList(
             items: [

@@ -1,5 +1,9 @@
 import 'package:flutter/foundation.dart';
 
+enum DefaultMessageType {
+  success, error;
+}
+
 class MessageEventNotifier<T> extends ChangeNotifier {
   T? _dialogEventType;
 

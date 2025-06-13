@@ -2,7 +2,7 @@ import 'package:app/src/data/remote/model/base/base_details_request_parameters.d
 import 'package:app/src/domain/model/app_collection_model.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/cast_member_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/use_case/storage/add_item_to_collection_use_case.dart';

@@ -3,7 +3,5 @@ abstract class CollectionItemModel<T> {
 
   CollectionItemModel({required this.id});
 
-  T fromStorage(Map<String, dynamic> storage);
-
   Map<String, dynamic> toStorage();
 }

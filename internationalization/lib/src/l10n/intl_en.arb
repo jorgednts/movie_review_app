@@ -4,6 +4,7 @@
   "msg_watchlist_auth_needed": "Log in to add items to watchlist",
   "msg_operation_not_completed": "Operation not completed",
   "msg_operation_completed": "Operation completed",
+  "msg_generic_error": "Oops! It seems something went wrong, but don't worry! You can try again later.",
   "common_name": "name",
   "common_empty_field": "field can't be empty",
   "common_movies": "movies",
@@ -12,10 +13,12 @@
   "common_page": "page",
   "common_items": "items",
   "common_item": "item",
+  "common_edit": "Edit",
   "common_save": "Save",
   "common_cancel": "Cancel",
   "common_confirm": "Confirm",
   "common_confirm_operation": "Confirm Operation",
+  "common_try_again": "Try Again",
   "shell_home": "Home",
   "shell_search": "Search",
   "shell_reviews": "Reviews",
@@ -66,7 +69,11 @@
   "details_remove_watchlist": "Do you want to remove this item from your watchlist?",
   "details_remove_review": "Do you want to remove the review for this item?",
   "reviews_my_review": "My Review",
+  "reviews_my_reviews": "My Reviews",
   "reviews_my_rating": "My Rating",
   "reviews_add_review": "Add Review...",
-  "reviews_submit_review": "Submit Review"
+  "reviews_submit_review": "Submit Review",
+  "reviews_empty_state": "Oops! No reviews found. Add your first review now!",
+  "reviews_login_required_message": "Your personal reviews are saved here.\nLog in to view and manage your notes.",
+  "watchlist_login_required_message": "Your personalized watchlist is waiting.\nSign in to access your saved movies and TV series."
 }

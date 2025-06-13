@@ -213,7 +213,25 @@ class AppRouter {
           name: AppRoute.reviews.name,
           builder:
               (context, state) => Provider(
-                create: (context) => ReviewsViewModel(),
+                create:
+                    (context) => ReviewsViewModel(
+                      getCollectionFromStorageUseCase:
+                          GetCollectionFromStorageUseCase(
+                            coreStorageRepository:
+                                context.read<CoreStorageRepository>(),
+                          ),
+                      addItemToCollectionUseCase: AddItemToCollectionUseCase(
+                        coreStorageRepository:
+                            context.read<CoreStorageRepository>(),
+                      ),
+                      deleteItemFromCollectionUseCase:
+                          DeleteItemFromCollectionUseCase(
+                            coreStorageRepository:
+                                context.read<CoreStorageRepository>(),
+                          ),
+                      messageEventNotifier:
+                          MessageEventNotifier<DefaultMessageType>(),
+                    ),
                 child: const ReviewsView(),
               ),
         ),

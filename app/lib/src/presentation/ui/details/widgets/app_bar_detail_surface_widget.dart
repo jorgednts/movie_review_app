@@ -1,5 +1,5 @@
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';

@@ -4,6 +4,7 @@
   "msg_watchlist_auth_needed": "Faça login para adicionar itens à sua lista",
   "msg_operation_not_completed": "Operação não concluída",
   "msg_operation_completed": "Operação concluída",
+  "msg_generic_error": "Oops! Parece que algo deu errado, mas não se preocupe! Você pode tentar novamente mais tarde.",
   "common_name": "nome",
   "common_empty_field": "campo não pode estar vazio",
   "common_movies": "filmes",
@@ -12,10 +13,12 @@
   "common_page": "página",
   "common_items": "itens",
   "common_item": "item",
+  "common_edit": "Editar",
   "common_save": "Salvar",
   "common_cancel": "Cancelar",
   "common_confirm": "Confirmar",
   "common_confirm_operation": "Confirmar Operação",
+  "common_try_again": "Tentar Novamente",
   "shell_home": "Home",
   "shell_search": "Buscar",
   "shell_reviews": "Resenhas",
@@ -66,7 +69,11 @@
   "details_remove_watchlist": "Deseja remover este item da sua lista?",
   "details_remove_review": "Deseja remover a resenha deste item?",
   "reviews_my_review": "Minha Resenha",
+  "reviews_my_reviews": "Minha Resenhas",
   "reviews_my_rating": "Minha Avaliação",
   "reviews_add_review": "Adicionar Resenha...",
-  "reviews_submit_review": "Enviar Resenha"
+  "reviews_submit_review": "Enviar Resenha",
+  "reviews_empty_state": "Ops! Nenhuma resenha encontrada. Adicione sua primeira resenha agora!",
+  "reviews_login_required_message": "Suas resenhas estão guardadas aqui!\nFaça login para visualizar e gerenciar suas anotações.",
+  "watchlist_login_required_message": "Sua watchlist personalizada está te esperando!\nEntre com sua conta para acessar seus filmes e séries salvos."
 }

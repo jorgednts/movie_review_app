@@ -9,6 +9,7 @@ class TMDBOverviewPosterCard extends StatelessWidget {
   final String overview;
   final int? overviewLines;
   final void Function()? onTap;
+  final Widget? bottomTrailing;
 
   const TMDBOverviewPosterCard({
     super.key,
@@ -19,6 +20,7 @@ class TMDBOverviewPosterCard extends StatelessWidget {
     required this.overview,
     required this.onTap,
     this.overviewLines = 6,
+    this.bottomTrailing,
   });
 
   @override
@@ -51,32 +53,39 @@ class TMDBOverviewPosterCard extends StatelessWidget {
           ),
           Row(
             spacing: Dimensions.spacingXs,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.star,
-                color: Theme.of(context).colorScheme.tertiary,
-                size: Dimensions.iconSizeXs,
-              ),
-              Text(
-                voteAverage.toStringAsFixed(1),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Expanded(
-                child: Text(
-                  releaseYear,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.end,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
+              Flexible(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Theme.of(context).colorScheme.tertiary,
+                      size: Dimensions.iconSizeXs,
+                    ),
+                    Text(
+                      voteAverage.toStringAsFixed(1),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              bottomTrailing ??
+                  Expanded(
+                    child: Text(
+                      releaseYear,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.end,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
             ],
           ),
         ],

@@ -15,7 +15,7 @@ import 'package:app/src/data/remote/model/response/tv_series_response.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/cast_member_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:core/core.dart';

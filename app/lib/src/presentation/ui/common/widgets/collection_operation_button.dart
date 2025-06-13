@@ -1,6 +1,6 @@
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
 import 'package:app/src/presentation/ui/common/widgets/review_bottom_sheet.dart';
 import 'package:app/src/presentation/ui/details/data/operation_command_request.dart';
 import 'package:app/src/presentation/ui/details/widgets/confirm_operation_dialog.dart';
@@ -27,32 +27,36 @@ class CollectionOperationButton extends StatelessWidget {
   final AppCollectionItemType itemType;
 
   void handleOperation(String uid, OperationType operationType) async {
-    AppCollectionItemModel? review;
+    AppCollectionItemModel? reviewedItem;
     if (collectionType == AppCollectionType.review &&
         operationType == OperationType.add) {
       (await CustomModalNavigator.showCustomBottomSheet<
         AppCollectionItemModel?
-      >(ReviewBottomSheet(details: item, type: itemType))).fold(
+      >(
+        ReviewBottomSheet(item: item.toCollectionItem(itemType, null, null)),
+      )).fold(
         onOk: (result) {
-          review = result;
+          reviewedItem = result;
         },
         onError: (error) {},
       );
     }
-    commandOperation.execute(
-      OperationCommandRequest(
-        operationType: operationType,
-        crudItemRequest: CRUDItemRequest(
-          uid: uid,
-          collectionName: collectionType.name,
-          collectionItemModel: item.toCollectionItem(
-            itemType,
-            review?.review,
-            review?.voteAverage,
+    if (reviewedItem != null || collectionType == AppCollectionType.watchlist) {
+      commandOperation.execute(
+        OperationCommandRequest(
+          operationType: operationType,
+          crudItemRequest: CRUDItemRequest(
+            uid: uid,
+            collectionName: collectionType.name,
+            collectionItemModel: item.toCollectionItem(
+              itemType,
+              reviewedItem?.review,
+              reviewedItem?.voteAverage,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   void handleMessageEvents(BuildContext context) {

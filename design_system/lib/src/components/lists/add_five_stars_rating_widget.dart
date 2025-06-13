@@ -39,9 +39,9 @@ class _AddFiveStarsRatingWidgetState extends State<AddFiveStarsRatingWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
+        Flexible(
           child: IconButton.outlined(
             onPressed: () => decrement(),
             icon: const Icon(Icons.remove),
@@ -72,7 +72,7 @@ class _AddFiveStarsRatingWidgetState extends State<AddFiveStarsRatingWidget> {
             ),
           );
         }),
-        Expanded(
+        Flexible(
           child: IconButton.outlined(
             onPressed: () => increment(),
             icon: const Icon(Icons.add),

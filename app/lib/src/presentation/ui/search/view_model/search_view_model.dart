@@ -1,7 +1,7 @@
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
-import 'package:app/src/domain/model/collection_item_model.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/use_case/app/get_search_suggestion_list_local_use_case.dart';
