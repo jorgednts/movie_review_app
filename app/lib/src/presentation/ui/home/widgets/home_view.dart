@@ -1,41 +1,17 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
-import 'package:app/src/presentation/common/params/details_params.dart';
-import 'package:app/src/presentation/navigation/app_routes.dart';
+import 'package:app/src/presentation/navigation/app_navigator.dart';
 import 'package:app/src/presentation/ui/home/view_model/home_view_model.dart';
 import 'package:app/src/presentation/ui/home/widgets/poster_carousel.dart';
 import 'package:app/src/presentation/ui/home/widgets/tmdb_info_card.dart';
-import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  void _navigateToDetails(
-    BuildContext context,
-    String id,
-    AppCollectionItemType type,
-    String storageId,
-  ) {
-    final user = context.read<UserStorageChangeNotifier>();
-    context.pushNamed(
-      AppRoute.details.name,
-      pathParameters: {'itemId': id},
-      queryParameters:
-          DetailsParams(
-            itemId: id,
-            itemType: type,
-            language: Localizations.localeOf(context).toLanguageTag(),
-            itemStorageId: storageId,
-            uid: user.uid,
-          ).toJson(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +36,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
               onTapItem: (index) {
-                _navigateToDetails(
-                  context,
+                context.navigateToDetails(
                   viewModel.popularMovies[index].id.toString(),
                   AppCollectionItemType.movie,
                   viewModel.popularMovies[index].storageId,
@@ -81,13 +56,13 @@ class HomeView extends StatelessWidget {
                       releaseYear: tvSeries.releaseYear,
                     ),
                   ),
-              onTapItem:
-                  (index) => _navigateToDetails(
-                    context,
-                    viewModel.popularTVSeries[index].id.toString(),
-                    AppCollectionItemType.tvSeries,
-                    viewModel.popularTVSeries[index].storageId,
-                  ),
+              onTapItem: (index) {
+                context.navigateToDetails(
+                  viewModel.popularTVSeries[index].id.toString(),
+                  AppCollectionItemType.tvSeries,
+                  viewModel.popularTVSeries[index].storageId,
+                );
+              },
             ),
             PosterCarousel<MovieModel>(
               title: AppIntl.of(context).home_top_rated_movies_title,
@@ -102,13 +77,13 @@ class HomeView extends StatelessWidget {
                       releaseYear: movie.releaseYear,
                     ),
                   ),
-              onTapItem:
-                  (index) => _navigateToDetails(
-                    context,
-                    viewModel.topRatedMovies[index].id.toString(),
-                    AppCollectionItemType.movie,
-                    viewModel.topRatedMovies[index].storageId,
-                  ),
+              onTapItem: (index) {
+                context.navigateToDetails(
+                  viewModel.topRatedMovies[index].id.toString(),
+                  AppCollectionItemType.movie,
+                  viewModel.topRatedMovies[index].storageId,
+                );
+              },
             ),
             PosterCarousel<TVSeriesModel>(
               title: AppIntl.of(context).home_top_rated_tv_series_title,
@@ -123,13 +98,13 @@ class HomeView extends StatelessWidget {
                       releaseYear: tvSeries.releaseYear,
                     ),
                   ),
-              onTapItem:
-                  (index) => _navigateToDetails(
-                    context,
-                    viewModel.topRatedTVSeries[index].id.toString(),
-                    AppCollectionItemType.tvSeries,
-                    viewModel.topRatedTVSeries[index].storageId,
-                  ),
+              onTapItem: (index) {
+                context.navigateToDetails(
+                  viewModel.topRatedTVSeries[index].id.toString(),
+                  AppCollectionItemType.tvSeries,
+                  viewModel.topRatedTVSeries[index].storageId,
+                );
+              },
             ),
           ],
         ),

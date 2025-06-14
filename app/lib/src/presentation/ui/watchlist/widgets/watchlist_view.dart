@@ -1,7 +1,6 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
-import 'package:app/src/presentation/common/params/details_params.dart';
-import 'package:app/src/presentation/navigation/app_routes.dart';
+import 'package:app/src/presentation/navigation/app_navigator.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/common/widgets/login_required_widget.dart';
 import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
@@ -9,7 +8,6 @@ import 'package:app/src/presentation/ui/watchlist/view_model/watchlist_view_mode
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
 import 'package:provider/provider.dart';
 
@@ -62,26 +60,6 @@ class _WatchlistViewState extends State<WatchlistView> {
         }
       });
     }
-  }
-
-  void _navigateToDetails(
-    String id,
-    AppCollectionItemType type,
-    String storageId,
-  ) {
-    final user = context.read<UserStorageChangeNotifier>();
-    context.pushNamed(
-      AppRoute.details.name,
-      pathParameters: {'itemId': id},
-      queryParameters:
-          DetailsParams(
-            itemId: id,
-            itemType: type,
-            language: Localizations.localeOf(context).toLanguageTag(),
-            uid: user.user?.uid,
-            itemStorageId: storageId,
-          ).toJson(),
-    );
   }
 
   @override
@@ -141,37 +119,37 @@ class _WatchlistViewState extends State<WatchlistView> {
             isBold: true,
           ),
           const Spacer(),
-          IconButton(
-            onPressed: () => refresh(),
-            icon: const Icon(Icons.refresh),
-          ),
+          IconButton(onPressed: refresh, icon: const Icon(Icons.refresh)),
         ],
       ),
-      itemBuilder:
-          (item) => TMDBOverviewPosterCard(
-            posterUrl: item.posterUrl,
-            title: item.title,
-            voteAverage: item.voteAverage,
-            releaseYear: item.releaseYear,
-            overview: item.overview,
-            onTap:
-                () => _navigateToDetails(
-                  item.tmdbId.toString(),
-                  item.type,
-                  item.id,
+      itemBuilder: (item) {
+        return TMDBOverviewPosterCard(
+          posterUrl: item.posterUrl,
+          title: item.title,
+          voteAverage: item.voteAverage,
+          releaseYear: item.releaseYear,
+          overview: item.overview,
+          onTap: () {
+            context.navigateToDetails(
+              item.tmdbId.toString(),
+              item.type,
+              item.id,
+            );
+          },
+          bottomTrailing: IconButton(
+            onPressed: () {
+              viewModel.removeFromWatchlist.execute(
+                CRUDItemRequest(
+                  uid: userProvider.user!.uid,
+                  collectionName: AppCollectionType.watchlist.name,
+                  collectionItemModel: item,
                 ),
-            bottomTrailing: IconButton(
-              onPressed:
-                  () => viewModel.removeFromWatchlist.execute(
-                    CRUDItemRequest(
-                      uid: userProvider.user!.uid,
-                      collectionName: AppCollectionType.watchlist.name,
-                      collectionItemModel: item,
-                    ),
-                  ),
-              icon: const Icon(Icons.delete_forever),
-            ),
+              );
+            },
+            icon: const Icon(Icons.delete_forever),
           ),
+        );
+      },
     );
   }
 }

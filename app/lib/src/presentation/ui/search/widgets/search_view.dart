@@ -1,43 +1,19 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
-import 'package:app/src/presentation/common/params/details_params.dart';
-import 'package:app/src/presentation/navigation/app_routes.dart';
+import 'package:app/src/presentation/navigation/app_navigator.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/search/view_model/search_view_model.dart';
 import 'package:app/src/presentation/ui/search/widgets/loading_more_widget.dart';
 import 'package:app/src/presentation/ui/search/widgets/search_info_widget.dart';
 import 'package:app/src/presentation/ui/search/widgets/search_state_stacked_icon_card.dart';
 import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
-import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
-
-  void _navigateToDetails(
-    BuildContext context,
-    String id,
-    AppCollectionItemType type,
-    String storageId,
-  ) {
-    final user = context.read<UserStorageChangeNotifier>();
-    context.pushNamed(
-      AppRoute.details.name,
-      pathParameters: {'itemId': id},
-      queryParameters:
-          DetailsParams(
-            itemId: id,
-            itemType: type,
-            language: Localizations.localeOf(context).toLanguageTag(),
-            itemStorageId: storageId,
-            uid: user.uid,
-          ).toJson(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +120,7 @@ class SearchView extends StatelessWidget {
                               releaseYear: movie.releaseYear,
                               overview: movie.overview,
                               onTap:
-                                  () => _navigateToDetails(
-                                    context,
+                                  () => context.navigateToDetails(
                                     movie.id.toString(),
                                     AppCollectionItemType.movie,
                                     movie.storageId,
@@ -161,8 +136,7 @@ class SearchView extends StatelessWidget {
                               releaseYear: tvSeries.releaseYear,
                               overview: tvSeries.overview,
                               onTap:
-                                  () => _navigateToDetails(
-                                    context,
+                                  () => context.navigateToDetails(
                                     tvSeries.id.toString(),
                                     AppCollectionItemType.tvSeries,
                                     tvSeries.storageId,

@@ -1,16 +1,13 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
-import 'package:app/src/presentation/common/params/details_params.dart';
-import 'package:app/src/presentation/navigation/app_routes.dart';
+import 'package:app/src/presentation/navigation/app_navigator.dart';
 import 'package:app/src/presentation/ui/home/widgets/poster_carousel.dart';
 import 'package:app/src/presentation/ui/home/widgets/tmdb_info_card.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
-import 'package:provider/provider.dart';
 
 class SimilarItemsWidget extends StatelessWidget {
   const SimilarItemsWidget({
@@ -21,27 +18,6 @@ class SimilarItemsWidget extends StatelessWidget {
 
   final Command getSimilarItems;
   final List items;
-
-  void _navigateToDetails(
-    BuildContext context,
-    String id,
-    AppCollectionItemType type,
-    String storageId,
-  ) {
-    final user = context.read<UserStorageChangeNotifier>();
-    context.pushNamed(
-      AppRoute.details.name,
-      pathParameters: {'itemId': id},
-      queryParameters:
-          DetailsParams(
-            itemId: id,
-            itemType: type,
-            language: Localizations.localeOf(context).toLanguageTag(),
-            uid: user.user?.uid,
-            itemStorageId: storageId,
-          ).toJson(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +40,7 @@ class SimilarItemsWidget extends StatelessWidget {
             ),
         onTapItem: (index) {
           final item = items[index] as MovieModel;
-          _navigateToDetails(
-            context,
+          context.navigateToDetails(
             item.id.toString(),
             AppCollectionItemType.movie,
             item.storageId,
@@ -88,8 +63,7 @@ class SimilarItemsWidget extends StatelessWidget {
           ),
       onTapItem: (index) {
         final item = items[index] as TVSeriesModel;
-        _navigateToDetails(
-          context,
+        context.navigateToDetails(
           item.id.toString(),
           AppCollectionItemType.tvSeries,
           item.storageId,
