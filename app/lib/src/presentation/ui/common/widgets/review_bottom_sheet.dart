@@ -104,10 +104,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                             horizontal: Dimensions.spacingSm,
                             vertical: Dimensions.spacingXs,
                           ),
-                          child: Text(
-                            widget.item.title,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                          child: StyledText.t3(widget.item.title),
                         ),
                       ],
                     ),
@@ -167,14 +164,11 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                         children: [
                           TextButton(
                             onPressed: () => context.pop(),
-                            child: Text(
+                            child: StyledText.b2(
                               AppIntl.of(context).common_cancel,
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              isBold: true,
+                              fontColor:
+                                  Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                           FilledButton(
@@ -188,7 +182,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                                 );
                               }
                             },
-                            child: Text(
+                            child: StyledText.b2(
                               AppIntl.of(context).reviews_submit_review,
                             ),
                           ),

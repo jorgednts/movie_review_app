@@ -133,12 +133,7 @@ class _ReviewsViewState extends State<ReviewsView> {
       ),
       titleWidget: Row(
         children: [
-          Text(
-            AppIntl.of(context).reviews_my_reviews,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
-          ),
+          StyledText.h2(AppIntl.of(context).reviews_my_reviews, isBold: true),
           const Spacer(),
           IconButton(
             onPressed: () => refresh(),

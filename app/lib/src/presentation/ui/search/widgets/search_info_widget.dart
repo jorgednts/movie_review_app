@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';
 
@@ -16,14 +17,10 @@ class SearchInfoWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          AppIntl.of(context).search_results,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+        StyledText.h1(AppIntl.of(context).search_results),
         const Spacer(),
-        Text(
+        StyledText.l2(
           '$currentItems ${AppIntl.of(context).common_of} $totalItems ${AppIntl.of(context).common_items}',
-          style: Theme.of(context).textTheme.labelMedium,
         ),
       ],
     );

@@ -17,18 +17,13 @@ class ConfirmOperationDialog extends StatelessWidget {
       ),
       onPop: context.pop,
       title: Align(
-        child: Text(
-          AppIntl.of(context).common_confirm_operation,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        child: StyledText.t3(AppIntl.of(context).common_confirm_operation),
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: Dimensions.spacingLg,
         children: [
-          Flexible(
-            child: Text(message, style: Theme.of(context).textTheme.bodyLarge),
-          ),
+          Flexible(child: StyledText.b3(message)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

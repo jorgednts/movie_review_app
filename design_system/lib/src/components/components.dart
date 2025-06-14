@@ -47,3 +47,4 @@ export 'responsive/base_responsive.dart';
 
 // Text
 export 'text/expandable_text.dart';
+export 'text/styled_text.dart';

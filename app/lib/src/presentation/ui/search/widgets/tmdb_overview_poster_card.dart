@@ -34,21 +34,18 @@ class TMDBOverviewPosterCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: Dimensions.spacingMd,
         children: [
-          Text(
+          StyledText.t2(
             title,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            isBold: true,
           ),
           Expanded(
-            child: Text(
+            child: StyledText.b2(
               overview,
               maxLines: overviewLines,
               softWrap: true,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           Row(
@@ -63,27 +60,23 @@ class TMDBOverviewPosterCard extends StatelessWidget {
                       color: Theme.of(context).colorScheme.tertiary,
                       size: Dimensions.iconSizeXs,
                     ),
-                    Text(
+                    StyledText.b1(
                       voteAverage.toStringAsFixed(1),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      isBold: true,
                     ),
                   ],
                 ),
               ),
               bottomTrailing ??
                   Expanded(
-                    child: Text(
+                    child: StyledText.b2(
                       releaseYear,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.end,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontStyle: FontStyle.italic,
-                      ),
+                      isItalic: true,
                     ),
                   ),
             ],

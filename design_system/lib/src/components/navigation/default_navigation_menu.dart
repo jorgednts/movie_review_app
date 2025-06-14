@@ -28,12 +28,7 @@ class DefaultNavigationMenu extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                destination,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              StyledText.h1(destination, isBold: true),
               const SizedBox(height: Dimensions.spacingXs),
               TweenAnimationBuilder<double>(
                 duration: const Duration(milliseconds: 300),

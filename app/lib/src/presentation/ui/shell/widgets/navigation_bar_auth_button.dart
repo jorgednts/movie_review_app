@@ -70,17 +70,13 @@ class NavigationBarAuthButton extends StatelessWidget {
                     icon:
                         username.isEmpty
                             ? const Icon(Icons.person_outline)
-                            : Text(
+                            : StyledText.b3(
                               username.substring(0, 1),
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    Theme.of(
-                                      context,
-                                    ).colorScheme.onSecondaryContainer,
-                              ),
+                              isBold: true,
+                              fontColor:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondaryContainer,
                             ),
                   );
             },

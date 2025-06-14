@@ -142,10 +142,7 @@ class _SignInDialogState extends State<SignInDialog> {
           spacing: Dimensions.spacingMd,
           children: [
             if (state != AuthDialogState.init) ...[
-              Text(
-                state.widgetTitle(context),
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+              StyledText.t3(state.widgetTitle(context)),
               Form(
                 key: _formKey,
                 child: Column(
@@ -197,11 +194,9 @@ class _SignInDialogState extends State<SignInDialog> {
               ),
             ],
             if (state == AuthDialogState.init)
-              Text(
+              StyledText.b2(
                 AppIntl.of(context).shell_or.toUpperCase(),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                isBold: true,
               ),
             if (state != AuthDialogState.create) ...[
               if (state == AuthDialogState.init)
@@ -216,11 +211,9 @@ class _SignInDialogState extends State<SignInDialog> {
                 onPressed:
                     () =>
                         handleTextButtonPress(state == AuthDialogState.signIn),
-                child: Text(
+                child: StyledText.b1(
                   state.messageLabel(context, inverse: true),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                  fontColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
           ],
@@ -237,12 +230,7 @@ class _MessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      state.messageLabel(context),
-      style: Theme.of(
-        context,
-      ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-    );
+    return StyledText.b2(state.messageLabel(context), isBold: true);
   }
 }
 

@@ -36,10 +36,7 @@ class CustomLoadingWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Text(
-              message ?? AppIntl.of(context).shell_loading_message,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            StyledText.t3(message ?? AppIntl.of(context).shell_loading_message),
           ],
         ),
       ),

@@ -33,21 +33,17 @@ class CastMembersWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  StyledText.t2(
                     member.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    isBold: true,
                   ),
-                  Text(
+                  StyledText.t1(
                     member.character,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontStyle: FontStyle.italic,
-                    ),
+                    isItalic: true,
                   ),
                 ],
               ),

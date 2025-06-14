@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableText extends StatefulWidget {
@@ -41,10 +42,7 @@ class _ExpandableTextState extends State<ExpandableText> {
               () => setState(() {
                 isExpanded = !isExpanded;
               }),
-          child: Text(
-            isExpanded ? widget.seeLess : widget.seeMore,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          child: StyledText.b1(isExpanded ? widget.seeLess : widget.seeMore),
         ),
       ],
     );

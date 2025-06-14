@@ -136,11 +136,9 @@ class _WatchlistViewState extends State<WatchlistView> {
       ),
       titleWidget: Row(
         children: [
-          Text(
+          StyledText.h2(
             AppIntl.of(context).watchlist_my_watchlist,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+            isBold: true,
           ),
           const Spacer(),
           IconButton(

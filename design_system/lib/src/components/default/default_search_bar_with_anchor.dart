@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class DefaultSearchBarWithAnchor extends StatelessWidget {
@@ -39,7 +40,10 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
           ),
       textInputAction: TextInputAction.search,
       viewTrailing: [
-        IconButton(onPressed: searchController.clear, icon: const Icon(Icons.clear)),
+        IconButton(
+          onPressed: searchController.clear,
+          icon: const Icon(Icons.clear),
+        ),
         IconButton(
           onPressed: () {
             searchController.closeView(searchController.text);
@@ -54,11 +58,10 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
                   .map(
                     (suggestion) => ListTile(
                       onTap: () => onSuggestionSelected(suggestion),
-                      title: Text(
+                      title: StyledText.b2(
                         suggestion,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       trailing: Icon(suggestionTrailingIcon),
                     ),

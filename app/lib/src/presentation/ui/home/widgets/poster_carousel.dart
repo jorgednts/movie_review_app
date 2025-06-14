@@ -34,13 +34,11 @@ class PosterCarousel<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: Dimensions.spacingSm,
       children: [
-        Text(
+        StyledText.h3(
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: titleStyle ?? Theme.of(
-            context,
-          ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
+          isBold: true,
         ),
         SizedBox(
           height: carouselHeight,

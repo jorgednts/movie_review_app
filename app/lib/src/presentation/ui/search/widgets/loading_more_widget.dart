@@ -42,11 +42,9 @@ class _LoadingMoreWidgetState extends State<LoadingMoreWidget>
             horizontal: Dimensions.spacingSm,
             vertical: Dimensions.spacingSm,
           ),
-          child: Text(
+          child: StyledText.l2(
             AppIntl.of(context).search_loading_more,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onTertiaryContainer,
-            ),
+            fontColor: Theme.of(context).colorScheme.onTertiaryContainer,
           ),
         ),
       ),

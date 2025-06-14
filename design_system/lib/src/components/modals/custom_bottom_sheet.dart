@@ -29,13 +29,11 @@ class CustomBottomSheet extends StatelessWidget {
         spacing: Dimensions.spacingMd,
         children: [
           if (title != null)
-            Text(
+            StyledText.h1(
               title!,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontWeight: FontWeight.bold,
-              ),
+              isBold: true,
+              fontColor: Theme.of(context).colorScheme.onSurface,
             ),
           Expanded(child: content),
         ],

@@ -98,18 +98,12 @@ class CommandResultDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (titleMessage != null)
-            Text(
+            StyledText.t2(
               titleMessage,
               textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              isBold: true,
             ),
-          Text(
-            subtitleMessage,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          StyledText.t2(subtitleMessage, textAlign: TextAlign.center),
         ],
       ),
     );
