@@ -88,20 +88,33 @@ class TMDBOverviewPosterCard extends StatelessWidget {
 }
 
 class _PosterAspectRatio extends StatelessWidget {
-  const _PosterAspectRatio.error() : child = const DefaultErrorWidget();
+  const _PosterAspectRatio.error()
+    : child = const DefaultErrorWidget(),
+      isError = true;
 
-  const _PosterAspectRatio.placeholder() : child = const DefaultPlaceholder();
+  const _PosterAspectRatio.placeholder()
+    : child = const DefaultPlaceholder(),
+      isError = false;
 
   final Widget child;
+  final bool isError;
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 2 / 3,
-      child: Container(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        child: child,
-      ),
+      child:
+          isError
+              ? Container(
+                color: Theme.of(context).colorScheme.surface,
+                child: child,
+              )
+              : ShimmerLoading(
+                child: Container(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: child,
+                ),
+              ),
     );
   }
 }

@@ -3,23 +3,27 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class PaginatedGrid extends StatefulWidget {
-  final List items;
+  final int itemCount;
   final Widget Function(int index) itemBuilder;
   final ScrollController scrollController;
   final Widget bottomLoadingWidget;
   final bool Function() showLoading;
   final void Function() onLoadMore;
   final bool Function() hasMoreItems;
+  final bool Function() showRetry;
+  final Widget retryWidget;
 
   const PaginatedGrid({
     super.key,
-    required this.items,
+    required this.itemCount,
     required this.itemBuilder,
     required this.scrollController,
     required this.bottomLoadingWidget,
     required this.showLoading,
     required this.onLoadMore,
     required this.hasMoreItems,
+    required this.showRetry,
+    required this.retryWidget,
   });
 
   @override
@@ -65,7 +69,7 @@ class _PaginatedGridState extends State<PaginatedGrid> {
               Expanded(
                 child: GridView.builder(
                   controller: widget.scrollController,
-                  itemCount: widget.items.length,
+                  itemCount: widget.itemCount,
                   itemBuilder: (_, index) {
                     return widget.itemBuilder(index);
                   },
@@ -80,6 +84,7 @@ class _PaginatedGridState extends State<PaginatedGrid> {
                 ),
               ),
               if (widget.showLoading()) widget.bottomLoadingWidget,
+              if (widget.showRetry()) widget.retryWidget,
             ],
           ),
     );

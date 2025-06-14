@@ -1,7 +1,7 @@
 import 'package:app/src/data/remote/model/request/movie_paginated_request_parameters.dart';
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart';
-import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/app_collection_item_model.dart';
+import 'package:app/src/domain/model/base_tmdb_paginated_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/use_case/app/get_search_suggestion_list_local_use_case.dart';
@@ -38,7 +38,7 @@ class SearchViewModel extends BaseViewModel {
   // Pagination Notifiers
   late final MoviePaginatedListNotifier searchMovies;
   late final TVSeriesPaginatedListNotifier searchTVSeries;
-  late final Command0<void> getSuggestions;
+  late final Command0<List<String>> getSuggestions;
 
   // Other Variables
   AppCollectionItemType selectedSegment = AppCollectionItemType.movie;
@@ -46,7 +46,8 @@ class SearchViewModel extends BaseViewModel {
   final ValueNotifier<bool> initState = ValueNotifier(true);
   final ValueNotifier<int?> totalResults = ValueNotifier(null);
   final ScrollController scrollController = ScrollController();
-  List<String> suggestions = List.empty(growable: true);
+
+  // List<String> suggestions = List.empty(growable: true);
   String language = 'en-US';
 
   @override
@@ -129,15 +130,7 @@ class SearchViewModel extends BaseViewModel {
     await _getSuggestions();
   }
 
-  AsyncResult _getSuggestions() async {
-    return await callUseCase<NoParam, List<String>>(
-      useCase: _getSearchSuggestionListLocalUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        suggestions.clear();
-        suggestions.addAll(result);
-      },
-      onError: (error) {},
-    );
+  AsyncResult<List<String>> _getSuggestions() async {
+    return await _getSearchSuggestionListLocalUseCase(NoParam());
   }
 }

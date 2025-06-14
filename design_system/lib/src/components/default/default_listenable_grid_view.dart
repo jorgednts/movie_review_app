@@ -6,8 +6,8 @@ class DefaultListenableGridView<T, M> extends StatelessWidget {
   const DefaultListenableGridView({
     super.key,
     required this.fetchList,
-    required this.initStateWidget,
-    required this.loadingStateWidget,
+    this.initStateWidget,
+    this.loadingStateWidget,
     required this.errorStateWidget,
     required this.emptyStateWidget,
     required this.itemBuilder,
@@ -22,8 +22,8 @@ class DefaultListenableGridView<T, M> extends StatelessWidget {
   final Command fetchList;
   final UserStorageChangeNotifier userProvider;
   final MessageEventNotifier<M> messageEventNotifier;
-  final Widget initStateWidget;
-  final Widget loadingStateWidget;
+  final Widget? initStateWidget;
+  final Widget? loadingStateWidget;
   final Widget errorStateWidget;
   final Widget emptyStateWidget;
   final Widget noUserWidget;
@@ -47,41 +47,48 @@ class DefaultListenableGridView<T, M> extends StatelessWidget {
           if (userProvider.user == null) {
             return noUserWidget;
           }
+          List<Widget> children = [titleWidget];
           switch (fetchList.state) {
             case CommandState.init:
-              return loadingStateWidget;
+              children.add(
+                Expanded(child: initStateWidget ?? const LoadingGrid()),
+              );
             case CommandState.loading:
-              return loadingStateWidget;
+              children.add(
+                Expanded(child: loadingStateWidget ?? const LoadingGrid()),
+              );
             case CommandState.error:
-              return errorStateWidget;
+              children.add(errorStateWidget);
             case CommandState.completed:
               final result = fetchList.result as Ok<List<T>>;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: Dimensions.spacingMd,
-                children: [
-                  titleWidget,
-                  Expanded(
-                    child:
-                        result.value.isEmpty
-                            ? emptyStateWidget
-                            : listWidget ??
-                                PaginatedGrid(
-                                  items: result.value,
-                                  itemBuilder: (index) {
-                                    final item = result.value[index];
-                                    return itemBuilder(item);
-                                  },
-                                  scrollController: ScrollController(),
-                                  bottomLoadingWidget: const SizedBox(),
-                                  showLoading: () => false,
-                                  onLoadMore: () => false,
-                                  hasMoreItems: () => false,
-                                ),
-                  ),
-                ],
+              children.add(
+                Expanded(
+                  child:
+                      result.value.isEmpty
+                          ? emptyStateWidget
+                          : listWidget ??
+                              PaginatedGrid(
+                                itemCount: result.value.length,
+                                itemBuilder: (index) {
+                                  final item = result.value[index];
+                                  return itemBuilder(item);
+                                },
+                                scrollController: ScrollController(),
+                                bottomLoadingWidget: const SizedBox(),
+                                showLoading: () => false,
+                                onLoadMore: () => false,
+                                hasMoreItems: () => false,
+                                showRetry: () => false,
+                                retryWidget: const SizedBox(),
+                              ),
+                ),
               );
           }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: Dimensions.spacingMd,
+            children: children,
+          );
         },
       ),
     );

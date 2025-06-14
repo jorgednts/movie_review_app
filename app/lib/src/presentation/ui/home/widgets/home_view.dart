@@ -15,7 +15,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<HomeViewModel>();
+    final viewModel = context.read<HomeViewModel>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
@@ -25,7 +25,6 @@ class HomeView extends StatelessWidget {
             PosterCarousel<MovieModel>(
               title: AppIntl.of(context).home_popular_movies_title,
               command: viewModel.fetchPopularMovies,
-              items: viewModel.popularMovies,
               cardBuilder:
                   (movie) => PosterCard(
                     posterUrl: movie.posterUrl,
@@ -35,18 +34,17 @@ class HomeView extends StatelessWidget {
                       releaseYear: movie.releaseYear,
                     ),
                   ),
-              onTapItem: (index) {
+              onTapItem: (item) {
                 context.navigateToDetails(
-                  viewModel.popularMovies[index].id.toString(),
+                  item.id.toString(),
                   AppCollectionItemType.movie,
-                  viewModel.popularMovies[index].storageId,
+                  item.storageId,
                 );
               },
             ),
             PosterCarousel<TVSeriesModel>(
               title: AppIntl.of(context).home_popular_tv_series_title,
               command: viewModel.fetchPopularTVSeries,
-              items: viewModel.popularTVSeries,
               cardBuilder:
                   (tvSeries) => PosterCard(
                     posterUrl: tvSeries.posterUrl,
@@ -56,18 +54,17 @@ class HomeView extends StatelessWidget {
                       releaseYear: tvSeries.releaseYear,
                     ),
                   ),
-              onTapItem: (index) {
+              onTapItem: (item) {
                 context.navigateToDetails(
-                  viewModel.popularTVSeries[index].id.toString(),
+                  item.id.toString(),
                   AppCollectionItemType.tvSeries,
-                  viewModel.popularTVSeries[index].storageId,
+                  item.storageId,
                 );
               },
             ),
             PosterCarousel<MovieModel>(
               title: AppIntl.of(context).home_top_rated_movies_title,
               command: viewModel.fetchTopRatedMovies,
-              items: viewModel.topRatedMovies,
               cardBuilder:
                   (movie) => PosterCard(
                     posterUrl: movie.posterUrl,
@@ -77,18 +74,17 @@ class HomeView extends StatelessWidget {
                       releaseYear: movie.releaseYear,
                     ),
                   ),
-              onTapItem: (index) {
+              onTapItem: (item) {
                 context.navigateToDetails(
-                  viewModel.topRatedMovies[index].id.toString(),
+                  item.id.toString(),
                   AppCollectionItemType.movie,
-                  viewModel.topRatedMovies[index].storageId,
+                  item.storageId,
                 );
               },
             ),
             PosterCarousel<TVSeriesModel>(
               title: AppIntl.of(context).home_top_rated_tv_series_title,
               command: viewModel.fetchTopRatedTVSeries,
-              items: viewModel.topRatedTVSeries,
               cardBuilder:
                   (tvSeries) => PosterCard(
                     posterUrl: tvSeries.posterUrl,
@@ -98,11 +94,11 @@ class HomeView extends StatelessWidget {
                       releaseYear: tvSeries.releaseYear,
                     ),
                   ),
-              onTapItem: (index) {
+              onTapItem: (item) {
                 context.navigateToDetails(
-                  viewModel.topRatedTVSeries[index].id.toString(),
+                  item.id.toString(),
                   AppCollectionItemType.tvSeries,
-                  viewModel.topRatedTVSeries[index].storageId,
+                  item.storageId,
                 );
               },
             ),

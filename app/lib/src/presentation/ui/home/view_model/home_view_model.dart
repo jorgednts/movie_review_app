@@ -1,12 +1,10 @@
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
-import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_tv_series_use_case.dart';
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 
 class HomeViewModel extends BaseViewModel {
   // Use Cases
@@ -14,33 +12,22 @@ class HomeViewModel extends BaseViewModel {
   final GetPopularTVSeriesUseCase _getPopularTVSeriesUseCase;
   final GetTopRatedMoviesUseCase _getTopRatedMoviesUseCase;
   final GetTopRatedTVSeriesUseCase _getTopRatedTVSeriesUseCase;
-  final CreateGuestSessionUseCase _createGuestSessionUseCase;
 
   HomeViewModel({
     required GetPopularMoviesUseCase getPopularMoviesUseCase,
     required GetPopularTVSeriesUseCase getPopularTVSeriesUseCase,
     required GetTopRatedMoviesUseCase getTopRatedMoviesUseCase,
     required GetTopRatedTVSeriesUseCase getTopRatedTVSeriesUseCase,
-    required CreateGuestSessionUseCase createGuestSessionUseCase,
   }) : _getPopularMoviesUseCase = getPopularMoviesUseCase,
        _getPopularTVSeriesUseCase = getPopularTVSeriesUseCase,
        _getTopRatedMoviesUseCase = getTopRatedMoviesUseCase,
-       _getTopRatedTVSeriesUseCase = getTopRatedTVSeriesUseCase,
-       _createGuestSessionUseCase = createGuestSessionUseCase;
+       _getTopRatedTVSeriesUseCase = getTopRatedTVSeriesUseCase;
 
   // Commands
-  late final Command0<void> fetchPopularMovies;
-  late final Command0<void> fetchPopularTVSeries;
-  late final Command0<void> fetchTopRatedMovies;
-  late final Command0<void> fetchTopRatedTVSeries;
-  late final Command0<void> createGuestSession;
-
-  // Other Variables
-  final List<MovieModel> popularMovies = [];
-  final List<TVSeriesModel> popularTVSeries = [];
-  final List<MovieModel> topRatedMovies = [];
-  final List<TVSeriesModel> topRatedTVSeries = [];
-  String? guestSessionId;
+  late final Command0<List<MovieModel>> fetchPopularMovies;
+  late final Command0<List<TVSeriesModel>> fetchPopularTVSeries;
+  late final Command0<List<MovieModel>> fetchTopRatedMovies;
+  late final Command0<List<TVSeriesModel>> fetchTopRatedTVSeries;
 
   @override
   void onInit() {
@@ -50,7 +37,6 @@ class HomeViewModel extends BaseViewModel {
     fetchPopularTVSeries.execute();
     fetchTopRatedMovies.execute();
     fetchTopRatedTVSeries.execute();
-    createGuestSession.execute();
   }
 
   @override
@@ -59,75 +45,21 @@ class HomeViewModel extends BaseViewModel {
     fetchPopularTVSeries = Command0(_getPopularTVSeries);
     fetchTopRatedMovies = Command0(_getTopRatedMovies);
     fetchTopRatedTVSeries = Command0(_getTopRatedTVSeries);
-    createGuestSession = Command0(_createGuestSession);
   }
 
-  AsyncResult _getPopularMovies() async {
-    return await callUseCase<NoParam, List<MovieModel>>(
-      useCase: _getPopularMoviesUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        popularMovies.clear();
-        popularMovies.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
-    );
+  AsyncResult<List<MovieModel>> _getPopularMovies() async {
+    return await _getPopularMoviesUseCase(NoParam());
   }
 
-  AsyncResult<void> _getPopularTVSeries() async {
-    return await callUseCase<NoParam, List<TVSeriesModel>>(
-      useCase: _getPopularTVSeriesUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        popularTVSeries.clear();
-        popularTVSeries.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
-    );
+  AsyncResult<List<TVSeriesModel>> _getPopularTVSeries() async {
+    return await _getPopularTVSeriesUseCase(NoParam());
   }
 
-  AsyncResult _getTopRatedMovies() async {
-    return await callUseCase<NoParam, List<MovieModel>>(
-      useCase: _getTopRatedMoviesUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        topRatedMovies.clear();
-        topRatedMovies.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
-    );
+  AsyncResult<List<MovieModel>> _getTopRatedMovies() async {
+    return await _getTopRatedMoviesUseCase(NoParam());
   }
 
-  AsyncResult<void> _getTopRatedTVSeries() async {
-    return await callUseCase<NoParam, List<TVSeriesModel>>(
-      useCase: _getTopRatedTVSeriesUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        topRatedTVSeries.clear();
-        topRatedTVSeries.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
-    );
-  }
-
-  AsyncResult<void> _createGuestSession() async {
-    return await callUseCase<NoParam, String>(
-      useCase: _createGuestSessionUseCase,
-      input: NoParam(),
-      onSuccess: (result) {
-        guestSessionId = result;
-      },
-      onError: (error) {
-        guestSessionId = null;
-      },
-    );
+  AsyncResult<List<TVSeriesModel>> _getTopRatedTVSeries() async {
+    return await _getTopRatedTVSeriesUseCase(NoParam());
   }
 }

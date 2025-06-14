@@ -82,6 +82,9 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                             url: widget.item.backdropUrl,
                             width: double.infinity,
                             boxFit: BoxFit.cover,
+                            placeholder:
+                                const _BackdropAspectRatio.placeholder(),
+                            errorWidget: const _BackdropAspectRatio.error(),
                           ),
                         ),
                         Container(
@@ -194,6 +197,38 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
               ),
         ),
       ),
+    );
+  }
+}
+
+class _BackdropAspectRatio extends StatelessWidget {
+  const _BackdropAspectRatio.error()
+    : child = const DefaultErrorWidget(),
+      isError = true;
+
+  const _BackdropAspectRatio.placeholder()
+    : child = const DefaultPlaceholder(),
+      isError = false;
+
+  final Widget child;
+  final bool isError;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child:
+          isError
+              ? Container(
+                color: Theme.of(context).colorScheme.surface,
+                child: child,
+              )
+              : ShimmerLoading(
+                child: Container(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: child,
+                ),
+              ),
     );
   }
 }

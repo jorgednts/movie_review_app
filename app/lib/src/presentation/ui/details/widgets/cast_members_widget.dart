@@ -6,14 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:internationalization/internationalization.dart';
 
 class CastMembersWidget extends StatelessWidget {
-  const CastMembersWidget({
-    super.key,
-    required this.castMembers,
-    required this.getCastMembers,
-  });
+  const CastMembersWidget({super.key, required this.getCastMembers});
 
-  final List<CastMemberModel> castMembers;
-  final Command getCastMembers;
+  final Command0<List<CastMemberModel>> getCastMembers;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +18,6 @@ class CastMembersWidget extends StatelessWidget {
         context,
       ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
       command: getCastMembers,
-      items: castMembers,
       cardBuilder:
           (member) => PosterCard(
             posterUrl: member.profileUrl,

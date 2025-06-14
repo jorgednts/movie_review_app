@@ -1,13 +1,16 @@
 import 'dart:math';
 
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
+import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/presentation/ui/common/widgets/collection_operation_button.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
 import 'package:app/src/presentation/ui/details/widgets/app_bar_detail_surface_widget.dart';
 import 'package:app/src/presentation/ui/details/widgets/cast_members_widget.dart';
 import 'package:app/src/presentation/ui/details/widgets/item_overview_widget.dart';
-import 'package:app/src/presentation/ui/details/widgets/similar_items_widget.dart';
+import 'package:app/src/presentation/ui/details/widgets/similar_movies_widget.dart';
+import 'package:app/src/presentation/ui/details/widgets/similar_tv_series_widget.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -25,15 +28,23 @@ class DetailsView extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel.getDetails,
         builder: (context, child) {
-          final item = viewModel.details;
+          BaseTMDBDetailsModel? item;
+          if (viewModel.getDetails.state == CommandState.completed) {
+            final result =
+                viewModel.getDetails.result as Ok<BaseTMDBDetailsModel>;
+            item = result.value;
+          }
+          final shimmer = Center(
+            child: ShimmerLoading(
+              child: Container(color: Theme.of(context).colorScheme.surface),
+            ),
+          );
           return DefaultCollapsableAppBarView(
             expandedHeight: expandedHeight,
             title: item?.title ?? '',
             appBarBackground: switch (viewModel.getDetails.state) {
-              CommandState.init => const Center(child: CustomLoadingWidget()),
-              CommandState.loading => const Center(
-                child: CustomLoadingWidget(),
-              ),
+              CommandState.init => shimmer,
+              CommandState.loading => shimmer,
               CommandState.error => CustomNetworkImage(
                 url: item?.backdropUrl ?? '',
               ),
@@ -50,18 +61,20 @@ class DetailsView extends StatelessWidget {
                       posterConstraints: BoxConstraints(
                         maxHeight: expandedHeight * 0.6,
                       ),
-                      onHomepagePressed: viewModel.launchUrl,
-                      showHomepageButton:
-                          viewModel.details?.homepage?.isNotEmpty ?? false,
+                      onHomepagePressed:
+                          () => viewModel.launchUrl(item?.homepage ?? ''),
+                      showHomepageButton: item.homepage?.isNotEmpty ?? false,
                       reviewButton: CollectionOperationButton(
                         commandOperation: viewModel.handleReviewOperation,
-                        messageEventNotifier: viewModel.watchlistMessageEventNotifier,
+                        messageEventNotifier:
+                            viewModel.watchlistMessageEventNotifier,
                         collectionType: AppCollectionType.review,
                         item: item,
                         itemType: viewModel.type,
                       ),
                       watchlistButton: CollectionOperationButton(
-                        messageEventNotifier: viewModel.watchlistMessageEventNotifier,
+                        messageEventNotifier:
+                            viewModel.watchlistMessageEventNotifier,
                         commandOperation: viewModel.handleWatchlistOperation,
                         collectionType: AppCollectionType.watchlist,
                         item: item,
@@ -93,7 +106,6 @@ class DetailsView extends StatelessWidget {
                               SizedBox(
                                 width: width * 1.2,
                                 child: CastMembersWidget(
-                                  castMembers: viewModel.castMembers,
                                   getCastMembers: viewModel.getCastMembers,
                                 ),
                               ),
@@ -102,10 +114,17 @@ class DetailsView extends StatelessWidget {
                                 margin: const EdgeInsets.symmetric(
                                   vertical: Dimensions.spacingMd,
                                 ),
-                                child: SimilarItemsWidget(
-                                  getSimilarItems: viewModel.getSimilarItems,
-                                  items: viewModel.similarItems,
-                                ),
+                                child:
+                                    viewModel.type ==
+                                            AppCollectionItemType.movie
+                                        ? SimilarMoviesWidget(
+                                          getSimilarMovies:
+                                              viewModel.getSimilarMovies,
+                                        )
+                                        : SimilarTVSeriesWidget(
+                                          getSimilarTVSeries:
+                                              viewModel.getSimilarTVSeries,
+                                        ),
                               ),
                             ],
                   );

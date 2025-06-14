@@ -1,6 +1,5 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
-import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/common/widgets/login_required_widget.dart';
 import 'package:app/src/presentation/ui/common/widgets/review_bottom_sheet.dart';
 import 'package:app/src/presentation/ui/reviews/view_model/reviews_view_model.dart';
@@ -111,8 +110,6 @@ class _ReviewsViewState extends State<ReviewsView> {
         message: AppIntl.of(context).reviews_login_required_message,
       ),
       handleMessageEvent: handleMessageEvent,
-      initStateWidget: const Center(child: CustomLoadingWidget()),
-      loadingStateWidget: const Center(child: CustomLoadingWidget()),
       errorStateWidget: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 300),

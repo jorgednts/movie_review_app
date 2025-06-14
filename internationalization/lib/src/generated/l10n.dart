@@ -100,6 +100,26 @@ class AppIntl {
     );
   }
 
+  /// `Falha ao buscar mais itens :(`
+  String get msg_load_error {
+    return Intl.message(
+      'Falha ao buscar mais itens :(',
+      name: 'msg_load_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nada para ver aqui...`
+  String get msg_empty_list {
+    return Intl.message(
+      'Nada para ver aqui...',
+      name: 'msg_empty_list',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `nome`
   String get common_name {
     return Intl.message('nome', name: 'common_name', desc: '', args: []);
@@ -185,6 +205,16 @@ class AppIntl {
     return Intl.message(
       'Tentar Novamente',
       name: 'common_try_again',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recarregar`
+  String get common_reload {
+    return Intl.message(
+      'Recarregar',
+      name: 'common_reload',
       desc: '',
       args: [],
     );
@@ -600,6 +630,16 @@ class AppIntl {
     return Intl.message(
       'ver menos',
       name: 'details_see_less',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Esse título parece adorar um mistério... Nenhuma sinopse disponível — talvez seja pra você assistir sem spoilers!`
+  String get details_no_overview {
+    return Intl.message(
+      'Esse título parece adorar um mistério... Nenhuma sinopse disponível — talvez seja pra você assistir sem spoilers!',
+      name: 'details_no_overview',
       desc: '',
       args: [],
     );

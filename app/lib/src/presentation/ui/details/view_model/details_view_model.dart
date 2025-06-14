@@ -1,8 +1,8 @@
 import 'package:app/src/data/remote/model/base/base_details_request_parameters.dart';
+import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
 import 'package:app/src/domain/model/cast_member_model.dart';
-import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/movie_model.dart';
 import 'package:app/src/domain/model/tv_series_model.dart';
 import 'package:app/src/domain/use_case/storage/add_item_to_collection_use_case.dart';
@@ -51,10 +51,10 @@ class DetailsViewModel extends BaseViewModel {
        _deleteItemFromCollectionUseCase = deleteItemFromCollectionUseCase;
 
   //************* Commands **************
-  late Command0<void> getDetails;
-  late Command0<void> getSimilarMovies;
-  late Command0<void> getSimilarTVSeries;
-  late Command0<void> getCastMembers;
+  late Command0<BaseTMDBDetailsModel> getDetails;
+  late Command0<List<MovieModel>> getSimilarMovies;
+  late Command0<List<TVSeriesModel>> getSimilarTVSeries;
+  late Command0<List<CastMemberModel>> getCastMembers;
   late Command1<bool, OperationCommandRequest> handleWatchlistOperation;
   late Command1<bool, OperationCommandRequest> handleReviewOperation;
 
@@ -66,15 +66,7 @@ class DetailsViewModel extends BaseViewModel {
   //*************************************
 
   //********* Other Variables ***********
-  BaseTMDBDetailsModel? details;
-  final List<MovieModel> _similarMovies = List.empty(growable: true);
-  final List<TVSeriesModel> _similarTVSeries = List.empty(growable: true);
-  final List<CastMemberModel> castMembers = List.empty(growable: true);
-
-  List get similarItems => switch (_params.itemType) {
-    AppCollectionItemType.movie => _similarMovies,
-    AppCollectionItemType.tvSeries => _similarTVSeries,
-  };
+  // BaseTMDBDetailsModel? details;
 
   AppCollectionItemType get type => _params.itemType;
 
@@ -105,10 +97,10 @@ class DetailsViewModel extends BaseViewModel {
 
   @override
   void initCommands() {
-    getDetails = Command0<void>(_getDetails);
-    getSimilarMovies = Command0<void>(_getSimilarMovies);
-    getSimilarTVSeries = Command0<void>(_getSimilarTVSeries);
-    getCastMembers = Command0<void>(_getCastMembers);
+    getDetails = Command0<BaseTMDBDetailsModel>(_getDetails);
+    getSimilarMovies = Command0<List<MovieModel>>(_getSimilarMovies);
+    getSimilarTVSeries = Command0<List<TVSeriesModel>>(_getSimilarTVSeries);
+    getCastMembers = Command0<List<CastMemberModel>>(_getCastMembers);
     handleWatchlistOperation = Command1<bool, OperationCommandRequest>(
       _handleWatchlist,
     );
@@ -117,88 +109,49 @@ class DetailsViewModel extends BaseViewModel {
     );
   }
 
-  AsyncResult _getDetails() async {
-    return await callUseCase<
-      BaseDetailsRequestParameters,
-      BaseTMDBDetailsModel
-    >(
-      useCase: _getTMDBItemDetailsUseCase,
-      input: BaseDetailsRequestParameters(
+  AsyncResult<BaseTMDBDetailsModel> _getDetails() async {
+    return await _getTMDBItemDetailsUseCase(
+      BaseDetailsRequestParameters(
         id: _params.itemId,
         type: _params.itemType,
         language: _params.language,
       ),
-      onSuccess: (result) {
-        details = result;
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
     );
   }
 
-  AsyncResult _getSimilarMovies() async {
-    return await callUseCase<BaseDetailsRequestParameters, List<MovieModel>>(
-      useCase: _getSimilarMoviesUseCase,
-      input: BaseDetailsRequestParameters(
+  AsyncResult<List<MovieModel>> _getSimilarMovies() async {
+    return await _getSimilarMoviesUseCase(
+      BaseDetailsRequestParameters(
         id: _params.itemId,
         type: _params.itemType,
         language: _params.language,
       ),
-      onSuccess: (result) {
-        _similarMovies.clear();
-        _similarMovies.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
     );
   }
 
-  AsyncResult _getSimilarTVSeries() async {
-    return await callUseCase<BaseDetailsRequestParameters, List<TVSeriesModel>>(
-      useCase: _getSimilarTVSeriesUseCase,
-      input: BaseDetailsRequestParameters(
+  AsyncResult<List<TVSeriesModel>> _getSimilarTVSeries() async {
+    return await _getSimilarTVSeriesUseCase(
+      BaseDetailsRequestParameters(
         id: _params.itemId,
         type: _params.itemType,
         language: _params.language,
       ),
-      onSuccess: (result) {
-        _similarTVSeries.clear();
-        _similarTVSeries.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
     );
   }
 
-  AsyncResult _getCastMembers() async {
-    return await callUseCase<
-      BaseDetailsRequestParameters,
-      List<CastMemberModel>
-    >(
-      useCase: _getCastMembersUseCase,
-      input: BaseDetailsRequestParameters(
+  AsyncResult<List<CastMemberModel>> _getCastMembers() async {
+    return await _getCastMembersUseCase(
+      BaseDetailsRequestParameters(
         id: _params.itemId,
         type: _params.itemType,
         language: _params.language,
       ),
-      onSuccess: (result) {
-        castMembers.clear();
-        castMembers.addAll(result);
-      },
-      onError: (error) {
-        debugPrint(error.toString());
-      },
     );
   }
 
-  void launchUrl() async {
-    if (details?.homepage != null && (details!.homepage?.isNotEmpty ?? false)) {
-      final result = await UrlLauncher.launchExternally(
-        Uri.parse(details!.homepage!),
-      );
+  void launchUrl(String? homepage) async {
+    if (homepage != null && (homepage.isNotEmpty)) {
+      final result = await UrlLauncher.launchExternally(Uri.parse(homepage));
       result.fold(
         onOk: (result) {},
         onError: (error) {

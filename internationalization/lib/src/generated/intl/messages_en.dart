@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_name": MessageLookupByLibrary.simpleMessage("name"),
     "common_of": MessageLookupByLibrary.simpleMessage("of"),
     "common_page": MessageLookupByLibrary.simpleMessage("page"),
+    "common_reload": MessageLookupByLibrary.simpleMessage("Reload"),
     "common_save": MessageLookupByLibrary.simpleMessage("Save"),
     "common_try_again": MessageLookupByLibrary.simpleMessage("Try Again"),
     "common_tv_series": MessageLookupByLibrary.simpleMessage("tv series"),
@@ -46,6 +47,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "details_cast": MessageLookupByLibrary.simpleMessage("Cast"),
     "details_edit_review": MessageLookupByLibrary.simpleMessage("Add Review"),
+    "details_no_overview": MessageLookupByLibrary.simpleMessage(
+      "This title seems to love suspense... No overview available — maybe it wants you to dive in without spoilers!",
+    ),
     "details_overview": MessageLookupByLibrary.simpleMessage("Overview"),
     "details_rating": MessageLookupByLibrary.simpleMessage("Vote Average"),
     "details_remove_review": MessageLookupByLibrary.simpleMessage(
@@ -74,8 +78,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Top Rated TV Series",
     ),
+    "msg_empty_list": MessageLookupByLibrary.simpleMessage(
+      "Nothing to see here...",
+    ),
     "msg_generic_error": MessageLookupByLibrary.simpleMessage(
       "Oops! It seems something went wrong, but don\'t worry! You can try again later.",
+    ),
+    "msg_load_error": MessageLookupByLibrary.simpleMessage(
+      "Failed to fetch more items :(",
     ),
     "msg_operation_completed": MessageLookupByLibrary.simpleMessage(
       "Operation completed",

@@ -1,7 +1,6 @@
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
 import 'package:app/src/presentation/navigation/app_navigator.dart';
-import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/common/widgets/login_required_widget.dart';
 import 'package:app/src/presentation/ui/search/widgets/tmdb_overview_poster_card.dart';
 import 'package:app/src/presentation/ui/watchlist/view_model/watchlist_view_model.dart';
@@ -92,8 +91,6 @@ class _WatchlistViewState extends State<WatchlistView> {
         message: AppIntl.of(context).watchlist_login_required_message,
       ),
       handleMessageEvent: handleMessageEvent,
-      initStateWidget: const Center(child: CustomLoadingWidget()),
-      loadingStateWidget: const Center(child: CustomLoadingWidget()),
       errorStateWidget: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 300),

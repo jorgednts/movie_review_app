@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "common_name": MessageLookupByLibrary.simpleMessage("nome"),
     "common_of": MessageLookupByLibrary.simpleMessage("de"),
     "common_page": MessageLookupByLibrary.simpleMessage("página"),
+    "common_reload": MessageLookupByLibrary.simpleMessage("Recarregar"),
     "common_save": MessageLookupByLibrary.simpleMessage("Salvar"),
     "common_try_again": MessageLookupByLibrary.simpleMessage(
       "Tentar Novamente",
@@ -49,6 +50,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "details_cast": MessageLookupByLibrary.simpleMessage("Elenco"),
     "details_edit_review": MessageLookupByLibrary.simpleMessage(
       "Adicionar Resenha",
+    ),
+    "details_no_overview": MessageLookupByLibrary.simpleMessage(
+      "Esse título parece adorar um mistério... Nenhuma sinopse disponível — talvez seja pra você assistir sem spoilers!",
     ),
     "details_overview": MessageLookupByLibrary.simpleMessage("Sinopse"),
     "details_rating": MessageLookupByLibrary.simpleMessage(
@@ -80,8 +84,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_top_rated_tv_series_title": MessageLookupByLibrary.simpleMessage(
       "Séries de TV Melhores Avaliadas",
     ),
+    "msg_empty_list": MessageLookupByLibrary.simpleMessage(
+      "Nada para ver aqui...",
+    ),
     "msg_generic_error": MessageLookupByLibrary.simpleMessage(
       "Oops! Parece que algo deu errado, mas não se preocupe! Você pode tentar novamente mais tarde.",
+    ),
+    "msg_load_error": MessageLookupByLibrary.simpleMessage(
+      "Falha ao buscar mais itens :(",
     ),
     "msg_operation_completed": MessageLookupByLibrary.simpleMessage(
       "Operação concluída",

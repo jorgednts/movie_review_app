@@ -1,5 +1,4 @@
 import 'package:app/src/domain/repository/tmdb_repository.dart';
-import 'package:app/src/domain/use_case/tmdb/create_guest_session_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_movies_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_popular_tv_series_use_case.dart';
 import 'package:app/src/domain/use_case/tmdb/get_top_rated_movies_use_case.dart';
@@ -33,9 +32,6 @@ class HomeDependency {
                   tmdbRepository: repository,
                 ),
                 getTopRatedTVSeriesUseCase: GetTopRatedTVSeriesUseCase(
-                  tmdbRepository: repository,
-                ),
-                createGuestSessionUseCase: CreateGuestSessionUseCase(
                   tmdbRepository: repository,
                 ),
               );
