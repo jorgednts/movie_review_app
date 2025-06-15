@@ -16,6 +16,11 @@ class CoreStorageRepositoryImpl implements CoreStorageRepository {
   }
 
   @override
+  AsyncResult<void> deleteUserStorage(String uid) async {
+    return await _storageService.deleteUserStorage(uid);
+  }
+
+  @override
   AsyncResult<bool> addItemToCollection<T extends AppCollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {

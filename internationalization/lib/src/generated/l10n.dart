@@ -420,6 +420,16 @@ class AppIntl {
     );
   }
 
+  /// `Apagar Conta`
+  String get shell_delete_user {
+    return Intl.message(
+      'Apagar Conta',
+      name: 'shell_delete_user',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Entre com sua conta Ciné!`
   String get shell_sign_in_message {
     return Intl.message(
@@ -510,6 +520,11 @@ class AppIntl {
     return Intl.message('Ops :(', name: 'shell_oops', desc: '', args: []);
   }
 
+  /// `Sucesso!`
+  String get shell_success {
+    return Intl.message('Sucesso!', name: 'shell_success', desc: '', args: []);
+  }
+
   /// `Login realizado com sucesso!`
   String get shell_sign_in_success_message {
     return Intl.message(
@@ -535,6 +550,16 @@ class AppIntl {
     return Intl.message(
       'Logout realizado com sucesso!',
       name: 'shell_sign_out_success_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conta apagada com sucesso!`
+  String get shell_delete_user_success_message {
+    return Intl.message(
+      'Conta apagada com sucesso!',
+      name: 'shell_delete_user_success_message',
       desc: '',
       args: [],
     );

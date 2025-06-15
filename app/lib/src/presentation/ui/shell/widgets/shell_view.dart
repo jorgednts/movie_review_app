@@ -65,6 +65,7 @@ class ShellView extends StatelessWidget {
                     authButton: NavigationBarAuthButton(
                       onSignIn: onSignIn,
                       onSignOut: viewModel.signOut.execute,
+                      onDeleteUser: viewModel.deleteUser.execute,
                     ),
                   ),
                   Expanded(

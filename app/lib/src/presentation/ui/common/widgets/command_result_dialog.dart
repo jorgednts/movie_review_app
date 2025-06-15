@@ -34,9 +34,12 @@ class CommandResultDialog extends StatelessWidget {
         return null;
       case AuthMessageType.successCreateUser:
         return AppIntl.of(context).shell_welcome;
+      case AuthMessageType.successDeleteUser:
+        return AppIntl.of(context).shell_success;
       case AuthMessageType.errorSignIn:
       case AuthMessageType.errorSignOut:
       case AuthMessageType.errorCreateUser:
+      case AuthMessageType.errorDeleteUser:
         return AppIntl.of(context).shell_oops;
     }
   }
@@ -58,9 +61,12 @@ class CommandResultDialog extends StatelessWidget {
         return AppIntl.of(context).shell_sign_out_success_message;
       case AuthMessageType.successCreateUser:
         return AppIntl.of(context).shell_sign_up_success_message;
+      case AuthMessageType.successDeleteUser:
+        return AppIntl.of(context).shell_delete_user_success_message;
       case AuthMessageType.errorSignIn:
       case AuthMessageType.errorSignOut:
       case AuthMessageType.errorCreateUser:
+      case AuthMessageType.errorDeleteUser:
         return AppIntl.of(context).shell_error_message;
     }
   }

@@ -11,10 +11,12 @@ class NavigationBarAuthButton extends StatelessWidget {
     super.key,
     required this.onSignIn,
     required this.onSignOut,
+    required this.onDeleteUser,
   });
 
   final void Function() onSignIn;
   final void Function() onSignOut;
+  final void Function() onDeleteUser;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +65,15 @@ class NavigationBarAuthButton extends StatelessWidget {
                               child: ListTile(
                                 title: Text(AppIntl.of(context).shell_sign_out),
                                 leading: const Icon(Icons.logout),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              onTap: onDeleteUser,
+                              child: ListTile(
+                                title: Text(
+                                  AppIntl.of(context).shell_delete_user,
+                                ),
+                                leading: const Icon(Icons.person_remove),
                               ),
                             ),
                           ],

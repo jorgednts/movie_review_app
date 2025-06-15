@@ -1,8 +1,10 @@
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
+import 'package:app/src/domain/use_case/auth/delete_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
 import 'package:app/src/domain/use_case/auth/stream_user_changes_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/delete_user_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
@@ -12,9 +14,11 @@ enum AuthMessageType {
   successSignIn,
   successSignOut,
   successCreateUser,
+  successDeleteUser,
   errorSignIn,
   errorSignOut,
   errorCreateUser,
+  errorDeleteUser,
 }
 
 class ShellViewModel extends BaseViewModel {
@@ -26,11 +30,14 @@ class ShellViewModel extends BaseViewModel {
   final CreateUserStorageUseCase _createUserStorageUseCase;
   final UserStorageChangeNotifier _userChangeNotifier;
   final StreamUserChangesUseCase _streamUserChangesUseCase;
+  final DeleteUserUseCase _deleteUserUseCase;
+  final DeleteUserStorageUseCase _deleteUserStorageUseCase;
   final CustomThemeNotifier _themeNotifier;
 
   // Commands
   late final Command1<void, UserRequest> signIn;
   late final Command0<void> signOut;
+  late final Command0<void> deleteUser;
   late final Command1<void, UserRequest> createUser;
 
   ShellViewModel({
@@ -43,6 +50,8 @@ class ShellViewModel extends BaseViewModel {
     required GetCollectionFromStorageUseCase getUserStorageUseCase,
     required GetUsernameUseCase getUsernameUseCase,
     required StreamUserChangesUseCase streamUserChangesUseCase,
+    required DeleteUserUseCase deleteUserUseCase,
+    required DeleteUserStorageUseCase deleteUserStorageUseCase,
     required CustomThemeNotifier themeNotifier,
   }) : _signInUseCase = signInUseCase,
        _signOutUseCase = signOutUseCase,
@@ -52,6 +61,8 @@ class ShellViewModel extends BaseViewModel {
        _createUserStorageUseCase = createUserStorageUseCase,
        _getUsernameUseCase = getUsernameUseCase,
        _streamUserChangesUseCase = streamUserChangesUseCase,
+       _deleteUserUseCase = deleteUserUseCase,
+       _deleteUserStorageUseCase = deleteUserStorageUseCase,
        _themeNotifier = themeNotifier;
 
   @override
@@ -65,6 +76,7 @@ class ShellViewModel extends BaseViewModel {
     signIn = Command1(_signIn);
     signOut = Command0(_signOut);
     createUser = Command1(_createUser);
+    deleteUser = Command0(_deleteUser);
   }
 
   AsyncResult _signIn(UserRequest input) async {
@@ -127,6 +139,30 @@ class ShellViewModel extends BaseViewModel {
           );
         }
       },
+      onError: (error) {},
+    );
+  }
+
+  AsyncResult<void> _deleteUser() async {
+    final uid = userChangeNotifier.uid ?? '';
+    return await callUseCase(
+      useCase: _deleteUserUseCase,
+      input: NoParam(),
+      onSuccess: (result) {
+        _dialogEventNotifier.trigger(AuthMessageType.successDeleteUser);
+        _deleteUserStorage(uid);
+      },
+      onError: (error) {
+        _dialogEventNotifier.trigger(AuthMessageType.errorDeleteUser);
+      },
+    );
+  }
+
+  AsyncResult<void> _deleteUserStorage(String uid) async {
+    return await callUseCase<String, void>(
+      useCase: _deleteUserStorageUseCase,
+      input: uid,
+      onSuccess: (result) {},
       onError: (error) {},
     );
   }

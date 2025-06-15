@@ -9,5 +9,7 @@ abstract class AuthRepository {
 
   AsyncResult<void> signOut();
 
+  AsyncResult<void> deleteUser();
+
   Stream<UserModel?> get userChanges;
 }

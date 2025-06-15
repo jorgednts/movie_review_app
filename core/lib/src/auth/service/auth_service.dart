@@ -9,5 +9,7 @@ abstract class AuthService {
 
   AsyncResult<UserModel?> checkLoggedUser();
 
+  AsyncResult<void> deleteUser();
+
   Stream<UserModel?> get userChanges;
 }

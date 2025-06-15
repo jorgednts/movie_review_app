@@ -28,5 +28,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  AsyncResult<void> deleteUser() async {
+    return await _authService.deleteUser();
+  }
+
+  @override
   Stream<UserModel?> get userChanges => _authService.userChanges;
 }

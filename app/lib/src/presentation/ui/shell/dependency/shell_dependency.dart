@@ -1,10 +1,12 @@
 import 'package:app/src/domain/repository/auth_repository.dart';
 import 'package:app/src/domain/repository/core_storage_repository.dart';
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
+import 'package:app/src/domain/use_case/auth/delete_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
 import 'package:app/src/domain/use_case/auth/stream_user_changes_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
+import 'package:app/src/domain/use_case/storage/delete_user_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
 import 'package:app/src/presentation/ui/home/dependency/home_dependency.dart';
@@ -46,6 +48,12 @@ class ShellDependency {
               userChangeNotifier: userStorageNotifier,
               streamUserChangesUseCase: StreamUserChangesUseCase(
                 authRepository: authRepository,
+              ),
+              deleteUserUseCase: DeleteUserUseCase(
+                authRepository: authRepository,
+              ),
+              deleteUserStorageUseCase: DeleteUserStorageUseCase(
+                coreStorageRepository: storageRepository,
               ),
               themeNotifier: context.read<CustomThemeNotifier>(),
             );

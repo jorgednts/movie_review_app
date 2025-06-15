@@ -67,6 +67,20 @@ class AuthServiceImpl extends AuthService {
   }
 
   @override
+  AsyncResult<void> deleteUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) {
+        return Result.error(NullUserException());
+      }
+      await user.delete();
+      return const Result.ok(null);
+    } catch (e) {
+      return Result.error(AuthGenericException(cause: e.toString()));
+    }
+  }
+
+  @override
   Stream<UserModel?> get userChanges {
     return _auth.userChanges().map((user) {
       if (user == null) return null;

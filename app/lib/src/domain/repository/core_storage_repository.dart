@@ -6,6 +6,8 @@ abstract class CoreStorageRepository {
     required CreateUserStorageRequest request,
   });
 
+  AsyncResult<void> deleteUserStorage(String uid);
+
   AsyncResult<String> getUsername({required String uid});
 
   AsyncResult<bool> addItemToCollection<T extends AppCollectionItemModel>({

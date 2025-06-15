@@ -165,6 +165,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "shell_create_user_title": MessageLookupByLibrary.simpleMessage(
       "Account Creation",
     ),
+    "shell_delete_user": MessageLookupByLibrary.simpleMessage("Delete Account"),
+    "shell_delete_user_success_message": MessageLookupByLibrary.simpleMessage(
+      "Account deleted successfully!",
+    ),
     "shell_email": MessageLookupByLibrary.simpleMessage("e-mail"),
     "shell_email_empty_error": MessageLookupByLibrary.simpleMessage(
       "e-mail can\'t be empty",
@@ -204,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shell_sign_up_success_message": MessageLookupByLibrary.simpleMessage(
       "Account created successfully!",
     ),
+    "shell_success": MessageLookupByLibrary.simpleMessage("Success!"),
     "shell_watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
     "shell_welcome": MessageLookupByLibrary.simpleMessage("Welcome to Ciné!"),
     "shell_welcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!"),

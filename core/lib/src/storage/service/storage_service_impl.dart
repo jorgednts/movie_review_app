@@ -39,6 +39,21 @@ class StorageServiceImpl implements StorageService {
   }
 
   @override
+  AsyncResult<void> deleteUserStorage(String uid) async {
+    try {
+      await _userCollection.doc(uid).delete();
+      return const Result.ok(null);
+    } catch (e) {
+      return Result.error(
+        FirebaseException(
+          plugin: StorageConstants.plugin,
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
   AsyncResult<bool> addItemToCollection<T extends CollectionItemModel>({
     required CRUDItemRequest<T> request,
   }) async {
