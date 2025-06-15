@@ -55,10 +55,17 @@ class NavigationBarAuthButton extends StatelessWidget {
                           context: context,
                           position: RelativeRect.fromLTRB(
                             MediaQuery.of(context).size.width,
-                            kToolbarHeight + Dimensions.spacingXs,
+                            kToolbarHeight + Dimensions.spacingLg,
                             0,
                             0,
                           ),
+                          color: Theme.of(context).colorScheme.surface,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(Dimensions.radiusLg),
+                            ),
+                          ),
+                          elevation: 4,
                           items: [
                             PopupMenuItem(
                               onTap: onSignOut,
@@ -70,10 +77,15 @@ class NavigationBarAuthButton extends StatelessWidget {
                             PopupMenuItem(
                               onTap: onDeleteUser,
                               child: ListTile(
-                                title: Text(
+                                title: StyledText.b2(
                                   AppIntl.of(context).shell_delete_user,
+                                  fontColor:
+                                      Theme.of(context).colorScheme.error,
                                 ),
-                                leading: const Icon(Icons.person_remove),
+                                leading: Icon(
+                                  Icons.person_remove,
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
                               ),
                             ),
                           ],

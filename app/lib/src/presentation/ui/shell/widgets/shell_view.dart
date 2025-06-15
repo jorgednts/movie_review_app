@@ -29,12 +29,14 @@ class ShellView extends StatelessWidget {
 
     void onSignIn() async {
       await CustomModalNavigator.showCustomAdaptiveDialog<bool>(
-        SignInDialog(
+        AuthDialog(
           signInCommand: viewModel.signIn,
           signUpCommand: viewModel.createUser,
         ),
         isDismissible: false,
       );
+      viewModel.signIn.clearResult();
+      viewModel.createUser.clearResult();
     }
 
     return Scaffold(

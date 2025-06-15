@@ -9,8 +9,8 @@ import 'package:internationalization/internationalization.dart';
 
 enum AuthDialogState { init, signIn, create }
 
-class SignInDialog extends StatefulWidget {
-  const SignInDialog({
+class AuthDialog extends StatefulWidget {
+  const AuthDialog({
     super.key,
     required this.signInCommand,
     required this.signUpCommand,
@@ -20,10 +20,10 @@ class SignInDialog extends StatefulWidget {
   final Command1<void, UserRequest> signUpCommand;
 
   @override
-  State<SignInDialog> createState() => _SignInDialogState();
+  State<AuthDialog> createState() => _AuthDialogState();
 }
 
-class _SignInDialogState extends State<SignInDialog> {
+class _AuthDialogState extends State<AuthDialog> {
   AuthDialogState state = AuthDialogState.init;
 
   @override
@@ -87,11 +87,7 @@ class _SignInDialogState extends State<SignInDialog> {
           onPop:
               widget.signUpCommand.running || widget.signInCommand.running
                   ? null
-                  : () {
-                    widget.signInCommand.clearResult();
-                    widget.signUpCommand.clearResult();
-                    context.pop();
-                  },
+                  : context.pop,
           title: const Center(child: AppLogoCircleWidget()),
           content: SingleChildScrollView(
             child: AnimatedSwitcher(
