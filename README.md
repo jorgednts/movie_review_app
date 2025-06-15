@@ -2,6 +2,14 @@
 
 > Uma aplicação *responsiva*, *adaptativa* e *multiplataforma* desenvolvida com Flutter + Clean Architecture, voltada para consulta de filmes e séries, com funcionalidades sociais privadas.
 
+## 🎥 Demonstração
+
+<p align="center">
+  <img src="app/assets/demo/cine_demo.gif" alt="Demonstração do Ciné App" height="500" />
+</p>
+
+> Uma prévia da navegação pelo app Ciné nas versões mobile e web.
+
 ## 📱 Sobre o projeto
 
 **Ciné** é uma aplicação desenvolvida com o objetivo de explorar boas práticas de arquitetura e desenvolvimento com Flutter, destacando-se por:
