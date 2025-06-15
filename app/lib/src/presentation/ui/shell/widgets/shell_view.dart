@@ -1,9 +1,9 @@
 import 'package:app/src/presentation/navigation/app_routes.dart';
+import 'package:app/src/presentation/ui/auth/auth_dialog.dart';
 import 'package:app/src/presentation/ui/common/widgets/command_result_dialog.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/shell/dependency/shell_dependency.dart';
 import 'package:app/src/presentation/ui/shell/view_model/shell_view_model.dart';
-import 'package:app/src/presentation/ui/shell/widgets/auth_dialog.dart';
 import 'package:app/src/presentation/ui/shell/widgets/custom_navigation_bar.dart';
 import 'package:app/src/presentation/ui/shell/widgets/navigation_bar_auth_button.dart';
 import 'package:core/core.dart';
@@ -17,15 +17,9 @@ class ShellView extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
-  void showCommandResultDialog(
-    BuildContext context,
-    bool isError,
-    AuthMessageType message,
-  ) {
+  void showCommandResultDialog(BuildContext context, AuthMessageType message) {
     CustomModalNavigator.showCustomAdaptiveDialog(
-      isError
-          ? CommandResultDialog.error(authMessageType: message)
-          : CommandResultDialog.success(authMessageType: message),
+      CommandResultDialog(authMessageType: message),
     );
   }
 
@@ -34,13 +28,12 @@ class ShellView extends StatelessWidget {
     final viewModel = context.watch<ShellViewModel>();
 
     void onSignIn() async {
-      (await CustomModalNavigator.showCustomAdaptiveDialog<AuthDialogResult>(
-        const SignInDialog(),
-      )).fold(
-        onOk: (result) {
-          viewModel.handleAuthDialogResult(result);
-        },
-        onError: (error) {},
+      await CustomModalNavigator.showCustomAdaptiveDialog<bool>(
+        SignInDialog(
+          signInCommand: viewModel.signIn,
+          signUpCommand: viewModel.createUser,
+        ),
+        isDismissible: false,
       );
     }
 
@@ -53,12 +46,7 @@ class ShellView extends StatelessWidget {
                 viewModel.dialogEventNotifier.consumeEvent();
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (messageEventType != null) {
-                final isError = switch (messageEventType) {
-                  AuthMessageType.signIn => false,
-                  AuthMessageType.signOut => false,
-                  AuthMessageType.createUser => false,
-                };
-                showCommandResultDialog(context, isError, messageEventType);
+                showCommandResultDialog(context, messageEventType);
               }
             });
             return DefaultLoadingView(

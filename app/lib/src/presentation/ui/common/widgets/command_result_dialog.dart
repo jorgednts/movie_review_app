@@ -5,80 +5,85 @@ import 'package:go_router/go_router.dart';
 import 'package:internationalization/internationalization.dart';
 
 class CommandResultDialog extends StatelessWidget {
-  const CommandResultDialog.error({super.key, required this.authMessageType})
-    : icon = Icons.error_outline,
-      isError = true;
-
-  const CommandResultDialog.success({super.key, required this.authMessageType})
-    : icon = Icons.check,
-      isError = false;
+  const CommandResultDialog({
+    super.key,
+    required this.authMessageType,
+    this.message,
+  }) : icon = Icons.check,
+       isError =
+           authMessageType == AuthMessageType.errorSignIn ||
+           authMessageType == AuthMessageType.errorSignOut ||
+           authMessageType == AuthMessageType.errorCreateUser;
 
   final IconData icon;
   final bool isError;
   final AuthMessageType authMessageType;
+  final String? message;
 
   String? getDialogTitleMessage(
     BuildContext context,
-    bool isError,
     AuthMessageType resultMessageType,
   ) {
     if (isError) {
       return AppIntl.of(context).shell_oops;
     }
     switch (resultMessageType) {
-      case AuthMessageType.signIn:
+      case AuthMessageType.successSignIn:
         return AppIntl.of(context).shell_welcome_back;
-      case AuthMessageType.signOut:
+      case AuthMessageType.successSignOut:
         return null;
-      case AuthMessageType.createUser:
+      case AuthMessageType.successCreateUser:
         return AppIntl.of(context).shell_welcome;
+      case AuthMessageType.errorSignIn:
+      case AuthMessageType.errorSignOut:
+      case AuthMessageType.errorCreateUser:
+        return AppIntl.of(context).shell_oops;
     }
   }
 
   String getDialogSubtitleMessage(
     BuildContext context,
-    bool isError,
     AuthMessageType resultMessageType,
   ) {
+    if (message != null) {
+      return message!;
+    }
     if (isError) {
       return AppIntl.of(context).shell_error_message;
     }
     switch (resultMessageType) {
-      case AuthMessageType.signIn:
+      case AuthMessageType.successSignIn:
         return AppIntl.of(context).shell_sign_in_success_message;
-      case AuthMessageType.signOut:
+      case AuthMessageType.successSignOut:
         return AppIntl.of(context).shell_sign_out_success_message;
-      case AuthMessageType.createUser:
+      case AuthMessageType.successCreateUser:
         return AppIntl.of(context).shell_sign_up_success_message;
+      case AuthMessageType.errorSignIn:
+      case AuthMessageType.errorSignOut:
+      case AuthMessageType.errorCreateUser:
+        return AppIntl.of(context).shell_error_message;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final iconColor =
         isError
-            ? Theme.of(context).colorScheme.errorContainer
-            : Theme.of(context).colorScheme.onPrimaryContainer;
+            ? theme.colorScheme.errorContainer
+            : theme.colorScheme.onPrimaryContainer;
     final iconBackgroundColor =
         isError
-            ? Theme.of(context).colorScheme.onErrorContainer
-            : Theme.of(context).colorScheme.primaryContainer;
-    final titleMessage = getDialogTitleMessage(
-      context,
-      isError,
-      authMessageType,
-    );
-    final subtitleMessage = getDialogSubtitleMessage(
-      context,
-      isError,
-      authMessageType,
-    );
+            ? theme.colorScheme.onErrorContainer
+            : theme.colorScheme.primaryContainer;
+    final titleMessage = getDialogTitleMessage(context, authMessageType);
+    final subtitleMessage = getDialogSubtitleMessage(context, authMessageType);
     return ConstrainedDialog(
       boxConstraints: BoxConstraints(
         maxWidth: 250,
         maxHeight: MediaQuery.sizeOf(context).height * 0.75,
       ),
-      onPop: () => context.pop(),
+      onPop: context.pop,
       title: Center(
         child: PulsatingOpacityContainer(
           color: iconBackgroundColor,

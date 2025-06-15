@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FilledTextButton extends StatelessWidget {
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final String label;
   final TextStyle? labelStyle;
 

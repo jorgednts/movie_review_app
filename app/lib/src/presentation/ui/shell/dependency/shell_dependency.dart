@@ -1,9 +1,9 @@
 import 'package:app/src/domain/repository/auth_repository.dart';
 import 'package:app/src/domain/repository/core_storage_repository.dart';
-import 'package:app/src/domain/use_case/auth/check_user_logged_use_case.dart';
 import 'package:app/src/domain/use_case/auth/create_user_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_in_use_case.dart';
 import 'package:app/src/domain/use_case/auth/sign_out_use_case.dart';
+import 'package:app/src/domain/use_case/auth/stream_user_changes_use_case.dart';
 import 'package:app/src/domain/use_case/storage/create_user_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_collection_from_storage_use_case.dart';
 import 'package:app/src/domain/use_case/storage/get_username_use_case.dart';
@@ -33,9 +33,6 @@ class ShellDependency {
               createUserUseCase: CreateUserUseCase(
                 authRepository: authRepository,
               ),
-              checkUserLoggedUseCase: CheckUserLoggedUseCase(
-                authRepository: authRepository,
-              ),
               dialogEventNotifier: MessageEventNotifier<AuthMessageType>(),
               createUserStorageUseCase: CreateUserStorageUseCase(
                 coreStorageRepository: storageRepository,
@@ -47,6 +44,9 @@ class ShellDependency {
                 coreStorageRepository: storageRepository,
               ),
               userChangeNotifier: userStorageNotifier,
+              streamUserChangesUseCase: StreamUserChangesUseCase(
+                authRepository: authRepository,
+              ),
               themeNotifier: context.read<CustomThemeNotifier>(),
             );
           },

@@ -220,6 +220,126 @@ class AppIntl {
     );
   }
 
+  /// `Este e-mail já está em uso.`
+  String get auth_email_already_in_use {
+    return Intl.message(
+      'Este e-mail já está em uso.',
+      name: 'auth_email_already_in_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sua senha é muito fraca.`
+  String get auth_weak_password {
+    return Intl.message(
+      'Sua senha é muito fraca.',
+      name: 'auth_weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por favor, insira um e-mail válido.`
+  String get auth_invalid_email {
+    return Intl.message(
+      'Por favor, insira um e-mail válido.',
+      name: 'auth_invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Esta conta foi desativada.`
+  String get auth_user_disabled {
+    return Intl.message(
+      'Esta conta foi desativada.',
+      name: 'auth_user_disabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nenhuma conta encontrada com este e-mail.`
+  String get auth_user_not_found {
+    return Intl.message(
+      'Nenhuma conta encontrada com este e-mail.',
+      name: 'auth_user_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Senha incorreta. Tente novamente.`
+  String get auth_wrong_password {
+    return Intl.message(
+      'Senha incorreta. Tente novamente.',
+      name: 'auth_wrong_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Muitas tentativas. Tente novamente mais tarde.`
+  String get auth_too_many_requests {
+    return Intl.message(
+      'Muitas tentativas. Tente novamente mais tarde.',
+      name: 'auth_too_many_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sua sessão expirou. Faça login novamente.`
+  String get auth_user_token_expired {
+    return Intl.message(
+      'Sua sessão expirou. Faça login novamente.',
+      name: 'auth_user_token_expired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Erro de rede. Verifique sua conexão com a internet.`
+  String get auth_network_error {
+    return Intl.message(
+      'Erro de rede. Verifique sua conexão com a internet.',
+      name: 'auth_network_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operação não permitida.`
+  String get auth_operation_not_allowed {
+    return Intl.message(
+      'Operação não permitida.',
+      name: 'auth_operation_not_allowed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Um erro desconhecido ocorreu. Tente novamente.`
+  String get auth_unknown_error {
+    return Intl.message(
+      'Um erro desconhecido ocorreu. Tente novamente.',
+      name: 'auth_unknown_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Falha na autenticação. Tente novamente.`
+  String get auth_generic_error {
+    return Intl.message(
+      'Falha na autenticação. Tente novamente.',
+      name: 'auth_generic_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get shell_home {
     return Intl.message('Home', name: 'shell_home', desc: '', args: []);

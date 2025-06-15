@@ -12,9 +12,15 @@ class UserListenableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.read<ShellViewModel>();
     return ListenableBuilder(
-      listenable: viewModel.checkUserLogged,
+      listenable: Listenable.merge([
+        viewModel.signIn,
+        viewModel.signOut,
+        viewModel.createUser,
+      ]),
       builder: (_, _) {
-        if (viewModel.checkUserLogged.running) {
+        if (viewModel.signIn.running ||
+            viewModel.signOut.running ||
+            viewModel.createUser.running) {
           return const SizedBox();
         }
         return child;

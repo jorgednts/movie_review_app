@@ -23,6 +23,42 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "app_name": MessageLookupByLibrary.simpleMessage("Ciné"),
+    "auth_email_already_in_use": MessageLookupByLibrary.simpleMessage(
+      "This e-mail is already in use.",
+    ),
+    "auth_generic_error": MessageLookupByLibrary.simpleMessage(
+      "Authentication failed. Please try again.",
+    ),
+    "auth_invalid_email": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid e-mail.",
+    ),
+    "auth_network_error": MessageLookupByLibrary.simpleMessage(
+      "Network error. Please check your internet connection.",
+    ),
+    "auth_operation_not_allowed": MessageLookupByLibrary.simpleMessage(
+      "Operation not allowed.",
+    ),
+    "auth_too_many_requests": MessageLookupByLibrary.simpleMessage(
+      "Too many attempts. Please try again later.",
+    ),
+    "auth_unknown_error": MessageLookupByLibrary.simpleMessage(
+      "An unknown error occurred. Please try again.",
+    ),
+    "auth_user_disabled": MessageLookupByLibrary.simpleMessage(
+      "This account has been disabled.",
+    ),
+    "auth_user_not_found": MessageLookupByLibrary.simpleMessage(
+      "No account found with this e-mail.",
+    ),
+    "auth_user_token_expired": MessageLookupByLibrary.simpleMessage(
+      "Your session expired. Please log in again.",
+    ),
+    "auth_weak_password": MessageLookupByLibrary.simpleMessage(
+      "Your password is too weak.",
+    ),
+    "auth_wrong_password": MessageLookupByLibrary.simpleMessage(
+      "Incorrect password. Please try again.",
+    ),
     "common_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "common_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "common_confirm_operation": MessageLookupByLibrary.simpleMessage(

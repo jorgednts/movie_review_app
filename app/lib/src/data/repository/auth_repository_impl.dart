@@ -26,4 +26,7 @@ class AuthRepositoryImpl implements AuthRepository {
   AsyncResult<void> signOut() async {
     return await _authService.signOut();
   }
+
+  @override
+  Stream<UserModel?> get userChanges => _authService.userChanges;
 }
