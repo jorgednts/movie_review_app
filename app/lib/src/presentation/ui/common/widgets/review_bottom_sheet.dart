@@ -174,7 +174,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                                   Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
-                          FilledButton(
+                          OutlinedButton(
                             onPressed: () {
                               if (formKey.currentState?.validate() ?? false) {
                                 context.pop(
@@ -187,6 +187,10 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                             },
                             child: StyledText.b2(
                               AppIntl.of(context).reviews_submit_review,
+                              fontColor:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                             ),
                           ),
                         ],

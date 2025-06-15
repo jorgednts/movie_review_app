@@ -18,7 +18,10 @@ class HomeView extends StatelessWidget {
     final viewModel = context.read<HomeViewModel>();
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.spacingMd),
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimensions.spacingMd,
+          vertical: Dimensions.spacingMd,
+        ),
         child: Column(
           spacing: Dimensions.spacingXl,
           children: [

@@ -21,7 +21,6 @@ dependencies:
     path: ../internationalization
 
   cupertino_icons: ^1.0.8
-  flutter_dotenv: ^5.2.1
   go_router: ^15.1.2
   http: ^1.4.0
   provider: ^6.1.5

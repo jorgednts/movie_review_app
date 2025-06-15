@@ -5,14 +5,12 @@ import 'package:app/src/presentation/utils/custom_theme_notifier.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
 import 'package:internationalization/internationalization.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await dotenv.load();
 
   runApp(
     MultiProvider(providers: Dependencies.providers, child: const MyApp()),

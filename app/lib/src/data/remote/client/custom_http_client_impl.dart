@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:http/http.dart' as http;
 
 import 'custom_http_client.dart';
@@ -8,6 +8,8 @@ class CustomHttpClientImpl implements CustomHttpClient {
   final http.Client _client;
 
   CustomHttpClientImpl(this._client);
+
+  static const _tmdbApiToken = String.fromEnvironment('TMDB_API_TOKEN');
 
   @override
   Future<dynamic> get(
@@ -23,7 +25,7 @@ class CustomHttpClientImpl implements CustomHttpClient {
       ),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${dotenv.env['TMDB_API_TOKEN']}',
+        'Authorization': 'Bearer $_tmdbApiToken',
       },
     );
 
@@ -40,7 +42,7 @@ class CustomHttpClientImpl implements CustomHttpClient {
       Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${dotenv.env['TMDB_API_TOKEN']}',
+        'Authorization': 'Bearer $_tmdbApiToken',
       },
       body: jsonEncode(body),
     );

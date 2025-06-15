@@ -57,9 +57,9 @@ class AppCollectionItemModel
     required this.review,
   });
 
-  String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500$posterPath';
 
-  String get backdropUrl => 'https://image.tmdb.org/t/p/original/$backdropPath';
+  String get backdropUrl => 'https://image.tmdb.org/t/p/original$backdropPath';
 
   String get releaseYear => releaseDate.toDateFormat().year.toString();
 

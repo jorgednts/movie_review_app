@@ -33,7 +33,7 @@ class MovieModel {
     required this.voteCount,
   });
 
-  String get posterUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500$posterPath';
 
   String get releaseYear => releaseDate.toDateFormat().year.toString();
 
