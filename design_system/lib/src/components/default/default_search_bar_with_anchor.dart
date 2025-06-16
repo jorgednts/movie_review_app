@@ -30,6 +30,7 @@ class DefaultSearchBarWithAnchor extends StatelessWidget {
       isFullScreen: false,
       shrinkWrap: true,
       viewElevation: 0,
+      viewOnSubmitted: (_) => onSearch(),
       builder:
           (context, controller) => SearchBar(
             controller: searchController,
