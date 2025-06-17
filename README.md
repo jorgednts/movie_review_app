@@ -106,7 +106,7 @@ O projeto é organizado em módulos reutilizáveis e desacoplados:
 
 ---
 
-> 💡 As imagens acima mostram como o app se adapta de forma fluida entre diferentes tamanhos de tela, mantendo uma boa experiência em diferentes tamanhos de tela.
+> 💡 As imagens acima mostram como o app se adapta de forma fluida entre diferentes tamanhos de tela, mantendo uma boa experiência.
 
 ---
 
