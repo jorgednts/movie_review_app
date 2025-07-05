@@ -17,6 +17,7 @@ class DefaultCollapsableAppBarView extends StatelessWidget {
     ],
     required this.body,
     required this.appBarSurfaceWidget,
+    this.onPop,
   });
 
   final double expandedHeight;
@@ -28,6 +29,7 @@ class DefaultCollapsableAppBarView extends StatelessWidget {
   final List<StretchMode> stretchModes;
   final Widget body;
   final Widget? appBarSurfaceWidget;
+  final void Function()? onPop;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class DefaultCollapsableAppBarView extends StatelessWidget {
                     ).colorScheme.surface.withValues(alpha: 0.5),
                   ),
                 ),
+                onPressed: onPop,
               ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           title: Container(

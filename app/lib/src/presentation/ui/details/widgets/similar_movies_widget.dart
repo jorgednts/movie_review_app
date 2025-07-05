@@ -35,6 +35,7 @@ class SimilarMoviesWidget extends StatelessWidget {
           item.id.toString(),
           AppCollectionItemType.movie,
           item.storageId,
+          push: true,
         );
       },
     );

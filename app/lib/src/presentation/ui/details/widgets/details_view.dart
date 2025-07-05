@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app/src/domain/model/app_collection_item_model.dart';
 import 'package:app/src/domain/model/app_collection_model.dart';
 import 'package:app/src/domain/model/base_tmdb_details_model.dart';
+import 'package:app/src/presentation/navigation/app_navigator.dart';
 import 'package:app/src/presentation/ui/common/widgets/collection_operation_button.dart';
 import 'package:app/src/presentation/ui/common/widgets/custom_loading_widget.dart';
 import 'package:app/src/presentation/ui/details/view_model/details_view_model.dart';
@@ -40,6 +41,7 @@ class DetailsView extends StatelessWidget {
             ),
           );
           return DefaultCollapsableAppBarView(
+            onPop: context.popDetails,
             expandedHeight: expandedHeight,
             title: item?.title ?? '',
             appBarBackground: switch (viewModel.getDetails.state) {

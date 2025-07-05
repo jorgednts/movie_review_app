@@ -11,19 +11,41 @@ extension AppNavigator on BuildContext {
     String id,
     AppCollectionItemType type,
     String storageId,
+  {
+    bool push = false,
+  }
   ) {
     final user = read<UserStorageChangeNotifier>();
-    pushNamed(
-      AppRoute.details.name,
-      pathParameters: {'itemId': id},
-      queryParameters:
-          DetailsParams(
-            itemId: id,
-            itemType: type,
-            language: Localizations.localeOf(this).toLanguageTag(),
-            uid: user.user?.uid,
-            itemStorageId: storageId,
-          ).toJson(),
-    );
+    if(push) {
+      pushNamed(
+        AppRoute.details.name,
+        pathParameters: {'itemId': id},
+        queryParameters:
+        DetailsParams(
+          itemId: id,
+          itemType: type,
+          language: Localizations.localeOf(this).toLanguageTag(),
+          uid: user.user?.uid,
+          itemStorageId: storageId,
+        ).toJson(),
+      );
+    } else {
+      goNamed(
+        AppRoute.details.name,
+        pathParameters: {'itemId': id},
+        queryParameters:
+            DetailsParams(
+              itemId: id,
+              itemType: type,
+              language: Localizations.localeOf(this).toLanguageTag(),
+              uid: user.user?.uid,
+              itemStorageId: storageId,
+            ).toJson(),
+      );
+    }
+  }
+
+  void popDetails() {
+    goNamed(AppRoute.home.name);
   }
 }

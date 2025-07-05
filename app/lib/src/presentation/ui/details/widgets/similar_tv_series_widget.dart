@@ -32,6 +32,7 @@ class SimilarTVSeriesWidget extends StatelessWidget {
           item.id.toString(),
           AppCollectionItemType.tvSeries,
           item.storageId,
+          push: true,
         );
       },
     );
