@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:design_system/design_system.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +106,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
               shrinkExtent: widget.minItemExtent,
               children: widget.children,
             ),
-            if (kIsWeb) ...[
+            if (kIsWeb || Platform.isWindows || Platform.isIOS) ...[
               if (currentPage > 0)
                 _ArrowWidget.left(
                   onPressedArrow: () => onPressedArrow(currentPage - 1),
