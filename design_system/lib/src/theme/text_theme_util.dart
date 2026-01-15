@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 TextTheme createTextTheme({
   required BuildContext context,
   String bodyFontString = Fonts.openSans,
-  String displayFontString = Fonts.robotoCondensed,
+  String displayFontString = Fonts.sofiaSans,
 }) {
   TextTheme baseTextTheme = Theme.of(context).textTheme;
   TextTheme bodyTextTheme = GoogleFonts.getTextTheme(
