@@ -87,7 +87,7 @@ class SearchViewModel extends BaseViewModel {
     );
   }
 
-  void handleSearch() {
+  void handleSearch() async {
     if (searchController.text.isEmpty) {
       initState.value = true;
       return;
@@ -95,8 +95,10 @@ class SearchViewModel extends BaseViewModel {
     if (initState.value) {
       initState.value = false;
     }
+
+    await _saveSuggestion(searchController.text);
+
     resetPagination();
-    _saveSuggestion(searchController.text);
     switch (selectedSegment) {
       case AppCollectionItemType.movie:
         searchMovies.loadNextPage();
@@ -125,9 +127,9 @@ class SearchViewModel extends BaseViewModel {
     searchTVSeries.reset();
   }
 
-  void _saveSuggestion(String suggestion) async {
+  Future<void> _saveSuggestion(String suggestion) async {
     await _updateSearchSuggestionListLocalUseCase(suggestion);
-    await _getSuggestions();
+    await getSuggestions.execute();
   }
 
   AsyncResult<List<String>> _getSuggestions() async {
