@@ -33,6 +33,7 @@ class ItemOverviewWidget extends StatelessWidget {
           ExpandableText(
             text: item.overview,
             initLines: 5,
+            textAlign: TextAlign.end,
             seeLess: AppIntl.of(context).details_see_less,
             seeMore: AppIntl.of(context).details_see_more,
             style: Theme.of(context).textTheme.bodyLarge,

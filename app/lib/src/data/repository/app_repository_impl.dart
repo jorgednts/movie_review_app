@@ -14,7 +14,7 @@ class AppRepositoryImpl implements AppRepository {
   }
 
   @override
-  AsyncResult<bool> getThemeMode() async {
+  AsyncResult<bool?> getThemeMode() async {
     return await _appLocalDataSource.getThemeMode();
   }
 

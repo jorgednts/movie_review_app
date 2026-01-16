@@ -139,7 +139,10 @@ class CollectionOperationButton extends StatelessWidget {
                 break;
             }
           },
-          tooltip: AppIntl.of(context).details_add_watchlist,
+          tooltip:
+              collectionType == AppCollectionType.watchlist
+                  ? AppIntl.of(context).details_add_watchlist
+                  : AppIntl.of(context).details_edit_review,
           badge: Icon(
             exists! ? Icons.remove_circle : Icons.add_circle,
             color: Theme.of(context).colorScheme.primary,

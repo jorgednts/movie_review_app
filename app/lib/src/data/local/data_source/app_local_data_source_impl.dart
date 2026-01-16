@@ -1,7 +1,6 @@
 import 'package:app/src/data/local/data_source/app_local_data_source.dart';
 import 'package:app/src/data/local/data_source/prefs_constants/prefs_constants.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalDataSourceImpl implements AppLocalDataSource {
@@ -25,10 +24,10 @@ class AppLocalDataSourceImpl implements AppLocalDataSource {
   }
 
   @override
-  AsyncResult<bool> getThemeMode() async {
+  AsyncResult<bool?> getThemeMode() async {
     try {
       final result = (await _prefs()).getBool(PrefsConstants.themeModeKey);
-      return Result.ok(result ?? ThemeMode.system == ThemeMode.dark);
+      return Result.ok(result);
     } catch (e) {
       return Result.error(Exception(e));
     }

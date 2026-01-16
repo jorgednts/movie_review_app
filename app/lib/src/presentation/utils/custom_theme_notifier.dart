@@ -17,11 +17,18 @@ class CustomThemeNotifier extends ThemeNotifier {
   }
 
   void onInit() async {
+    final brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+
+    final bool isDark = brightness == Brightness.dark;
+
     (await _getThemeModeLocalUseCase.call(NoParam())).fold(
-      onOk: (result) {
-        setThemeMode(result);
+      onOk: (bool? savedTheme) {
+        setThemeMode(savedTheme ?? isDark);
       },
-      onError: (error) {},
+      onError: (_) {
+        setThemeMode(isDark);
+      },
     );
   }
 

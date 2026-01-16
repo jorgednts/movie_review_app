@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 abstract class AppLocalDataSource {
   AsyncResult<void> setThemeMode({required bool isDarkMode});
 
-  AsyncResult<bool> getThemeMode();
+  AsyncResult<bool?> getThemeMode();
 
   AsyncResult<void> updateSearchSuggestions({required String value});
 
