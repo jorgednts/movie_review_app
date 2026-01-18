@@ -114,6 +114,10 @@ O projeto é organizado em módulos reutilizáveis e desacoplados:
 
 ### 🔗 Acesse online
 
+Você pode baixar instalar o apk através do link abaixo:
+
+👉 [https://drive.google.com/file/d/1P3VonKKLkyoGORBMWNmimC_YHqjLe1BV/view?usp=sharing](https://drive.google.com/file/d/1P3VonKKLkyoGORBMWNmimC_YHqjLe1BV/view?usp=sharing)
+
 Você pode testar a versão Web diretamente pelo link:
 
 👉 [https://cine-app-fdadf.web.app](https://cine-app-fdadf.web.app/)
