@@ -137,9 +137,6 @@ O projeto é organizado em módulos reutilizáveis e desacoplados:
 ├── design_system/       # Componentes visuais reutilizáveis e temas responsivos
 ├── internationalization/# Suporte a internacionalização e localização
 ```
-
-> 🎨 Design System & Widgetbook
-> O projeto conta com um Design System dedicado, centralizado no módulo design_system, onde estão definidos componentes reutilizáveis, temas e estilos visuais. Para garantir consistência visual, previsibilidade de comportamento e qualidade da UI, os componentes são desenvolvidos e validados de forma isolada utilizando o Widgetbook, permitindo visualizar variações, estados e responsividade sem dependência da aplicação principal.
 ---
 
 ## 🧠 Tecnologias e Arquitetura
