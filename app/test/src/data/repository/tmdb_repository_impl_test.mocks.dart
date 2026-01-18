@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:app/src/data/remote/data_source/tmdb_remote_data_source.dart'
     as _i3;
+import 'package:app/src/data/remote/model/base/base_details_request_parameters.dart'
+    as _i14;
 import 'package:app/src/data/remote/model/base/base_request_parameters.dart'
     as _i5;
 import 'package:app/src/data/remote/model/base/base_tmdb_paginated_response.dart'
@@ -15,7 +17,9 @@ import 'package:app/src/data/remote/model/request/movie_paginated_request_parame
     as _i11;
 import 'package:app/src/data/remote/model/request/tv_series_paginated_request_parameters.dart'
     as _i12;
+import 'package:app/src/domain/model/base_tmdb_details_model.dart' as _i13;
 import 'package:app/src/domain/model/base_tmdb_paginated_model.dart' as _i10;
+import 'package:app/src/domain/model/cast_member_model.dart' as _i15;
 import 'package:app/src/domain/model/movie_model.dart' as _i8;
 import 'package:app/src/domain/model/tv_series_model.dart' as _i9;
 import 'package:core/core.dart' as _i6;
@@ -180,4 +184,68 @@ class MockTMDBRemoteDataSource extends _i1.Mock
           as _i4.Future<
             _i6.Result<_i10.BaseTMDBPaginatedModel<_i9.TVSeriesModel>>
           >);
+
+  @override
+  _i4.Future<_i6.Result<_i13.BaseTMDBDetailsModel>> getTMDBItemDetails({
+    required _i14.BaseDetailsRequestParameters? params,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getTMDBItemDetails, [], {#params: params}),
+            returnValue:
+                _i4.Future<_i6.Result<_i13.BaseTMDBDetailsModel>>.value(
+                  _i7.dummyValue<_i6.Result<_i13.BaseTMDBDetailsModel>>(
+                    this,
+                    Invocation.method(#getTMDBItemDetails, [], {
+                      #params: params,
+                    }),
+                  ),
+                ),
+          )
+          as _i4.Future<_i6.Result<_i13.BaseTMDBDetailsModel>>);
+
+  @override
+  _i4.Future<_i6.Result<List<_i8.MovieModel>>> getSimilarMovies({
+    required _i14.BaseDetailsRequestParameters? params,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getSimilarMovies, [], {#params: params}),
+            returnValue: _i4.Future<_i6.Result<List<_i8.MovieModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i8.MovieModel>>>(
+                this,
+                Invocation.method(#getSimilarMovies, [], {#params: params}),
+              ),
+            ),
+          )
+          as _i4.Future<_i6.Result<List<_i8.MovieModel>>>);
+
+  @override
+  _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>> getSimilarTVSeries({
+    required _i14.BaseDetailsRequestParameters? params,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getSimilarTVSeries, [], {#params: params}),
+            returnValue: _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>.value(
+              _i7.dummyValue<_i6.Result<List<_i9.TVSeriesModel>>>(
+                this,
+                Invocation.method(#getSimilarTVSeries, [], {#params: params}),
+              ),
+            ),
+          )
+          as _i4.Future<_i6.Result<List<_i9.TVSeriesModel>>>);
+
+  @override
+  _i4.Future<_i6.Result<List<_i15.CastMemberModel>>> getCastMembers({
+    required _i14.BaseDetailsRequestParameters? params,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getCastMembers, [], {#params: params}),
+            returnValue:
+                _i4.Future<_i6.Result<List<_i15.CastMemberModel>>>.value(
+                  _i7.dummyValue<_i6.Result<List<_i15.CastMemberModel>>>(
+                    this,
+                    Invocation.method(#getCastMembers, [], {#params: params}),
+                  ),
+                ),
+          )
+          as _i4.Future<_i6.Result<List<_i15.CastMemberModel>>>);
 }
